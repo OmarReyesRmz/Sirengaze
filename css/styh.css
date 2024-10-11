@@ -1,0 +1,288 @@
+/* Header */
+
+/* @font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+
+.header1{
+    font-family: 'Cormorant_Infant', sans-serif;
+    padding: 1 10px;
+}
+
+.logo{
+    margin: 0px;
+    width: 60px;
+    height: 50px;
+}
+
+a:hover{
+    background-color: #65646421; 
+} */
+
+/* Nuevo diseño */
+
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+
+/* pseudo-elements */
+::selection{
+    color: rgb(0, 0, 0);
+    background-color: rgba(200, 163, 163, 0.171);
+}
+
+#logo {
+    width: 60px; 
+    height: 50px;
+}
+
+.boton-logo {
+    padding-right: 20px;
+    margin-right:30px;
+    border: none;  
+    transition: background-color 0.3s ease; 
+}
+
+.boton-logo:hover{
+    background-color: white;
+    color: black;
+}
+
+.icono{
+    padding-left: 15px;
+}
+
+#header1{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* background-color: rgba(0, 0, 0, 0.025); */
+    background-color: #fafafa;
+    display: flex;
+    justify-content:space-around; 
+    font-family: 'Cormorant_Infant', sans-serif;
+    font-size: 19px;
+    z-index: 100; /* Valor para asegurar que esté sobre otros elementos */
+    padding: 10px;
+}  
+
+.enc{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    text-align: right;
+}
+
+a:hover{
+  color: rgba(0, 0, 0, 0.08);
+}
+
+#menu{
+    /* Entre mas grande el width mas espacio entre los elementos */
+    width: 700px;
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+}
+
+@media screen and (max-width: 430px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 60px;
+        justify-content:center; 
+        flex-wrap: wrap;
+        font-size: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    
+    .boton-logo {
+        display: none;
+    }
+    
+    a{
+        font-size: 8px;
+    }
+    .icono{
+        font-size: 8px;
+    }
+    
+}
+
+
+@media screen and (max-width: 530px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 110px;
+        justify-content:center; 
+        flex-wrap: wrap;
+        font-size: 15px;
+    }
+    #logo {
+        width: 40px; 
+        height: 30px;
+    }
+    
+    .boton-logo {
+        text-align: center;
+        margin-left: 30px;
+        margin-right:0px;
+        font-size: 15px;
+    }
+    
+    a{
+        font-size: 15px;
+    }
+    
+    .icono{
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 40px;
+        justify-content:center; 
+        font-size: 10px;
+    }
+    a{
+        font-size: 15px;
+    }
+
+    .icono{
+        font-size: 15px;
+    }
+
+    #logo {
+        width: 40px; 
+        height: 30px;
+    }
+    
+    .boton-logo {
+        text-align: center;
+        margin-left: 0px;
+        margin-right:0px;
+        border: none;  
+        transition: background-color 0.3s ease; 
+        font-size: 15px;
+    }
+    .menu1{
+        margin-left: 0px;
+    }
+}
+
+
+@media screen and (max-width: 1120px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 400px;
+        flex-wrap: wrap;
+        font-size: 18px;
+    }
+    
+}
+
+
+/* Media query para pantallas con un ancho mínimo de 600 píxeles */
+@media screen and (min-width: 1270px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 700px;
+    }
+}
+
+/* Media query para pantallas con un ancho mínimo de 900 píxeles */
+@media screen and (min-width: 1350px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 1030px;
+        
+    }
+}
+
+@media screen and (min-width: 1750px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 1300px;
+        
+    }
+}
+
+@media screen and (min-width: 2050px) {
+    #menu{
+        /* Entre mas grande el width mas espacio entre los elementos */
+        width: 1700px;
+        
+    }
+}
+
+
+/* combinator */
+.encabezado ~ nav{
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* attribute */
+[class*="menu1"]:hover{
+    /* Comentar el color y descomentar el backround-color
+    background-color: #65646421; */
+    color: rgb(228, 158, 158);
+    /* background-color: white; */
+}
+
+.menu1{
+    margin-left: 35px;
+}
+
+/* Elemeno extra */
+
+.dropbtn {
+    background-color: #fafafa;
+    display: flex;
+    justify-content:center;
+    padding: 10px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(249, 249, 249, 0.505);
+    /* background-color: rgba(249, 249, 249, 0.772); */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration:none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: white; color: black;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: white; color:rgb(228, 158, 158); }
+/* fin */

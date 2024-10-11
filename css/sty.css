@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'Tourney';
+    src: url('../fonts/Tourney/static/Tourney_Condensed-Thin.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Monoton';
+    src: url('../fonts/Monoton/Monoton-Regular.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Lexend_Tera';
+    src: url('../fonts/Lexend_Tera/static/LexendTera-Bold.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Big_Sholuders_Inline_Text';
+    src: url('../fonts/Big_Shoulders_Inline_Text/static/BigShouldersInlineText-Bold.ttf') format('truetype');
+}  
+  
+  
+
+body{
+    background-color: #ffffff;
+    /* #fff9e755 */
+    font-family: 'Cormorant_Infant', sans-serif;
+    font-size: larger;
+    /* font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+}  
+
+.bloque1{
+    display: grid;
+    grid-template-columns: 50% 40%;
+    justify-content: space-evenly;
+    font-family: 'Cormorant_Infant';
+    width: auto;
+    height: 530px;
+    margin: 100px;
+    background-color: rgb(255, 255, 255);
+}
+
+.estrella{
+    display: none;
+}
+
+
+.logo2{
+    margin: 30px;
+    width: 90px;
+    height: 70px;
+}
+
+.imagenes{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: space-between;
+    align-content: space-evenly;
+}
+
+.b1{
+    width: 180px;
+    height: 190px;
+}
+
+.b3{
+    width: 200px;
+    height: 250px;
+}
+
+.t1{
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 60px;
+    font-family: 'Tourney';
+}
+
+.t2{
+    font-size: 45px;
+    margin-left: 150px;
+    font-family: 'Lexend_Tera';
+}
+
+.subtitulo1{
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Tourney';
+    color: #000000;
+}
+
+.subtitulo2{
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Lexend_Tera';
+}
+
+.bloque3{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 280px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    background-image: url(../imagenes/fondo_des.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+    padding: 40px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 0;
+}
+
+.desct{
+    font-size: 30px;
+}
+
+.desct2{
+    padding-right: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 180px;
+}
+
+
+
+.bloque4{
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    height: 100px;
+    margin-top: 120px;
+    margin-bottom: 140px;
+    background-color: #000000;
+}
+
+.ap{
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .bloque1{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin-bottom: 500px;
+    }    
+
+    .t1{
+        margin-left: 0px;
+    }
+    
+    .t2{
+        margin-left: 40px;
+    }
+
+    .bloque3{
+        flex-direction: column;
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .desct{
+        font-size: 2rem;
+        margin: 20px;
+    }
+    
+    .desct2{
+        padding-right: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 6rem;
+    }
+    
+
+}
+
+.bloque5{
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    justify-content:space-evenly;
+    align-content: space-evenly;
+    height: 100px;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    background-color: #000000;
+}
+
+.efecto1:hover{
+    -webkit-transform:scale(1.3);transform:scale(1.2);
+}
+
+
+.inicio{
+    width: 100%;
+    height: 300px;
+}
+
+.zoom{
+    width: 200px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.zoom img{
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    object-fit: cover;
+}
+.zoom img:hover{
+    transform: scale(1.2);
+}
+
+
+/* .bloque3{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    justify-content: space-evenly;
+    font-family: 'Cormorant_Infant';
+    width: auto;
+    height: auto;
+    margin: 100px;
+    background-color: #fff9e7;
+} */
+
+/* .bloque3{
+    font-family: 'Lexend_Tera';
+}
+
+.bloque4{
+    font-family: 'Cormorant_Infant';
+}
+
+.bloque5{
+    font-family: 'Big_Sholuders_Inline_Text';
+} */
+

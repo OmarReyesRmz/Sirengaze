@@ -1,0 +1,288 @@
+@font-face {
+    font-family: 'Tourney';
+    src: url('../fonts/Tourney/static/Tourney_Condensed-Thin.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Monoton';
+    src: url('../fonts/Monoton/Monoton-Regular.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Lexend_Tera';
+    src: url('../fonts/Lexend_Tera/static/LexendTera-Bold.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Big_Sholuders_Inline_Text';
+    src: url('../fonts/Big_Shoulders_Inline_Text/static/BigShouldersInlineText-Bold.ttf') format('truetype');
+}  
+  
+.captcha{
+    margin: 15px 0px;
+}
+
+.captcha .preview{
+    color: #555;
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 8px;
+    border: 1px  solid #888;
+    font-family: "monospace";
+}
+
+.captcha .preview span{
+    display: inline-block;
+    user-select: none;
+}
+
+.captcha .captcha-form{
+    display: flex;
+}
+
+.captcha .captcha-form input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #888;
+}
+
+.captcha .captcha-form .captcha-refresh{
+    width: 80px;
+    height: auto;
+    border: none;
+    outline: none;
+    background: #888;
+    color: #eee;
+    cursor: pointer;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+    font-family: 'Cormorant_Infant', sans-serif;
+    font-size: 19px;
+}
+
+body{
+    background-color: #f2f2f2b7;
+}
+
+.regresar {
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	margin-left: 10px;
+	font-size: 1px;
+	color: black;
+	background-color: rgb(255, 255, 255);
+	border-radius: 50%;
+	position: relative;
+    border: 2px solid black
+	
+  }
+  
+  .regresar a {
+	color: black;
+	text-decoration: none;
+  }
+
+  
+  .regresar:hover {
+	background-color: rgb(233, 233, 233);
+	color: #1f1f1f86;
+  }
+
+  .regresar i{
+	text-align: center;
+	font-size: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+  
+main{
+	width: 100%;
+	padding: 20px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.contenedor__todo{
+	width: 100%;
+	max-width: 1000px;
+	margin: auto;
+	position: relative;
+}
+
+.caja__trasera{
+	width: 100%;
+	padding: 10px 20px;
+	display: flex;
+	justify-content: center;
+	background-color: rgba(173, 173, 173, 0.364);
+}
+
+.caja__trasera div{
+	margin: 100px 40px;
+	color: rgb(0, 0, 0);
+	transition: all 500ms;
+}
+
+.caja__trasera-register{
+    width: 20%;
+}
+
+.caja__trasera-login{
+    width: 50%;
+}
+
+.registrosl{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+}
+
+.registrosl label{
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.caja__trasera button{
+	border: 2px solid black;
+	background: transparent;
+	font-size: 24px;
+	font-weight: 1000;
+	cursor: pointer;
+	color: white;
+	outline: none;
+	transition: all 300ms;
+}
+
+.caja__trasera a{
+    padding: 50px;
+    color: black;
+    text-decoration: none;
+}
+
+.caja__trasera button:hover{
+	background: #fff;
+}
+
+.contenedor__login-register{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 650px;
+	position: relative;
+	top: -225px;
+	left: 10px;
+
+	transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+}
+
+
+.contenedor__login-register form{
+	width: 100%;
+	padding: 40px 40px;
+	background: #ffffffd5;
+	position: absolute; 
+    border-radius: 15px;
+}
+
+.contenedor__login-register label, .contenedor__login-register p{
+    font-weight: 550;
+}
+
+.contenedor__login-register input{
+    background-color: rgba(255, 255, 255, 0.449);
+}
+
+.contenedor__login-register form h2{
+	font-size: 30px;
+	text-align: center;
+    font-weight: 1000;
+	margin-bottom: 20px;
+	color: #000000;
+}
+
+
+.contenedor__login-register form button{
+	border: 2px solid #000000;
+    border-radius: 0px;
+	background: transparent;
+	font-size: 17px;
+	font-weight: 1000;
+	cursor: pointer;
+	color: rgb(0, 0, 0);
+	outline: none;
+	transition: all 300ms;
+}
+
+.contenedor__login-register form button:hover{
+    background-color: rgb(233, 233, 233);
+    color: black;
+    border: 2px solid black;
+    border-radius: 0px;
+}
+
+@media screen and (max-width: 1000px){
+	main{
+		margin-top: 50px;
+	}
+
+	.caja__trasera{
+		max-width: 450px;
+		height: 300px;
+		flex-direction: column;
+		margin: auto;
+	}
+	.caja__trasera-register{
+		width: 40%;
+	}
+
+	.caja__trasera div{
+		margin:0px;
+		position: absolute;
+	}
+	.contenedor__login-register{
+		top: -10px;
+		left: -5px;
+		margin: auto;
+	}
+
+	.contenedor__login-register form{
+		position: relative;
+	}
+	.caja__trasera-login {
+		width: 50%;
+	}
+}
+
+@media screen  and (max-width: 650px) {
+	.caja__trasera{
+		max-width: 300px;
+		height: 400px;
+	}
+	.caja__trasera-login {
+		width: 50%;
+	}
+
+	.caja__trasera-register{
+		width: 60%;
+	}
+
+	.registrosl{
+		flex-direction: column;
+	}
+}
+	

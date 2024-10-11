@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+} 
+body{
+    margin-top: 120px;
+    display: flex;
+    justify-content:space-around;
+    color: #FFF;
+}
+
+.contenedor_form{
+    margin-top: 100px;
+    width: 700px;
+    height: 500px;
+    background-image: url(../imagenes/form2.jpg);
+    background-repeat: no-repeat;
+    padding: 100px;
+    padding-top: 50px;
+    color: #fff;
+    margin-bottom: 50px;
+   
+}
+
+.overlay {
+    width: 700px;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.7); /* Color gris semitransparente */
+    padding: 100px;
+    padding-top: 50px;
+  
+}
+
+#contacto{ 
+    /* background-color: #ffffff25; */
+    display: flex;
+    flex-direction: column;
+    font-family: 'Cormorant_Infant', sans-serif;
+}
+
+#contacto input[type="text"],
+#contacto input[type="email"]{
+    width: 95%;
+    border: 1px solid #ccc;
+    background: transparent;
+    margin-top: 3px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1.3rem;
+    color: #FFF;
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
+#contacto textarea{
+    resize: none;
+    height: 80px;
+    width: 95%;
+    border: 1px solid #ccc;
+    background: transparent;
+    margin-top: 3px;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: #FFF;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+
+
+}
+
+#contacto input[type="text"]:hover,
+#contacto input[type="email"]:hover,
+#contacto textarea:hover{
+    -webkit-transition: border-color 0.3s ease-in-out;
+    -moz-transition: border-color 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid #07480c;
+}
+
+
+#contacto button[type="submit"] {
+    font-family: 'Cormorant_Infant', sans-serif;
+    cursor: pointer;
+    width: 150px;
+    border: none;
+    background: #0e0f0f;
+    color: #FFF;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#contacto button[type="submit"]:hover {
+    background: #92aba7;
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#contacto button[type="submit"]:active {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+} 
+
+@media screen and (max-width: 910px) {
+   .overlay{
+    width: 500px;
+    /* height: 400px; */
+    padding: 50px;
+    /* display: flex;
+    justify-content: center;
+    background-position: left; */
+    /* align-items: center; */
+   }
+
+   .contenedor_form{
+    width: 500px;
+    /* height: 400px; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    padding: 50px;
+   }
+}
+
+
+@media screen and (max-width: 600px) {
+    .overlay{
+     width: 350px;
+     /* height: 200px; */
+     padding: 25px;
+     /* display: flex;
+     justify-content: center;
+     background-position: left; */
+     /* align-items: center; */
+    }
+ 
+    .contenedor_form{
+     width: 350px;
+     /* height: 200px; */
+     /* display: flex;
+     justify-content: center;
+     align-items: center; */
+     padding: 25px;
+     margin-bottom: 50px;
+    }
+ }
