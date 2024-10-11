@@ -62,7 +62,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -82,15 +82,20 @@ if ($dataResult) {
 
     while ($row = $dataResult->fetch_assoc()) {
         // Asignar valores a variables
-        $id = $row['Id_producto'];
-        $nombre = $row['nombre'];
-        $descripcion = $row['descripcion'];
-        $cantidad = $row['cantidad'];
-        $precio = $row['precio'];
-        $imagen = $row['imagen'];
-        $descuento = $row['descuento'];
-        $categoria = $row['categoria'];
-        $subcategoria = $row['subcategoria'];
+        $id = $row['IdProducto'];
+        $nombre = $row['Nombre'];
+        $categoria = $row['Categoria'];
+        $exclusivo = $row['Exclusivo'];
+        $precio = $row['Precio'];
+        $talla = $row['Talla'];
+        $existencias = $row['Existencias'];
+        $marca = $row['Marca'];
+        $descripcion = $row['Descripcion'];
+        $imagen = $row['Imagen'];
+        $descuento = $row['Descuento'];
+        $subcategoria = $row['Subcategoria'];
+        $imagen2 = $row['Imagen2'];
+        $imagen3 = $row['Imagen3'];
 
         ?>
         
@@ -109,10 +114,10 @@ if ($dataResult) {
             }else{
                 echo '<span class="precio">MXN ' . $precio . '</span><br>';
             }
-            if($cantidad == 0){
+            if($existencias == 0){
                 echo 'Agotado<br>';
             }else{
-                echo 'Cantidad en existencia: ' . (isset($_SESSION['carrito'][$id]['cantidad']) ? $cantidad - (isset($_SESSION['carrito'][$id]['cantidad']) ? $_SESSION['carrito'][$id]['cantidad']: 0) : $cantidad) . '<br>';
+                echo 'Cantidad en existencia: ' . (isset($_SESSION['carrito'][$id]['cantidad']) ? $existencias - (isset($_SESSION['carrito'][$id]['cantidad']) ? $_SESSION['carrito'][$id]['cantidad']: 0) : $existencias) . '<br>';
             }
             
             if($descuento == 0){
