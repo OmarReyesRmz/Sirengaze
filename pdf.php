@@ -42,7 +42,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 $precio_final = 0;
 $total = 0;
 
@@ -57,17 +57,17 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
 
     foreach ($carrito as $productoId => $detallesProducto) {
         if ($detallesProducto['cantidad'] != 0) {
-            $query = "SELECT * FROM inventario WHERE Id_producto = $productoId";
+            $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
             $result = $conn->query($query);
 
             if ($result && $result->num_rows > 0) {
                 $row = $result->fetch_assoc();
 
-                $pdf->Cell(80, 10, $row['nombre'], 1);
-                if ($row['descuento'] != 0) {
-                    $precio_final = ($row['precio'] - $row['precio'] * $row['descuento'] / 100);
+                $pdf->Cell(80, 10, $row['Nombre'], 1);
+                if ($row['Descuento'] != 0) {
+                    $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
                 } else {
-                    $precio_final = $row['precio'];
+                    $precio_final = $row['Precio'];
                 }
                 $pdf->Cell(30, 10, '$' . $precio_final, 1);
                 $pdf->Cell(30, 10, $detallesProducto['cantidad'], 1);

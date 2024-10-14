@@ -24,7 +24,7 @@
             <div class="encabezado">
                 <nav id="menu">
                     <a class="menu1" href="index.php">Home</a>
-                    <a class="menu1" href="acercade.php">Acerca de</a>
+                    <!-- <a class="menu1" href="acercade.php">Acerca de</a> -->
                     <a class="menu1" href="preguntas.php">Ayuda</a>
                     <a class="menu1" href="contactanos.php">Contactanos</a>
                     <div class="dropdown">
@@ -71,7 +71,7 @@
                     <!-- Funciones de administrador -->
                     <?php 
                     if(isset($_SESSION["cuenta"])){
-                      if($cuenta == "admin"){?>
+                      if($cuenta == "ADMIN"){?>
                       <div class="dropdown">
                           <button class="dropbtn"><a>Control</a></button>
                           <div class="dropdown-content">

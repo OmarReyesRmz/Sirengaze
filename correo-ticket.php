@@ -7,7 +7,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 $total = 0;
 $precio_final = 0;
 
@@ -31,12 +31,12 @@ $mail = new PHPMailer(true);
 $nombre = "aaron";
 $cuenta = $_SESSION["cuenta"];
 
-$query = "SELECT email FROM usuarios WHERE cuenta = '$cuenta'";
+$query = "SELECT Correo FROM cliente WHERE Cuenta = '$cuenta'";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $email = $row["email"]; // Obtener el correo de la fila obtenida
+    $email = $row["Correo"]; // Obtener el correo de la fila obtenida
 } 
 
     
@@ -168,23 +168,23 @@ if ($result->num_rows > 0) {
             <tbody>';
             foreach ($carrito as $productoId => $detallesProducto) {
                 if ($detallesProducto['cantidad'] != 0) {
-                    $query = "SELECT * FROM $tabla WHERE Id_producto = $productoId";
+                    $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                     $result = $conn->query($query);
             
                     if ($result->num_rows > 0) {
                         $row = $result->fetch_assoc();
                         $emailContent .= '<tr>';
                         $emailContent .= '<td  class="align-middle px-4 can"><img src="cid:imagen' . $productoId . '" alt="imagen_producto_' . $productoId . '" style="width: 100px; height: 130px;"></td>';
-                        $imagePath = 'imagenes/' . $row['imagen']; // Ruta de la imagen que deseas adjuntar
+                        $imagePath = 'imagenes/' . $row['Imagen']; // Ruta de la imagen que deseas adjuntar
                         $imagenNombre = 'imagen' . $productoId; // Nombre único para cada imagen
-                        $mail->AddEmbeddedImage($imagePath, $imagenNombre, $row['imagen']); 
-                        $emailContent .= '<td  class="align-middle px-4 can">' . $row['nombre'] . '</td>';
+                        $mail->AddEmbeddedImage($imagePath, $imagenNombre, $row['Imagen']); 
+                        $emailContent .= '<td  class="align-middle px-4 can">' . $row['Nombre'] . '</td>';
                         // $emailContent .= '<td  class="align-middle px-4">' . $row['descripcion'] . '</td>';
-                        if ($row['descuento'] != 0) {
-                            $precio_final = ($row['precio'] - $row['precio'] * $row['descuento'] / 100);
+                        if ($row['Descuento'] != 0) {
+                            $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
                             $emailContent .= '<td class="align-middle px-4 can" style="color:red";> $' . $precio_final . '</td>';
                         } else {
-                            $precio_final = $row['precio'];
+                            $precio_final = $row['Precio'];
                             $emailContent .= '<td class="align-middle px-4 can"> $' . $precio_final . '</td>';
                         }
                         $emailContent .= '<td class="align-middle px-4 can">' . $detallesProducto['cantidad'] . '</td>';
@@ -267,7 +267,7 @@ if ($result->num_rows > 0) {
         });
     </script>';
     
-        header('Location: venta.php');
+        header('Location: ticket.php');
     } catch (Exception $e) {
         header('Location: index.php');
     }

@@ -243,7 +243,7 @@ $total = $_SESSION['total'];
                 <div class="form-group">
                     <label for="numeroTarjeta" class="my-2">Número de Tarjeta</label>
                     <div class="d-flex align-items-center">
-                        <input type="text" class="form-control" id="numeroTarjeta" placeholder="Número de Tarjeta" required>
+                        <input type="number" class="form-control" id="numeroTarjeta" placeholder="Número de Tarjeta" maxlength="16" pattern="\d{16}" title="Debe contener exactamente 16 números" required >
 
                         <span class="input-group-text text-muted mx-2">
                             <i class="fa fa-cc-visa mx-1"></i>
@@ -256,19 +256,19 @@ $total = $_SESSION['total'];
                 <div class="form-row d-flex align-items-center">
                     <div class="form-group col-md-4">
                         <label for="expiracionMes" class="my-2">Mes de Expiración</label>
-                        <input type="text" class="form-control" id="expiracionMes" placeholder="MM" required>
+                        <input type="number" class="form-control" id="expiracionMes" maxlength="2" placeholder="MM" required>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="expiracionAnio" class="my-2">Año de Expiración</label>
-                        <input type="text" class="form-control" id="expiracionAnio" placeholder="AAAA" required>
+                        <input type="number" class="form-control" id="expiracionAnio" maxlength="4" placeholder="AAAA" required>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label data-toggle="tooltip" title="Codigo de 3 digitos en la parte de atras de tu tarjeta" class="my-2">
                             CCV <i class="fa fa-question-circle"></i>
                         </label>
-                        <input type="text" class="form-control" id="ccv" placeholder="CCV" required>
+                        <input type="number" class="form-control" id="ccv" placeholder="CCV" maxlength="3" required>
                     </div>
                 </div>
                 <br>

@@ -89,6 +89,13 @@
                     </div>
 
                     <div class="registrosl">
+                        <label for="cuenta">Cuenta:</label>
+                        <input type="text" class="form-control" id="cuenta" name="cuenta" required>
+
+                    </div>
+
+
+                    <div class="registrosl">
                         <label for="telefono">Telefono:</label>
                         <input type="number" class="form-control" id="telefono" name="telefono" required>
 
@@ -147,7 +154,7 @@
                         <label for="confirmPassword">Repetir Contraseña:</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                     </div>
-                    <center><p><input type="checkbox" name="mayorista" id="mayorista" value="1"> Ser mayorista</p></center>
+                    <!-- <center><p><input type="checkbox" name="mayorista" id="mayorista" value="1"> Ser mayorista</p></center> -->
                     <center><button type="submit" class="btn btn-primary" style="margin-top:30px;">Registrarse</button></center> 
                 </form>
             </div>
@@ -186,6 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $edad = $_POST["edad"];
     $telefono = $_POST["telefono"];
+    $cuenta = $_POST["cuenta"];
 
     if (isset($_POST["sus"])) {
         if($_POST["sus"] == "1")
@@ -223,8 +231,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </script>';
     } else {
         // El usuario no existe, realizar el registro
-        $stmt_insertar = $conn->prepare("INSERT INTO cliente (Nombre,Edad, Telefono, Correo, Calle, Colonia, CP,Numero, password) VALUES (?, ?, ?, ?, ?,?,?, ?, ?)");
-        $stmt_insertar->bind_param("sssssssss", $nombre, $edad, $telefono,$email, $calle, $colonia, $cp, $numero_int , $encryptedPassword);
+        $stmt_insertar = $conn->prepare("INSERT INTO cliente (Nombre,Edad, Cuenta, Telefono, Correo, Calle, Colonia, CP,Numero, password) VALUES (?, ?, ?, ?, ?,?,?, ?, ?)");
+        $stmt_insertar->bind_param("sssssssss", $nombre, $edad,$cuenta, $telefono,$email, $calle, $colonia, $cp, $numero_int , $encryptedPassword);
 
         if ($stmt_insertar->execute()) {
             // Registro exitoso

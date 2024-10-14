@@ -9,7 +9,7 @@
     $username = "root";
     $password = "";
     $database = "sirenegaze";
-    $tabla = "inventario";
+    $tabla = "producto";
     $total = 0;
     
     $conn = new mysqli($servername, $username, $password, $database);
@@ -80,7 +80,10 @@
         <p>S I R E N G A Z E</p>
         <p><?php
         date_default_timezone_set('America/Mexico_City'); 
-        echo date("d/m/Y H:i:s"); ?></p>
+        echo date("d/m/Y H:i:s");
+        $_SESSION['dia'] =  date("d");
+        $_SESSION['mes'] =  date("m");
+        $_SESSION['year'] =  date("y"); ?></p>
         <br>
         <table class="tik">
         <tr>
@@ -92,7 +95,7 @@
         <?php
         foreach ($carrito as $productoId => $detallesProducto) {    
         if($detallesProducto['cantidad'] != 0){
-            $query = "SELECT * FROM $tabla WHERE Id_producto = $productoId";
+            $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
             $result = $conn->query($query);
 
             if ($result->num_rows > 0) {
@@ -100,12 +103,12 @@
                 
                 ?>
                 <tr>
-                <td><?php echo $row['nombre'] ?></td>
+                <td><?php echo $row['Nombre'] ?></td>
                 <td><?php
-                if ($row['descuento'] != 0) {
-                    $precio_final = ($row['precio'] - $row['precio'] * $row['descuento'] / 100);
+                if ($row['Descuento'] != 0) {
+                    $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
                 } else {
-                    $precio_final = $row['precio'];
+                    $precio_final = $row['Precio'];
                 } 
                 echo $precio_final ?></td>
                 <td><?php echo $detallesProducto['cantidad'] ?></td>
@@ -166,8 +169,8 @@
         <img src="imagenes/Log.png" alt="" class="tic">
         <h4 class="centro">WWW.SIRENGAZE.COM</h4>
         <div class="centro">
-            <a href="pdf.php" >
-                <i class="fas fa-file-pdf"></i> DESCARGAR PDF
+            <a href="pdf.php" target="_blank" >
+                <i class="fas fa-file-pdf" ></i> DESCARGAR PDF
             </a>
         </div>
         <div style="margin-top:50px; margin-left: 80px;">
