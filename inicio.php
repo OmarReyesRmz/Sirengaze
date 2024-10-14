@@ -267,33 +267,39 @@
 
     <h1 class="subtitulo1">W &nbsp&nbspO &nbsp&nbspM &nbsp&nbspA &nbsp&nbspN</h1>
     <div class="bloque4">
-      <div class="zoom">
-      <a href="woman.php"><img src="imagenes/woman_pantalon.jpg"></a>
-      </div>
-      <div class="zoom">
-      <a href="woman.php"><img src="imagenes/woman_blusa.jpg" ></a>
-      </div>
-      <div class="zoom">
-      <a href="woman.php"><img src="imagenes/woman_sueter.jpg" ></a>
-      </div>
-      <h4 class="ap">Pantalones</h4>
-      <h4 class="ap">Blusas</h4>
-      <h4 class="ap">Sueteres</h4>
-      <div class="zoom">
-      <a href="woman.php"><img src="imagenes/woman_chamarra.jpg" ></a>
-      </div>
-      <div class="zoom">
-      <a href="woman.php"><img src="imagenes/woman_vestido.jpg" ></a>
-      </div>
-      <h4 class="ap"></h4>
-      <h4 class="ap">Chamarras</h4>
-      <h4 class="ap">Vestidos</h4>
-        <h4 class="nop">Pantalones</h4>
+    <div class="zoom">
+        <!-- Enlace a la categoría 'woman' y subcategoría 'Pantalones' -->
+        <a href="products.php?categoria=woman&subcategoria=Pantalones"><img src="imagenes/woman_pantalon.jpg"></a>
+    </div>
+    <div class="zoom">
+        <!-- Enlace a la categoría 'woman' y subcategoría 'Blusas' -->
+        <a href="products.php?categoria=woman&subcategoria=Blusas"><img src="imagenes/woman_blusa.jpg" ></a>
+    </div>
+    <div class="zoom">
+        <!-- Enlace a la categoría 'woman' y subcategoría 'Sueteres' -->
+        <a href="products.php?categoria=woman&subcategoria=Sueteres"><img src="imagenes/woman_sueter.jpg" ></a>
+    </div>
+    <h4 class="ap">Pantalones</h4>
+    <h4 class="ap">Blusas</h4>
+    <h4 class="ap">Sueteres</h4>
+    <div class="zoom">
+        <!-- Enlace a la categoría 'woman' y subcategoría 'Chamarras' -->
+        <a href="products.php?categoria=woman&subcategoria=Chamarras"><img src="imagenes/woman_chamarra.jpg" ></a>
+    </div>
+    <div class="zoom">
+        <!-- Enlace a la categoría 'woman' y subcategoría 'Vestidos' -->
+        <a href="products.php?categoria=woman&subcategoria=Vestidos"><img src="imagenes/woman_vestido.jpg" ></a>
+    </div>
+    <h4 class="ap"></h4>
+    <h4 class="ap">Chamarras</h4>
+    <h4 class="ap">Vestidos</h4>
+    <h4 class="nop">Pantalones</h4>
         <h4 class="nop">Blusas</h4>
         <h4 class="nop">Sueteres</h4>
         <h4 class="nop">Chamarras</h4>
         <h4 class="nop">Vestidos</h4>
-    </div>
+</div>
+
     <br><br><br><br>
     <h1 class="subtitulo2">M &nbspE &nbspN</h1>
     <div class="bloque5">
@@ -301,23 +307,23 @@
         <div class="blanco nop"></div>
         <div class="blanco nop"></div>
         <div class="zoom">
-        <a href="men.php"><img src="imagenes/man_camisa.jpg" ></a>
+        <a href="products.php?categoria=men&subcategoria=camisas"><img src="imagenes/man_camisa.jpg" ></a>
         </div>
         <div class="zoom">
-        <a href="men.php"><img src="imagenes/man_camisa_mc.jpg" ></a>
+        <a href="products.php?categoria=men&subcategoria=playeras"><img src="imagenes/man_camisa_mc.jpg" ></a>
         </div>
         <div class="zoom">
-        <a href="men.php"><img src="imagenes/man_chamarra.jpg" ></a>
+        <a href="products.php?categoria=men&subcategoria=chamarras"><img src="imagenes/man_chamarra.jpg" ></a>
         </div>
         <!-- Aparecen al quiebre de pantalla -->
         <h4 class="ap">Camisetas</h4>
         <h4 class="ap">Playeras</h4>
         <h4 class="ap">Chamarras</h4>
         <div class="zoom">
-        <a href="men.php"><img src="imagenes/man_pantalon.jpg"></a>
+        <a href="products.php?categoria=men&subcategoria=pantalones"><img src="imagenes/man_pantalon.jpg"></a>
         </div>
         <div class="zoom">
-        <a href="men.php"><img src="imagenes/man_sudadera.jpg" ></a>
+        <a href="products.php?categoria=men&subcategoria=sudaderas"><img src="imagenes/man_sudadera.jpg" ></a>
         </div>
         <div class="blanco nop"></div>
         <div class="blanco nop"></div>
