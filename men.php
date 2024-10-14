@@ -40,8 +40,13 @@ if ($dataResult) {
         $nombre = $row['Nombre'];
         $categoria = $row['Categoria'];
         $exclusivo = $row['Exclusivo'];
-        $precio = $row['Precio'];
-        $talla = $row['Talla'];
+        $precio = $row['Precio'];  
+        $xch = $row['XCH'];
+        $ch = $row['CH'];
+        $m = $row['M'];
+        $l = $row['L'];
+        $xl = $row['XL'];
+        $xll = $row['XXL'];
         $existencias = $row['Existencias'];
         $marca = $row['Marca'];
         $descripcion = $row['Descripcion'];
@@ -68,7 +73,7 @@ if ($dataResult) {
         }else{
             echo '<span class="precio">MXN ' . $precio . '</span><br>';
         }
-        if($cantidad == 0){
+        if($existencias == 0){
             echo 'Agotado<br>';
         }else{
             echo 'Cantidad en existencia: ' . (isset($_SESSION['carrito'][$id]['cantidad']) ? $existencias - (isset($_SESSION['carrito'][$id]['cantidad']) ? $_SESSION['carrito'][$id]['cantidad']: 0) : $existencias) . '<br>';

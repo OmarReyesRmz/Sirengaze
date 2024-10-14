@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/iniciar_sesion.css">
     <link rel="icon" sizes="180x180" href="imagenes/logoic.ico">
     <style>
+
+
         .caja__trasera-register{
             width: 80%;
         }
@@ -23,7 +25,7 @@
             left: 320px;
         }
         .contenedor__login-register{
-            top: -225px;
+            top: -185px;
         }
 
         
@@ -82,8 +84,14 @@
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
 
-                        <label for="cuenta">Cuenta:</label>
-                        <input type="text" class="form-control" id="cuenta" name="cuenta" required>
+                        <label for="edad">Edad:</label>
+                        <input type="number" class="form-control" id="edad" name="edad" required>
+                    </div>
+
+                    <div class="registrosl">
+                        <label for="telefono">Telefono:</label>
+                        <input type="number" class="form-control" id="telefono" name="telefono" required>
+
                     </div>
 
                     <div class="registrosl">
@@ -91,7 +99,30 @@
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
 
+                
+
                     <div class="registrosl">
+                        <label for="calle">Calle:</label>       
+                        <input type="text" class="form-control" id="calle" name="calle" required>
+
+                        <label for="colonia">Colonia:</label>
+                        <input type="text" class="form-control" id="colonia" name="colonia" required> 
+                        
+                    </div>
+
+                    <div class="registrosl">
+                        <label for="cp">Codigo Postal:</label>
+                        <input type="number" class="form-control" id="cp" name="cp" required> 
+                        
+                        <label for="numero_int">Numero interior:</label>
+                        <input type="number" class="form-control" id="numero_int" name="numero_int" required> 
+
+                        
+                    </div>
+
+                    
+
+                    <!-- <div class="registrosl">
                         <label for="preguntaSeleccionada">Pregunta de Seguridad:</label>
                         <select class="form-control" id="preguntaSeleccionada" name="preguntaSeleccionada" required>
                             <option value="1">Cual es el nombre de tu mejor amigo?</option>
@@ -104,7 +135,10 @@
                     <div class="registrosl">
                         <label for="respuestaPregunta">Respuesta de Seguridad:</label>
                         <input type="text" class="form-control" id="respuestaPregunta" name="respuestaPregunta" required>
-                    </div>
+                    </div> -->
+
+                
+                    
 
                     <div class="registrosl">
                         <label for="password">Contraseña:</label>
@@ -113,7 +147,7 @@
                         <label for="confirmPassword">Repetir Contraseña:</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                     </div>
-                    <center><p><input type="checkbox" name="sus" value="1"> Ser suscribtor</p></center>
+                    <center><p><input type="checkbox" name="mayorista" id="mayorista" value="1"> Ser mayorista</p></center>
                     <center><button type="submit" class="btn btn-primary" style="margin-top:30px;">Registrarse</button></center> 
                 </form>
             </div>
@@ -144,11 +178,14 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
-    $cuenta = $_POST["cuenta"];
     $email = $_POST["email"];
-    $preguntaSeleccionada = $_POST["preguntaSeleccionada"];
-    $respuestaPregunta = $_POST["respuestaPregunta"];
+    $calle = $_POST["calle"];
+    $colonia = $_POST["colonia"];
+    $cp = $_POST["cp"];
+    $numero_int = $_POST["numero_int"];
     $password = $_POST["password"];
+    $edad = $_POST["edad"];
+    $telefono = $_POST["telefono"];
 
     if (isset($_POST["sus"])) {
         if($_POST["sus"] == "1")
@@ -168,8 +205,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Verificar si el usuario ya existe
-    $stmt_verificar = $conn->prepare("SELECT COUNT(*) FROM usuarios WHERE cuenta = ?");
-    $stmt_verificar->bind_param("s", $cuenta);
+    $stmt_verificar = $conn->prepare("SELECT COUNT(*) FROM cliente WHERE Nombre = ?");
+    $stmt_verificar->bind_param("s", $nombre);
     $stmt_verificar->execute();
     $stmt_verificar->bind_result($count);
     $stmt_verificar->fetch();
@@ -186,8 +223,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </script>';
     } else {
         // El usuario no existe, realizar el registro
-        $stmt_insertar = $conn->prepare("INSERT INTO usuarios (nombre, cuenta, email, pregunta_seleccionada, respuesta_pregunta, password) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt_insertar->bind_param("ssssss", $nombre, $cuenta, $email, $preguntaSeleccionada, $respuestaPregunta, $encryptedPassword);
+        $stmt_insertar = $conn->prepare("INSERT INTO cliente (Nombre,Edad, Telefono, Correo, Calle, Colonia, CP,Numero, password) VALUES (?, ?, ?, ?, ?,?,?, ?, ?)");
+        $stmt_insertar->bind_param("sssssssss", $nombre, $edad, $telefono,$email, $calle, $colonia, $cp, $numero_int , $encryptedPassword);
 
         if ($stmt_insertar->execute()) {
             // Registro exitoso

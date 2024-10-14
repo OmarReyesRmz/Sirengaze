@@ -4,7 +4,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productoId = isset($_POST['producto_id']) ? intval($_POST['producto_id']) : 0;
-    $query = "SELECT * FROM $tabla WHERE Id_producto = $productoId";
+    $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
 

@@ -87,7 +87,12 @@ if ($dataResult) {
         $categoria = $row['Categoria'];
         $exclusivo = $row['Exclusivo'];
         $precio = $row['Precio'];
-        $talla = $row['Talla'];
+        $xch = $row['XCH'];
+        $ch = $row['CH'];
+        $m = $row['M'];
+        $l = $row['L'];
+        $xl = $row['XL'];
+        $xll = $row['XXL'];
         $existencias = $row['Existencias'];
         $marca = $row['Marca'];
         $descripcion = $row['Descripcion'];
@@ -147,19 +152,21 @@ if ($dataResult) {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
 <script>
     function agregarAlCarrito(productoId) {
         var xhr = new XMLHttpRequest();
-
         xhr.open("POST", "agregarcarrito.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
+        console.log(xhr.responseText); // Ver qué está devolviendo el servidor
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var respuesta = JSON.parse(xhr.responseText);
-
+                
+             console.log("hola entre");
                 if (respuesta.success) {
                     window.location.reload();
+                    
                 }else{
                     Swal.fire({
                     icon: 'info',
@@ -172,6 +179,7 @@ if ($dataResult) {
         };
 
         xhr.send("producto_id=" + productoId);
+        
     }
 
     function mensaje() {

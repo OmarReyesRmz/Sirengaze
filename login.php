@@ -81,14 +81,14 @@
                     <label for="password">Contraseña:</label>
                     <input type="password" class="form-control" id="password" name="password" value="<?php if(isset($_COOKIE["password"])){ echo $_COOKIE["password"];} ?>" required>
 
-                    <div class="captcha">
+                    <!-- <div class="captcha">
                         <label for="captcha-input">Introduce el captcha</label>
                         <div class="preview"></div>
                         <div class="captcha-form">
                             <input type="text" id="captcha-form" name="capt" placeholder="Introduce el captcha" required>
                             <button class="captcha-refresh"><i class="fa fa-refresh"></i></button>
                         </div>
-                    </div>
+                    </div> -->
 
                     <input type="hidden" id="captcha-hidden" name="capt2" value="">
 
@@ -110,7 +110,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cuenta = $_POST["cuenta"];
     $password = $_POST["password"];
-    $captcha = $_POST["capt"];
+    // $captcha = $_POST["capt"];
     $captchaValue = $_POST["capt2"];
 
     $claveSecreta = "tu_clave_secreta";
@@ -121,27 +121,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error de conexión: " . $conn->connect_error);
     }
 
-    $stmt_verificar = $conn->prepare("SELECT nombre, password, Intentos_fallidos, cuenta_habilitada FROM usuarios WHERE cuenta = ?");
+    $stmt_verificar = $conn->prepare("SELECT Nombre, password FROM cliente WHERE Nombre = ?");
     $stmt_verificar->bind_param("s", $cuenta);
     $stmt_verificar->execute();
-    $stmt_verificar->bind_result($nombre, $encryptedPassword, $intentosFallidos, $cuentaHabilitada);
+    $stmt_verificar->bind_result($nombre, $encryptedPassword);
     $stmt_verificar->fetch();
     $stmt_verificar->close();
 
     $decryptedPassword = openssl_decrypt($encryptedPassword, 'aes-256-cbc', $claveSecreta, 0, $claveSecreta);
 
-    if ($cuentaHabilitada && $password === $decryptedPassword && $captcha === $captchaValue) {
+    if ($password === $decryptedPassword) {
         // Restablecer intentos fallidos en caso de inicio de sesión exitoso
-        $stmt_reset_intentos = $conn->prepare("UPDATE usuarios SET Intentos_fallidos = 0 WHERE cuenta = ?");
-        $stmt_reset_intentos->bind_param("s", $cuenta);
-        $stmt_reset_intentos->execute();
-        $stmt_reset_intentos->close();
+        // $stmt_reset_intentos = $conn->prepare("UPDATE usuarios SET Intentos_fallidos = 0 WHERE Nombre = ?");
+        // $stmt_reset_intentos->bind_param("s", $cuenta);
+        // $stmt_reset_intentos->execute();
+        // $stmt_reset_intentos->close();
 
-        // Restablecer la cuenta bloqueada
-        $stmt_reset_cuenta = $conn->prepare("UPDATE usuarios SET cuenta_habilitada = 1 WHERE cuenta = ?");
-        $stmt_reset_cuenta->bind_param("s", $cuenta);
-        $stmt_reset_cuenta->execute();
-        $stmt_reset_cuenta->close();
+        // // Restablecer la cuenta bloqueada
+        // $stmt_reset_cuenta = $conn->prepare("UPDATE usuarios SET cuenta_habilitada = 1 WHERE Nombre = ?");
+        // $stmt_reset_cuenta->bind_param("s", $cuenta);
+        // $stmt_reset_cuenta->execute();
+        // $stmt_reset_cuenta->close();
 
         if(!empty($_POST["remember"])){
             setcookie("cuenta",$_POST["cuenta"],time()+3600);
@@ -164,39 +164,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 });
               </script>";
-    } else {
+    } 
+    //else {
         // Incrementar el contador de intentos fallidos
-        $intentosFallidos++;
+        // $intentosFallidos++;
 
-        // Bloquear la cuenta al tercer intento fallido
-        if ($intentosFallidos >= 3) {
-            $stmt_bloquear_cuenta = $conn->prepare("UPDATE usuarios SET cuenta_habilitada = 0 WHERE cuenta = ?");
-            $stmt_bloquear_cuenta->bind_param("s", $cuenta);
-            $stmt_bloquear_cuenta->execute();
-            $stmt_bloquear_cuenta->close();
+        // // Bloquear la cuenta al tercer intento fallido
+        // if ($intentosFallidos >= 3) {
+        //     $stmt_bloquear_cuenta = $conn->prepare("UPDATE usuarios SET cuenta_habilitada = 0 WHERE cuenta = ?");
+        //     $stmt_bloquear_cuenta->bind_param("s", $cuenta);
+        //     $stmt_bloquear_cuenta->execute();
+        //     $stmt_bloquear_cuenta->close();
 
-            echo "<script>
-                    Swal.fire({
-                    title: 'Cuenta Bloqueada',
-                    text: 'Su cuenta ha sido bloqueada. Puede recuperar su contraseña.',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = 'recuperarpassword.php';
-                    }
-                    });
-                  </script>";
-        } else {
-            // Actualizar el contador de intentos fallidos
-            $stmt_actualizar_intentos = $conn->prepare("UPDATE usuarios SET Intentos_fallidos = ? WHERE cuenta = ?");
-            $stmt_actualizar_intentos->bind_param("is", $intentosFallidos, $cuenta);
-            $stmt_actualizar_intentos->execute();
-            $stmt_actualizar_intentos->close();
+        //     echo "<script>
+        //             Swal.fire({
+        //             title: 'Cuenta Bloqueada',
+        //             text: 'Su cuenta ha sido bloqueada. Puede recuperar su contraseña.',
+        //             icon: 'warning',
+        //             confirmButtonText: 'OK'
+        //             }).then((result) => {
+        //             if (result.isConfirmed) {
+        //                 window.location.href = 'recuperarpassword.php';
+        //             }
+        //             });
+        //           </script>";
+        // } else {
+        //     // Actualizar el contador de intentos fallidos
+        //     $stmt_actualizar_intentos = $conn->prepare("UPDATE usuarios SET Intentos_fallidos = ? WHERE cuenta = ?");
+        //     $stmt_actualizar_intentos->bind_param("is", $intentosFallidos, $cuenta);
+        //     $stmt_actualizar_intentos->execute();
+        //     $stmt_actualizar_intentos->close();
 
-            echo "<script>Swal.fire('Credenciales incorrectas o captcha inválido')</script>";
-        }
-    }
+        //     echo "<script>Swal.fire('Credenciales incorrectas o captcha inválido')</script>";
+        // }
+   // }
     $conn->close();
 }
 ?>

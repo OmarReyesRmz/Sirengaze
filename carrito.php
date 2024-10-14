@@ -11,7 +11,7 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
     $username = "root";
     $password = "";
     $dbname = "sirenegaze";
-    $tabla = "inventario";
+    $tabla = "producto";
     $total = 0;
     $precio_final=0;
     $dcto=0;
@@ -58,26 +58,26 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                         <?php
                     foreach ($carrito as $productoId => $detallesProducto) {
                         if($detallesProducto['cantidad'] != 0){
-                            $query = "SELECT * FROM $tabla WHERE Id_producto = $productoId";
+                            $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                             $result = $conn->query($query);
                             
                             if ($result->num_rows > 0) {
                                 $row = $result->fetch_assoc();
                                 echo '<tr>';
-                                echo '<td class="align-middle px-4"><img class="img_carrito" src="imagenes/' . $row['imagen'] . '" alt="imagen no cargada"></td>';
-                                echo '<td class="align-middle px-4">' . $row['nombre'] . '</td>';
-                                echo '<td class="align-middle px-4">' . $row['descripcion'] . '</td>';
-                                if($row['descuento']!=0){
-                                    $dcto = ($row['precio']*$row['descuento']/100) + $dcto;
-                                    $precio_final = ($row['precio'] - $row['precio']*$row['descuento']/100);
+                                echo '<td class="align-middle px-4"><img class="img_carrito" src="imagenes/' . $row['Imagen'] . '" alt="imagen no cargada"></td>';
+                                echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['Descripcion'] . '</td>';
+                                if($row['Descuento']!=0){
+                                    $dcto = ($row['Precio']*$row['Descuento']/100) + $dcto;
+                                    $precio_final = ($row['Precio'] - $row['Precio']*$row['Descuento']/100);
                                     echo '<td class="align-middle px-4 can" style="color:red";> $' . $precio_final . '</td>';
                                 }else{
-                                    $precio_final = $row['precio'];
+                                    $precio_final = $row['Precio'];
                                     echo '<td class="align-middle px-4 can"> $' . $precio_final . '</td>';
                                 }
                                 echo '<td class="align-middle px-4 can">' . $detallesProducto['cantidad'] . '</td>';
                                 echo '<td class="align-middle px-4 can"> $' . $precio_final * $detallesProducto['cantidad'] . '</td>';
-                                echo '<td class="align-middle px-4 can"><button onclick="eliminar(' . $row['Id_producto'] . ')"><i class="fa-regular fa-trash-can" style="color: #000000; font-size:25px;"></i></button></td>';
+                                echo '<td class="align-middle px-4 can"><button onclick="eliminar(' . $row['IdProducto'] . ')"><i class="fa-regular fa-trash-can" style="color: #000000; font-size:25px;"></i></button></td>';
                                 echo '</tr>';
                             }
                             $total = $precio_final* $detallesProducto['cantidad'] + $total;
