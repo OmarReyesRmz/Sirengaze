@@ -62,7 +62,9 @@ if ($dataResult) {
         ?>
         <div class="contenedor">
         <div class="con">
-            <img src="<?php echo 'imagenes/' . $imagen ?>" alt="" >
+        <a href="detalles-producto.php?id=<?php echo $id; ?>">
+            <img src="<?php echo 'imagenes/' . $imagen ?>" alt="<?php echo $nombre; ?>">
+        </a>
         </div>
         <h5 style="font-weight: bold;"><?php echo 'ID: ' . $id ?></h5>
         <h5 style="font-weight: bold;"><?php echo $nombre ?></h5>
@@ -91,7 +93,10 @@ if ($dataResult) {
             <p><?php echo $descripcion ?></p>
         </details>
         <?php if(isset($_SESSION["cuenta"])){ ?>
-            <button class="buy" onclick="agregarAlCarrito(<?php echo $id; ?>)"><i class="fa-solid fa-plus" style="color: #080808;"></i></button>
+            <a href="detalles-producto.php?id=<?php echo $id; ?>">
+                <button class="buy" ><i class="fa-solid fa-plus" style="color: #080808;"></i></button>
+            </a>
+            
         <?php }else{ ?>
             <button class="buy" onclick="mensaje()"><i class="fa-solid fa-plus" style="color: #080808;"></i></button>
         <?php }?>
