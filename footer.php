@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="grupo-2">
-            <small>P r o y e c t o &nbspA c a d é m i c o<br>&copy; 2023 <b>Sirenegaze</b> - Todos los Derechos Reservados.<br>
+            <small>P r o y e c t o &nbspA c a d é m i c o<br>&copy; 2024 <b>Sirenegaze</b> - Todos los Derechos Reservados.<br>
             <?php
                 date_default_timezone_set('America/Mexico_City'); 
                 echo date("d/m/Y H:i:s"); ?>

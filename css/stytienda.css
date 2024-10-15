@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Tourney';
+    src: url('../fonts/Tourney/static/Tourney_Condensed-Thin.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Lexend_Tera';
+    src: url('../fonts/Lexend_Tera/static/LexendTera-Bold.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+
+#tienda_apartado{
+    margin-top: 140px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 90px;
+    padding-right: 90px;
+    gap: 20px;
+}
+
+.apartado {
+    width: 100%; 
+    height: 100%; 
+    text-align: center;
+    font-family: 'Cormorant_Infant';
+    position: relative;
+
+}
+
+.apartado img {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+}
+
+.texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    color: white; 
+    font-size: 40px;
+    text-align: center; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+a:hover{
+    background-color: black;
+}

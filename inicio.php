@@ -198,7 +198,7 @@
 <body>
     <div class="bloque1">
       <div class="texto">
-            <h1 class="t1">F A S H O N</h1>
+            <h1 class="t1">F A S H I O N</h1>
             <h1 class="t2">N E V E R</h1>
             <h1 class="t2 estre" style="margin-left: 180px;">S L E E P S</h1>
             <h1 class="t2 estrella">S L E E P S</h1>
@@ -207,11 +207,23 @@
             <img class="logo2" src="imagenes/Log.png" alt="" class="logo">
             <h5>Explora el mundo de la moda. En nuestra tienda online, cada prenda es una declaración de estilo. Encuentra lo que te define y eleva tu guardarropa.</h5>
       </div>
-          <div class="imagenes">
-            <img class="b1" src="imagenes/imginicio2.jpg" alt="" class="jess">
-            <img class="b1" src="imagenes/jess2.jpg" alt="" class="jess">
-            <img class="b1" src="imagenes/imginicio6.jpg" alt="" class="jess">
-            <img class="b1" src="imagenes/imginicio4.jpg" alt="" class="jess">
+      <div class="imagenes">
+            <div class="fil">
+              <div class="filtro"></div>
+              <img class="b1" src="imagenes/imginicio2.jpg" alt="">
+            </div>
+            <div class="fil">
+              <div class="filtro"></div>
+              <img class="b1" src="imagenes/jess2.jpg" alt="">
+            </div>
+            <div class="fil">
+              <div class="filtro"></div>
+              <img class="b1" src="imagenes/imginicio6.jpg" alt="">
+            </div>
+            <div class="fil">
+              <div class="filtro"></div> 
+              <img class="b1" src="imagenes/imginicio4.jpg" alt="">
+            </div>
           </div>
       </div>
         
