@@ -1,10 +1,8 @@
 
 :root{
     --footer-color: #000000;
-    --derechos: rgba(0, 0, 0, 0.32);
+    --derechos: rgba(110, 110, 110, 0.169);
 }
-
-
 
 /*:::::Pie de Pagina
 
@@ -16,11 +14,22 @@ GRIS:
 root: rgba(0, 0, 0, 0.32);
 .pie-gagina: rgba(0, 0, 0, 0.082);
 
+VERDE: 
+root: rgba(110, 110, 110, 0.169)
+.pie-pagina: #1f4d4d1b
+
+GRISES-2:
+.pie-pagina: #8a959737
+
+GRIS-3:
+.pie-pagina: #ebeded
+
 */
+
 .pie-pagina{
     margin-top: 70px;
     width: 100%;
-    background-color: #e49e9e5b;
+    background-color: #ebeded;
 }
 .pie-pagina .grupo-1{
     width: 100%;
@@ -66,7 +75,7 @@ root: rgba(0, 0, 0, 0.32);
     background-clip: text;
     border-radius: 20%;
     transform: scale(1.5);
-    color:#ffffff;
+    color:#21373bd9;
     background-color:transparent;
 
 }
@@ -75,7 +84,7 @@ root: rgba(0, 0, 0, 0.32);
     background-clip: text;
     border-radius: 20%;
     transform: scale(1.5);
-    color:#ffffff;
+    color:#21373bd9;
     background-color:transparent;
 
 }
@@ -93,7 +102,7 @@ root: rgba(0, 0, 0, 0.32);
     background-color: var(--derechos);
     padding: 15px 10px;
     text-align: center;
-    color: #fff;
+    color: #000000;
 }
 .pie-pagina .grupo-2 small{
     font-size: 15px;

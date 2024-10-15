@@ -3,6 +3,7 @@ session_start();
 if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
 	$paisSeleccionado = $_SESSION['pais'];
 }
+$cuenta = $_SESSION['cuenta'];
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +25,40 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
   }
 </style>
 </head>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sirenegaze";
+$tabla = "cliente";
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener los datos de la tabla inventario
+$dataQuery = "SELECT * FROM $tabla WHERE Cuenta = '$cuenta'";
+$dataResult = $conn->query($dataQuery);
+    
+if ($dataResult) {
+    $dataResult->data_seek(0);
+    
+
+    while ($row = $dataResult->fetch_assoc()) {
+        // Asignar valores a variables
+		$id = $row['IdCliente'];
+        $nombre = $row['Cuenta'];
+        $telefono = $row['Telefono'];
+        $calle = $row['Calle'];
+        $cp = $row['CP'];
+        $numero = $row['Numero'];
+        $colonia = $row['Colonia'];
+        $correo = $row['Correo'];
+?>
 
 <body style="font-family: 'Cormorant_Infant', sans-serif; font-size:18px;">
 		<?php include 'header.php'; ?>
@@ -33,45 +68,28 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
 					Dirección de envio
 			</h4>
 			<form >
-				<div class="form-row">
-					<div class="col-md-6 form-group">
-						<label for="firstname">Nombre</label>
-						<input type="text" class="form-control" id="firstname" placeholder="Nombre">
-						<div class="invalid-feedback">
-							El nombre es requerido.
-						</div>
-					</div>
-
-					<div class="col-md-6 form-group">
-						<label for="lastname">Apellido</label>
-						<input type="text" class="form-control" id="lastname" placeholder="Apellido">
-						<div class="invalid-feedback">
-							El apellido es requerido
-						</div>
-					</div>
-				</div>
 
 				<div class="form-group">
-					<label for="username">Usuario</label>
+					<label for="username">Nombre</label>
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text">@</span>
 							</div>	
-							<input type="text" class="form-control" id="username" placeholder="Usuario" required>
+							<input type="text" class="form-control" id="nombre" value="<?php echo $nombre; ?>" required disabled>
 							<div class="invalid-feedback">
-								El usuario es requerido.
+								El nombre es requerido.
 							</div>
 						</div>
 				</div>
 
 				<div class="form-group">
 						<label for="email">Email</label>
-						<input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+						<input type="email" class="form-control" id="email" value="<?php echo $correo; ?>"  required disabled>
 				</div>
 
 				<div class="form-group">
 					<label for="adress">Dirección</label>
-					<input type="text" class="form-control" id="adress" placeholder="123, Juan Escutia" required>
+					<input type="text" class="form-control" id="adress" value="<?php echo $calle . " " . $numero . " " . $colonia . " "; ?>"  required disabled>
 					<div class="invalid-feedback">
 						Ingresa tu dirección de envio.
 					</div>
@@ -84,13 +102,13 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
 					<input type="text" class="form-control" id="adress2" placeholder="123, Juan Barragan">
 				</div>
 
-				<div class="row">
-            <div class="col-md-4 form-group">
-			<label for="pais">País:</label>
-			<input type="text" id="pais" name="pais" value="<?php echo htmlspecialchars($paisSeleccionado); ?>" disabled>
-			<div class="invalid-feedback">
-                    Seleccione un pais válido.
-                </div>
+			<div class="row">
+			<div class="col-md-4 form-group">
+					<label for="pais">País:</label>
+					<input type="text" class="form-control" id="pais" name="pais" value="<?php echo htmlspecialchars($paisSeleccionado); ?>" disabled>
+				<div class="invalid-feedback">
+						Seleccione un pais válido.
+				</div>
             </div>
 
             <div class="col-md-4 form-group">
@@ -103,24 +121,18 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
             
             <div class="col-md-4 form-group">
                 <label for="CodigoPostal">Código Postal</label>
-                <input type="text" class="form-control" id="CodigoPostal" placeholder="Código postal" required>
+                <input type="text" class="form-control" id="CodigoPostal" value="<?php echo $cp; ?>"  required disabled>
                 <div class="invalid-feedback">
                     Ingresa un código postal válido.
                 </div>
             </div>
         </div>
-
-				<div class="form-check">
-					<input type="checkbox" class="form-check-input" id="shipping-adress"> 
-            La dirección de envío es la misma que mi dirección de facturación.
-					<label for="shipping-adress" class="form-check-label"></label>
-				</div>
-
-				<div class="form-check">
-					<input type="checkbox" class="form-check-input" id="same-adress">
-						Guardar información para futuras compras.
-					<label for="same-adress" class="form-check-label"></label>					
-					</div>
+		<?php
+    }
+} else {
+    echo "Error al obtener datos de la tabla: " . $conn->error;  
+}
+?>
           <br>
 		 	 <button id="btnContinuarPago" class="btn btn-dark bt-lg btn-block" type="button" onclick="validarFormulario()">Continuar al método de pago</button>
 
@@ -142,16 +154,14 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
             }
 
             function validarCampos() {
-                var nombre = document.getElementById('firstname').value;
-                var apellido = document.getElementById('lastname').value;
-                var usuario = document.getElementById('username').value;
+                var usuario = document.getElementById('nombre').value;
                 var email = document.getElementById('email').value;
                 var direccion = document.getElementById('adress').value;
                 var ciudad = document.getElementById('Ciudad').value;
                 var codigoPostal = document.getElementById('CodigoPostal').value;
                 // Agrega más campos según sea necesario
 
-                if (nombre && apellido && usuario && email && direccion && ciudad && codigoPostal) {
+                if (usuario && email && direccion && ciudad && codigoPostal) {
 					$.ajax({
 						type: 'POST',
 						url: 'direccion.php', 

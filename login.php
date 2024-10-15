@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error de conexión: " . $conn->connect_error);
     }
 
-    $stmt_verificar = $conn->prepare("SELECT Nombre, password FROM cliente WHERE Nombre = ?");
+    $stmt_verificar = $conn->prepare("SELECT Cuenta, password FROM cliente WHERE Cuenta = ?");
     $stmt_verificar->bind_param("s", $cuenta);
     $stmt_verificar->execute();
     $stmt_verificar->bind_result($nombre, $encryptedPassword);

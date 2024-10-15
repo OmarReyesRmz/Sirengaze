@@ -10,14 +10,15 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
     $_SESSION['subtotal'] = 0;
     $_SESSION['cupon'] = 0;
     $_SESSION['descuentototal'] = 0;
+    $total = $_SESSION['total'];
+    $dia = $_SESSION['dia'];
+    $mes = $_SESSION['mes'];
+    $year = $_SESSION['year'];
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "sirenegaze";
-    $tabla = "inventario";
-    $total = 0;
-    $precio_final = 0;
-    $dcto = 0;
+    $tabla = "producto";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -25,10 +26,29 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
         die("Error de conexión: " . $conn->connect_error);
     }
 
+    
+    $cuenta = $_SESSION['cuenta'];
+    $datales = "SELECT IdCliente FROM cliente WHERE Cuenta = '$cuenta'";
+    $resultado = $conn->query($datales);
+    $fila = $resultado->fetch_assoc();
+    $IdCliente = $fila['IdCliente'];
+    echo $IdCliente, $dia, $mes, $year, $total;
+    $dataQuery = "INSERT INTO compra (Day,Month,Year,IdCliente,Total_compra) VALUES ($dia, $mes, $year, $IdCliente,$total)";
+    $conn->query($dataQuery);
+
+    $IdCompra = $conn->insert_id;
+
+    // Insertar cada producto del carrito en la tabla 'detalles'
     foreach ($carrito as $productoId => $detallesProducto) {
         if ($detallesProducto['cantidad'] != 0) {
-            // Resta la cantidad del carrito de las existencias actuales en la base de datos
-            $updateQuery = "UPDATE $tabla SET cantidad = cantidad - {$detallesProducto['cantidad']} WHERE Id_producto = $productoId";
+            // Insertar en la tabla 'detalles' la cantidad, IdCompra e IdProducto
+            $insertDetalles = "INSERT INTO detalles (Cantidad, IdCompra, IdProducto) 
+                            VALUES ({$detallesProducto['cantidad']}, $IdCompra, $productoId)";
+            $conn->query($insertDetalles);
+
+            // Actualizar las existencias en la tabla de productos
+            $updateQuery = "UPDATE $tabla SET Existencias = Existencias - {$detallesProducto['cantidad']} 
+                            WHERE IdProducto = $productoId";
             $conn->query($updateQuery);
         }
     }

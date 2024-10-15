@@ -24,17 +24,18 @@
             <div class="encabezado">
                 <nav id="menu">
                     <a class="menu1" href="index.php">Home</a>
-                    <a class="menu1" href="acercade.php">Acerca de</a>
+                    <!-- <a class="menu1" href="acercade.php">Acerca de</a> -->
                     <a class="menu1" href="preguntas.php">Ayuda</a>
                     <a class="menu1" href="contactanos.php">Contactanos</a>
-                    <div class="dropdown">
+                    <a class="menu1" href="menu.php">Tienda</a>
+                    <!-- <div class="dropdown">
                         <button class="dropbtn"><a>Tienda</a></button>
                         <div class="dropdown-content">
                             <a id="menu1" href="woman.php">Woman</a>
                             <a id="menu1" href="men.php">Men</a>
                             <a id="menu1" href="tienda.php">Todos</a>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="enc icono">
                       <a href="carrito.php"><i class="fa-solid fa-cart-shopping" style="color: #000000; font-size:25px;"></i></a>
@@ -71,7 +72,7 @@
                     <!-- Funciones de administrador -->
                     <?php 
                     if(isset($_SESSION["cuenta"])){
-                      if($cuenta == "admin"){?>
+                      if($cuenta == "ADMIN"){?>
                       <div class="dropdown">
                           <button class="dropbtn"><a>Control</a></button>
                           <div class="dropdown-content">

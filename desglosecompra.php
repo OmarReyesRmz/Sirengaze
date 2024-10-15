@@ -11,7 +11,7 @@
         $username = "root";
         $password = "";
         $database = "sirenegaze";
-        $tabla = "inventario";
+        $tabla = "producto";
         $descuento = 0;
         $totalCarrito = 0;
         $totalcupon = 0;
@@ -95,7 +95,7 @@
                         echo '<div class="form-group">';
                         
                         if($detallesProducto['cantidad'] != 0){
-                            $query = "SELECT * FROM $tabla WHERE Id_producto = $productoId";
+                            $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                             $result = $conn->query($query);
 
                             if ($result->num_rows > 0) {
@@ -106,18 +106,18 @@
                                 <?php
                                 echo '<table class="table table-borderless">';
                                 echo '<tr>';
-                                echo '<td rowspan=5><img class="img_detalles" src="imagenes/' . $row['imagen'] . '" alt="imagen no cargada" width="130" height="180"></td>';
+                                echo '<td rowspan=5><img class="img_detalles" src="imagenes/' . $row['Imagen'] . '" alt="imagen no cargada" width="130" height="180"></td>';
                                 echo '</tr>';
                                 echo '<tr>';
-                                echo '<td>' . $row['nombre'] . '</td>';
+                                echo '<td>' . $row['Nombre'] . '</td>';
                                 echo '<td> </td>';
                                 echo '<td> </td>';
                                 echo '</tr>';
                                 echo '<tr>';
-                                if ($row['descuento'] != 0) {
-                                $precio_final = ($row['precio'] - $row['precio'] * $row['descuento'] / 100);
+                                if ($row['Descuento'] != 0) {
+                                $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
                                 } else {
-                                $precio_final = $row['precio'];
+                                $precio_final = $row['Precio'];
                                 }
                                 echo '<td> $' . $precio_final . '</td>';
                                 echo '<td></td>';

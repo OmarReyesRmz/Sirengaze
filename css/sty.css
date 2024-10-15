@@ -67,6 +67,33 @@ body{
     height: 190px;
 }
 
+.b1 {
+    width: 100%; /* La imagen ocupará todo el ancho del contenedor */
+    height: 100%; /* La imagen ocupará todo el alto del contenedor */
+    padding: 10%;
+}
+
+.fil{
+    position: relative;
+    height: 260px;
+    width: 250px;
+}
+
+.filtro {
+    position: absolute;
+    top: 26;
+    left: 26;
+    width: 79%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0); 
+    transition: background-color 0.5 ease, box-shadow 0.5s ease; 
+}
+
+.fil:hover .filtro {
+    background-color: rgba(0, 0, 0, 0.26); 
+    
+}
+
 .b3{
     width: 200px;
     height: 250px;
