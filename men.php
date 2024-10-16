@@ -55,7 +55,7 @@ if ($dataResult) {
         $subcategoria = $row['Subcategoria'];
         $imagen2 = $row['Imagen2'];
         $imagen3 = $row['Imagen3'];
-
+        if($exclusivo != 'T' && $exclusivo !='M'){
         if($categoria == 'men'){
         ?>
         <div class="contenedor">
@@ -101,7 +101,7 @@ if ($dataResult) {
         <?php }?>
         </div>
     <?php
-        }
+        }}
     }
 } else {
         echo "Error al obtener datos de la tabla: " . $conn->error;  

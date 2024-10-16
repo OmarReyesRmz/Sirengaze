@@ -20,7 +20,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -32,7 +32,7 @@ if ($conn->connect_error) {
 if (isset($_GET['id'])) {
     $idProductoEditar = $_GET['id'];
 
-    $consultaEditar = $conn->prepare("SELECT * FROM $tabla WHERE Id_producto = ?");
+    $consultaEditar = $conn->prepare("SELECT * FROM $tabla WHERE IdProducto = ?");
     $consultaEditar->bind_param("i", $idProductoEditar);
     $consultaEditar->execute();
     $resultadoEditar = $consultaEditar->get_result();
@@ -56,28 +56,28 @@ if (isset($_GET['id'])) {
         <form method="post" enctype="multipart/form-data" action="cambiosguardar.php">
             <div class="contenedor-altas2">
                 <h5 style="font-weight: bold;">Editar Producto <?php echo $idProductoEditar ?></h5>
-                <input type="hidden" name="Id_producto" value="<?php echo $productoEditar['Id_producto']; ?>">
-                <img id="imagenPrevia" src="<?php echo 'imagenes/' . $productoEditar['imagen']; ?>" alt="" class="con">
+                <input type="hidden" name="Id_producto" value="<?php echo $productoEditar['IdProducto']; ?>">
+                <img id="imagenPrevia" src="<?php echo 'imagenes/' . $productoEditar['Imagen']; ?>" alt="" class="con">
                 <input type="file" name="imagen" accept="image/jpeg, image/png" onchange="mostrarVistaPrevia(this)"><br>
                 <h5 style="font-weight: bold;">Nombre de la prenda</h5>
-                <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $productoEditar['nombre']; ?>" required><br>
+                <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $productoEditar['Nombre']; ?>" required><br>
                 <p><?php echo 'Precio MXN:'  , '<br>'; ?>
-                <input type="number" name="precio" placeholder="Precio" value="<?php echo $productoEditar['precio']; ?>" required>
+                <input type="number" name="precio" placeholder="Precio" value="<?php echo $productoEditar['Precio']; ?>" required>
                 <?php echo ' <br> Cantidad en existencia: '  , '<br>'; ?>
-                <input type="number" name="cantidad" placeholder="Cantidad" value="<?php echo $productoEditar['cantidad']; ?>" required><br>
-                <?php echo 'Descuento <br><input type="number" name="descuento" value="' . $productoEditar['descuento'] . '" required> %'; ?>
+                <input type="number" name="cantidad" placeholder="Cantidad" value="<?php echo $productoEditar['Existencias']; ?>" required><br>
+                <?php echo 'Descuento <br><input type="number" name="descuento" value="' . $productoEditar['Descuento'] . '" required> %'; ?>
                 <br></p>
                 <details>
                     <summary>Descripción</summary>
-                    <input type="text" name="descripcion" placeholder="Descripcion" value="<?php echo $productoEditar['descripcion']; ?>" required><br>
+                    <input type="text" name="descripcion" placeholder="Descripcion" value="<?php echo $productoEditar['Descripcion']; ?>" required><br>
 
                     <label for="categoria">Categoría:</label>
                     <select name="categoria" id="categoria" required>
-                        <option value="men" <?php echo ($productoEditar['categoria'] == 'men') ? 'selected' : ''; ?>>Men</option>
-                        <option value="woman" <?php echo ($productoEditar['categoria'] == 'woman') ? 'selected' : ''; ?>>Women</option>
+                        <option value="men" <?php echo ($productoEditar['Categoria'] == 'men') ? 'selected' : ''; ?>>Men</option>
+                        <option value="woman" <?php echo ($productoEditar['Categoria'] == 'woman') ? 'selected' : ''; ?>>Women</option>
                     </select><br>
                     <label for="subcategoria">Subcategoria</label>
-                    <input type="text" name="subcategoria" value="<?php echo $productoEditar['subcategoria']; ?>" required>
+                    <input type="text" name="subcategoria" value="<?php echo $productoEditar['Subcategoria']; ?>" required>
                 </details>
                 <button type="submit">Guardar Cambios</button><br>
             </div>

@@ -53,9 +53,12 @@ if ($dataResult) {
         $categoria = $row['Categoria'];
         $precio = $row['Precio'];  
         $existencias = $row['Existencias'];
+        $exclusivo = $row['Exclusivo'];
         $descripcion = $row['Descripcion'];
         $imagen = $row['Imagen'];
         $descuento = $row['Descuento'];
+
+        if($exclusivo != 'T' && $exclusivo !='M'){
 
         ?>
         <div class="contenedor">
@@ -92,7 +95,7 @@ if ($dataResult) {
             </a>
             <?php }else{ ?>
             <button class="buy" onclick="mensaje()"><i class="fa-solid fa-plus" style="color: #080808;"></i></button>
-        <?php }?>
+        <?php }}?>
         </div>
     <?php
     }

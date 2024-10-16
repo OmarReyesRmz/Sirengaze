@@ -3,7 +3,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -16,12 +16,14 @@ $idProducto = $_POST["idProducto"];
 $dataQuery = "SELECT * FROM $tabla";
 $dataResult = $conn->query($dataQuery);
 
-$sql = "DELETE FROM inventario WHERE Id_producto = $idProducto";
+$sql = "UPDATE $tabla SET Exclusivo='T' WHERE IdProducto = '$idProducto' ";
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto eliminado correctamente.";
+    
     header("Location: b.php");
 } else {
+    
     echo "Error al eliminar el producto: " . $conn->error;
 }
 

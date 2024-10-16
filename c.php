@@ -23,7 +23,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -40,15 +40,15 @@ if ($dataResult) {
         <?php
         while ($row = $dataResult->fetch_assoc()) {
         // Asignar valores a variables
-        $id = $row['Id_producto'];
-        $nombre = $row['nombre'];
-        $descripcion = $row['descripcion'];
-        $cantidad = $row['cantidad'];
-        $precio = $row['precio'];
-        $imagen = $row['imagen'];
-        $descuento = $row['descuento'];
-        $categoria = $row['categoria'];
-        $subcategoria = $row['subcategoria'];
+        $id = $row['IdProducto'];
+        $nombre = $row['Nombre'];
+        $descripcion = $row['Descripcion'];
+        $cantidad = $row['Existencias'];
+        $precio = $row['Precio'];
+        $imagen = $row['Imagen'];
+        $descuento = $row['Descuento'];
+        $categoria = $row['Categoria'];
+        $subcategoria = $row['Subcategoria'];
 
         ?>
         

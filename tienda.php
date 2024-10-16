@@ -102,6 +102,7 @@ if ($dataResult) {
         $imagen2 = $row['Imagen2'];
         $imagen3 = $row['Imagen3'];
 
+        if($exclusivo != 'T' && $exclusivo !='M'){
         ?>
         
         <div class="contenedor">
@@ -148,7 +149,7 @@ if ($dataResult) {
             <?php }?>
         </div>
     <?php
-    }
+        }}
 } else {
     echo "Error al obtener datos de la tabla: " . $conn->error;  
 }

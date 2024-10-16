@@ -15,7 +15,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -40,16 +40,18 @@ if ($dataResult) {
         <?php
         while ($row = $dataResult->fetch_assoc()) {
         // Asignar valores a variables
-        $id = $row['Id_producto'];
-        $nombre = $row['nombre'];
-        $descripcion = $row['descripcion'];
-        $cantidad = $row['cantidad'];
-        $precio = $row['precio'];
-        $imagen = $row['imagen'];
-        $descuento = $row['descuento'];
-        $categoria = $row['categoria'];
-        $subcategoria = $row['subcategoria'];
-
+        $id = $row['IdProducto'];
+        $nombre = $row['Nombre'];
+        $descripcion = $row['Descripcion'];
+        $cantidad = $row['Existencias'];
+        $exclusivo = $row['Exclusivo'];
+        $precio = $row['Precio'];
+        $imagen = $row['Imagen'];
+        $descuento = $row['Descuento'];
+        $categoria = $row['Categoria'];
+        $subcategoria = $row['Subcategoria'];
+        
+        if($exclusivo != 'T'){
         ?>
         
         <div class="contenedor">
@@ -89,7 +91,7 @@ if ($dataResult) {
                 
             </div>
         <?php
-        }
+        }}
         ?>
     </div>
 <?php
@@ -101,7 +103,7 @@ if ($dataResult) {
 <script>
     function eliminarProducto(idProducto) {
         Swal.fire({
-            title: '¿Estás seguro de eliminar este producto?',
+            title: '¿Estás seguro de eliminar este producto? '+idProducto + '',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -111,13 +113,14 @@ if ($dataResult) {
         }).then((result) => {
             if (result.isConfirmed) {
                 var xhr = new XMLHttpRequest();
+                console.log("entre");
                 xhr.open("POST", "bajastienda.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
                             document.getElementById("mensajeEliminar").innerHTML = xhr.responseText;
-                            location.reload();
+                            window.location.reload();
                         } else {
                             document.getElementById("mensajeEliminar").innerHTML = "Error al eliminar el producto.";
                         }

@@ -5,7 +5,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -27,7 +27,7 @@ if (!empty($_FILES["imagen"]["name"])) {
     move_uploaded_file($rutaTemporal, $rutaCompleta);
 } else {
     // Si no se proporciona una nueva imagen, mantener la imagen existente
-    $consultaImagen = $conn->prepare("SELECT imagen FROM $tabla WHERE Id_producto = ?");
+    $consultaImagen = $conn->prepare("SELECT Imagen FROM $tabla WHERE IdProducto = ?");
     $consultaImagen->bind_param("i", $idProducto);
     $consultaImagen->execute();
 
@@ -40,7 +40,7 @@ if (!empty($_FILES["imagen"]["name"])) {
     $resultadoImagen = $consultaImagen->get_result()->fetch_assoc();
 
     // Asignar la imagen existente a la variable $imagen
-    $imagen = $resultadoImagen['imagen'];
+    $imagen = $resultadoImagen['Imagen'];
     echo $imagen;
     $consultaImagen->close();
 }
@@ -52,7 +52,7 @@ if (!empty($_FILES["imagen"]["name"])) {
     $subcategoriaEditar = $_POST["subcategoria"];
 
     // Actualizar los datos en la base de datos
-    $actualizarConsulta = $conn->prepare("UPDATE $tabla SET nombre = ?, precio = ?, cantidad = ?, descuento = ?, descripcion = ?, categoria = ?, subcategoria = ?, imagen = ? WHERE Id_producto = ?");
+    $actualizarConsulta = $conn->prepare("UPDATE $tabla SET Nombre = ?, Precio = ?, Existencias = ?, Descuento = ?, Descripcion = ?, Categoria = ?, Subcategoria = ?, Imagen = ? WHERE IdProducto = ?");
     $actualizarConsulta->bind_param("sdiissssi", $nombreEditar, $precioEditar, $existenciaEditar, $descuentoEditar, $descripcionEditar, $categoriaEditar, $subcategoriaEditar, $imagen, $idProducto);
 
     if ($actualizarConsulta->execute()) {
