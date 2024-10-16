@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
-    <link rel="stylesheet" href="css/styt.css">
-    <link rel="stylesheet" href="css/detalles_producto.css">
-    <link rel="stylesheet" href="css/tienda.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="css/detalles-producto.css">
 </head>
 <body>
 
@@ -42,69 +41,93 @@ if ($productResult && $productResult->num_rows > 0) {
     
     // Mostrar la información del producto
     ?>
-    <div class="contenedor-producto-detalles">
-        <h1 class="titulo-producto"><?php echo $product['Nombre']; ?></h1>
+
+    <div id="contenedor-detalles">
+        
         <div class="imagenes-producto">
-            <img src="<?php echo 'imagenes/' . $product['Imagen']; ?>" alt="<?php echo $product['Nombre']; ?>" class="imagen-principal">
+            <img src="<?php echo 'imagenes/' . $product['Imagen']; ?>" alt="<?php echo $product['Nombre']; ?>">
             <div class="imagenes-secundarias">
-                <img src="<?php echo 'imagenes/' . $product['Imagen2']; ?>" alt="<?php echo $product['Nombre']; ?>" class="imagen-secundaria">
-                <img src="<?php echo 'imagenes/' . $product['Imagen3']; ?>" alt="<?php echo $product['Nombre']; ?>" class="imagen-secundaria">
+                <img src="<?php echo 'imagenes/' . $product['Imagen2']; ?>" alt="<?php echo $product['Nombre']; ?>">
+                <img src="<?php echo 'imagenes/' . $product['Imagen3']; ?>" alt="<?php echo $product['Nombre']; ?>">
             </div>
         </div>
-        <div class="detalles-producto">
-            <p><strong>Descripción:</strong> <?php echo $product['Descripcion']; ?></p>
-            <p><strong>Precio:</strong> MXN <?php echo $product['Precio']; ?></p>
-            <p><strong>Descuento:</strong> <?php echo $product['Descuento']; ?>%</p>
-            <p><strong>Marca:</strong> <?php echo $product['Marca']; ?></p>
-            <p><strong>Categoría:</strong> <?php echo $product['Categoria']; ?></p>
-            <p><strong>Subcategoría:</strong> <?php echo $product['Subcategoria']; ?></p>
-            <p><strong>Existencias:</strong> <?php echo $product['Existencias']; ?></p>
-        </div>
-        <div class="tallas-producto">
-    <h3>Selecciona una Talla</h3>
-    <div class="opciones-tallas">
-        <?php if ($product['XCH'] > 0) { ?>
-            <button class="btn-talla" data-talla="XCH">XCH</button>
-            <?php } else { ?>
-            <button class="btn-talla x" data-talla="XCH" disabled>XCH</button>
-            <?php } ?>
-        <?php if ($product['CH'] > 0) { ?>
-            <button class="btn-talla" data-talla="CH">CH</button>
-        <?php } else { ?>
-            <button class="btn-talla x" data-talla="CH" disabled>CH</button>
-            <?php } ?>
-        <?php if ($product['M'] > 0) { ?>
-            <button class="btn-talla" data-talla="M">M</button>
-        <?php }else { ?>
-            <button class="btn-talla x" data-talla="M" disabled>M</button>
-            <?php } ?>
-        <?php if ($product['L'] > 0) { ?>
-            <button class="btn-talla" data-talla="L">L</button>
-        <?php }else { ?>
-            <button class="btn-talla x" data-talla="L" disabled>L</button>
-            <?php } ?>
-        <?php if ($product['XL'] > 0) { ?>
-            <button class="btn-talla" data-talla="XL">XL</button>
-        
-        <?php } else{?>
-            <button class="btn-talla x" data-talla="XL" disabled>XL</button>
-            <?php } ?>
-        <?php if ($product['XXL'] > 0) { ?>
-            <button class="btn-talla" data-talla="XXL">XXL</button>
-        <?php }else{ ?>
-            <button class="btn-talla x" data-talla="XXL" disabled>XXL</button>
-            <?php } ?>
-    </div>
-</div>
 
-        <!-- Botón para agregar al carrito -->
-        <?php if(isset($_SESSION["cuenta"])){ ?>
-            <button class="btn-agregar-carrito" onclick="agregarAlCarrito(<?php echo $idProducto; ?>)"><i class="fa-solid fa-plus"></i> Agregar al carrito</button>
-        <?php }else{ ?>
-            <button class="btn-agregar-carrito" onclick="mensaje()"><i class="fa-solid fa-plus"></i> Agregar al carrito</button>
-        <?php }?>
-    </div>
+        <div class="detalles">
+        <p class="tit"><?php echo strtoupper($product['Nombre']); ?></p>
+        
+        <!-- <div class="pd"> -->
+        <p class="precio">MXN &nbsp<?php echo $product['Precio']; ?></p>
+        <p class="desc">- <?php echo $product['Descuento']; ?>%</p>
+        <!-- </div> -->
+    
+        <br><br>
+        <p class="texto">SELECCIONA LA TALLA</p>
+            
+        <div class="tallas">
+            <?php if ($product['XCH'] > 0) { ?>
+                <button class="btn-talla" data-talla="XCH">XCH</button>
+                <?php } else { ?>
+                <button class="btn-talla x" data-talla="XCH" disabled>XCH</button>
+                <?php } ?>
+            <?php if ($product['CH'] > 0) { ?>
+                <button class="btn-talla" data-talla="CH">CH</button>
+            <?php } else { ?>
+                <button class="btn-talla x" data-talla="CH" disabled>CH</button>
+                <?php } ?>
+                <?php if ($product['M'] > 0) { ?>
+                <button class="btn-talla" data-talla="M">M</button>
+            <?php }else { ?>
+                <button class="btn-talla x" data-talla="M" disabled>M</button>
+                <?php } ?>
+            <?php if ($product['L'] > 0) { ?>
+                <button class="btn-talla" data-talla="L">L</button>
+            <?php }else { ?>
+                <button class="btn-talla x" data-talla="L" disabled>L</button>
+                <?php } ?>
+            <?php if ($product['XL'] > 0) { ?>
+                <button class="btn-talla" data-talla="XL">XL</button>
+            
+            <?php } else{?>
+                <button class="btn-talla x" data-talla="XL" disabled>XL</button>
+                <?php } ?>
+            <?php if ($product['XXL'] > 0) { ?>
+                <button class="btn-talla" data-talla="XXL">XXL</button>
+            <?php }else{ ?>
+                <button class="btn-talla x" data-talla="XXL" disabled>XXL</button>
+                <?php } ?>
+            </div>
+
+            <br><br>
+
+            <div class="comprar">
+                <!-- Botón para agregar al carrito -->
+                <?php if(isset($_SESSION["cuenta"])){ ?>
+                    <button class="btn-agregar" onclick="agregarAlCarrito(<?php echo $idProducto; ?>)">AGREGAR</button>
+                <?php }else{ ?>
+                    <button class="btn-agregar" onclick="mensaje()">A G R E G A R</button>
+                <?php }?>
+            </div>
+            
+            <br>
+            <p class="d-inline-flex gap-1 descripcion texto">
+            <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Descripción
+            </a>
+            <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <i style="margin-left:250px;" class="fa-solid fa-plus" style="color: #000000;"></i>
+            </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+            <div class="texto" style="font-size: 15px;">
+                <?php echo $product['Descripcion']; ?>
+            </div>
+            </div>
+        
+        </div>
+
+    </div>        
     <?php
+
 } else {
     echo "<p>No se encontró el producto.</p>";
 }
