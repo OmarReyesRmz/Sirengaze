@@ -41,14 +41,7 @@
                 if(isset($_SESSION["cuenta"])){
                 $cuenta = $_SESSION["cuenta"];
                 ?>
-                <!-- Funciones de administrador -->
-                <?php 
-                    if(isset($_SESSION["cuenta"])){
-                      if($cuenta == "ADMIN"){?>
-                      <a class="menu1" href="control.php">Control</a>
-                    <?php } 
-                      }
-                    ?>
+                
                 <div class="dropdown icono">
                         <button class="dropbtn icono" style=""><i class="fa-solid fa-user" style="color: #000000; font-size:23px;"></i><?php echo '&nbsp' . $cuenta?></button>
                         <div class="dropdown-content">
@@ -68,7 +61,14 @@
                         </div>
                       <?php
                     } ?>
-                  
+                  <!-- Funciones de administrador -->
+                <?php 
+                    if(isset($_SESSION["cuenta"])){
+                      if($cuenta == "ADMIN"){?>
+                      <a class="menu1" href="control.php">Control</a>
+                    <?php } 
+                      }
+                    ?>
                 </nav>
             </div>
         </div>
