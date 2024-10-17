@@ -73,7 +73,8 @@
                     <?php 
                     if(isset($_SESSION["cuenta"])){
                       if($cuenta == "ADMIN"){?>
-                      <div class="dropdown">
+                      <a class="menu1" href="control.php">Control</a>
+                      <!-- <div class="dropdown">
                           <button class="dropbtn"><a>Control</a></button>
                           <div class="dropdown-content">
                               <a id="menu1" href="a.php">Agregar productos</a>
@@ -81,7 +82,7 @@
                               <a id="menu1" href="b.php">Eliminar productos</a>
                               <a id="menu1" href="graficas.php">Graficas</a>
                           </div>
-                      </div>
+                      </div> -->
                     <?php } 
                       }
                     ?>
