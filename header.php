@@ -24,18 +24,8 @@
             <div class="encabezado">
                 <nav id="menu">
                     <a class="menu1" href="index.php">Home</a>
-                    <!-- <a class="menu1" href="acercade.php">Acerca de</a> -->
-                    <!-- <a class="menu1" href="preguntas.php">Ayuda</a> -->
                     <a class="menu1" href="contactanos.php">Contactanos</a>
                     <a class="menu1" href="menu.php">Tienda</a>
-                    <!-- <div class="dropdown">
-                        <button class="dropbtn"><a>Tienda</a></button>
-                        <div class="dropdown-content">
-                            <a id="menu1" href="woman.php">Woman</a>
-                            <a id="menu1" href="men.php">Men</a>
-                            <a id="menu1" href="tienda.php">Todos</a>
-                        </div>
-                    </div> -->
                     
                     <div class="enc icono">
                       <a href="carrito.php"><i class="fa-solid fa-cart-shopping" style="color: #000000; font-size:25px;"></i></a>
@@ -51,9 +41,18 @@
                 if(isset($_SESSION["cuenta"])){
                 $cuenta = $_SESSION["cuenta"];
                 ?>
+                <!-- Funciones de administrador -->
+                <?php 
+                    if(isset($_SESSION["cuenta"])){
+                      if($cuenta == "ADMIN"){?>
+                      <a class="menu1" href="control.php">Control</a>
+                    <?php } 
+                      }
+                    ?>
                 <div class="dropdown icono">
-                        <button class="dropbtn icono"><i class="fa-solid fa-user" style="color: #000000; font-size:23px;"></i><?php echo '&nbsp' . $cuenta?></button>
+                        <button class="dropbtn icono" style=""><i class="fa-solid fa-user" style="color: #000000; font-size:23px;"></i><?php echo '&nbsp' . $cuenta?></button>
                         <div class="dropdown-content">
+                            <a id="menu1" href="addmembresia.php">Ser Miembro</a>
                             <a id="menu1" href="cerrar_sesion.php">Cerrar Sesión</a>
                         </div>
                 </div>
@@ -69,23 +68,7 @@
                         </div>
                       <?php
                     } ?>
-                    <!-- Funciones de administrador -->
-                    <?php 
-                    if(isset($_SESSION["cuenta"])){
-                      if($cuenta == "ADMIN"){?>
-                      <a class="menu1" href="control.php">Control</a>
-                      <!-- <div class="dropdown">
-                          <button class="dropbtn"><a>Control</a></button>
-                          <div class="dropdown-content">
-                              <a id="menu1" href="a.php">Agregar productos</a>
-                              <a id="menu1" href="c.php">Editar productos</a>
-                              <a id="menu1" href="b.php">Eliminar productos</a>
-                              <a id="menu1" href="graficas.php">Graficas</a>
-                          </div>
-                      </div> -->
-                    <?php } 
-                      }
-                    ?>
+                  
                 </nav>
             </div>
         </div>
