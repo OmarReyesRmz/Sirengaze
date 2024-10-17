@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 
 <header>
     <title>Tienda Online</title>
@@ -14,24 +14,23 @@
         }
 
         .apartado:hover {
-            color: initial; /* Mantiene el color original del texto e icono */
+            color: initial; 
         }
 
-        .apartado{
-            border: 2px solid rgb(64, 79, 70);;
+        .apartado {
+            border: 2px solid rgb(64, 79, 70);
             border-radius: 15px;
             height: 115%;
+            position: relative;
         }
 
-
-        .apartado i:hover{
+        .apartado i:hover {
             color: rgba(27, 27, 27, 1);
         }
 
-        #tienda_apartado{
+        #tienda_apartado {
             margin-bottom: 3%;
         }
-
 
         .texto {
             position: absolute;
@@ -39,55 +38,92 @@
             top: 10%;
             left: 50%;
             font-weight: bold;
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, -50%);
             color: rgb(64, 79, 70);
             font-size: 22px;
             text-align: center; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
         }
+
+        /* Contenedor ovalado para los botones */
+        .botones-container {
+            position: absolute;
+            bottom: 1%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50px;
+            display: flex;
+            margin-top: 15%;
+            padding: 10px 20px;
+            gap: 15px;
+        }
+
+        
+
+        .botones-container i {
+           
+            background-color: rgb(64, 79, 70);
+            color: white;
+            border-radius: 50%;
+            padding: 10px;
+            font-size: 24px;
+            transition: background-color 0.3s;
+        }
+
+        .botones-container i:hover {
+            background-color: rgb(177, 177, 177);;
+        }
+
     </style>
 </header>
 
 <body>
-<?php
-require 'header.php';
-?>
+<?php require 'header.php'; ?>
 
-<div id="tienda_apartado" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+<div id="tienda_apartado" class="d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
     
-<a href="a.php">
+    <!-- Proveedores Section -->
     <div class="apartado">
         <i class="fa-solid fa-people-group" style="color: rgb(64, 79, 70);"></i>
-        <div class="texto" style="text-shadow: none;" >PROVEEDORES</div>
+        <div class="texto">PROVEEDORES</div>
+        <div class="botones-container">
+                <a href="a.php"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href="c.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="b.php"><i class="fa-solid fa-trash-can"></i></a>
+        </div>
     </div>
-</a>
 
-
-<a href="b.php">
+    <!-- Productos Section -->
     <div class="apartado">
         <i class="fa-solid fa-camera-retro" style="color: rgb(64, 79, 70);"></i>
-        <div class="texto" style="text-shadow: none;">PRODUCTOS</div>
+        <div class="texto">PRODUCTOS</div>
+        <div class="botones-container">
+                <a href=""><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href=""><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href=""><i class="fa-solid fa-trash-can"></i></a>
+        </div>
     </div>
-</a>
-<a href="c.php">
+
+    <!-- Descuentos Section -->
     <div class="apartado">
         <i class="fa-solid fa-tags" style="color: rgb(64, 79, 70);"></i>
-        <div class="texto" style=" text-shadow: none;">DESCUENTOS</div>
+        <div class="texto">DESCUENTOS</div>
+        <div class="botones-container">
+                <a href=""><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href=""><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href=""><i class="fa-solid fa-trash-can"></i></a>
+        </div>
     </div>
-</a>
-<a href="graficas.php">
+
+    <!-- Graficas Section -->
     <div class="apartado">
         <i class="fa-solid fa-chart-column" style="color: rgb(64, 79, 70);"></i>
-        <div class="texto" style="text-shadow: none;">GRAFICAS</div>
+        <div class="texto">GRAFICAS</div>
+        <div class="botones-container">
+            <a href=""><i class="fa-regular fa-eye"></i></a>
+        </div>
     </div>
-</a>
 </div>
-<br><br>
 
+<?php include 'footer.php'; ?>
 
-
-
-<?php
-include 'footer.php';
-?>
 </body>
