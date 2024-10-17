@@ -86,9 +86,9 @@
         <i class="fa-solid fa-people-group" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">PROVEEDORES</div>
         <div class="botones-container">
-                <a href="a.php"><i class="fa-solid fa-file-circle-plus"></i></a>
-                <a href="c.php"><i class="fa-regular fa-pen-to-square"></i></a>
-                <a href="b.php"><i class="fa-solid fa-trash-can"></i></a>
+                <a href="addprov.php"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href="editprov.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="deleteprov.php"><i class="fa-solid fa-trash-can"></i></a>
         </div>
     </div>
 
@@ -97,9 +97,9 @@
         <i class="fa-solid fa-camera-retro" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">PRODUCTOS</div>
         <div class="botones-container">
-                <a href=""><i class="fa-solid fa-file-circle-plus"></i></a>
-                <a href=""><i class="fa-regular fa-pen-to-square"></i></a>
-                <a href=""><i class="fa-solid fa-trash-can"></i></a>
+                <a href="a.php"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href="c.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="b.php"><i class="fa-solid fa-trash-can"></i></a>
         </div>
     </div>
 
@@ -108,9 +108,9 @@
         <i class="fa-solid fa-tags" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">DESCUENTOS</div>
         <div class="botones-container">
-                <a href=""><i class="fa-solid fa-file-circle-plus"></i></a>
-                <a href=""><i class="fa-regular fa-pen-to-square"></i></a>
-                <a href=""><i class="fa-solid fa-trash-can"></i></a>
+                <a href="adddesc.php"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="deletedesc.php"><i class="fa-solid fa-trash-can"></i></a>
         </div>
     </div>
 
@@ -119,7 +119,7 @@
         <i class="fa-solid fa-chart-column" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">GRAFICAS</div>
         <div class="botones-container">
-            <a href=""><i class="fa-regular fa-eye"></i></a>
+            <a href="graficas.php"><i class="fa-regular fa-eye"></i></a>
         </div>
     </div>
 </div>

@@ -25,7 +25,7 @@
                 <nav id="menu">
                     <a class="menu1" href="index.php">Home</a>
                     <!-- <a class="menu1" href="acercade.php">Acerca de</a> -->
-                    <a class="menu1" href="preguntas.php">Ayuda</a>
+                    <!-- <a class="menu1" href="preguntas.php">Ayuda</a> -->
                     <a class="menu1" href="contactanos.php">Contactanos</a>
                     <a class="menu1" href="menu.php">Tienda</a>
                     <!-- <div class="dropdown">

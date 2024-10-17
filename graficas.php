@@ -6,7 +6,7 @@
     $username = "root";
     $password = "";
     $database = "sirenegaze";
-    $tabla = "inventario";
+    $tabla = "producto";
 
     $conn = new mysqli($servername, $username, $password, $database);
 
@@ -15,8 +15,8 @@
     }
 
     // Consulta SQL para obtener datos por subcategoría
-    $queryWoman = "SELECT subcategoria, COUNT(*) as cantidad FROM inventario WHERE categoria = 'woman' GROUP BY subcategoria";
-    $queryMen = "SELECT subcategoria, COUNT(*) as cantidad FROM inventario WHERE categoria = 'men' GROUP BY subcategoria";
+    $queryWoman = "SELECT Subcategoria, COUNT(*) as Existencias FROM producto WHERE Categoria = 'woman' GROUP BY Subcategoria";
+    $queryMen = "SELECT Subcategoria, COUNT(*) as Existencias FROM producto WHERE Categoria = 'men' GROUP BY Subcategoria";
 
     $resultWoman = $conn->query($queryWoman);
     $resultMen = $conn->query($queryMen);
@@ -30,8 +30,8 @@
         $chartData = [];
         while ($row = $result->fetch_assoc()) {
             $chartData[] = [
-                'value' => $row['cantidad'],
-                'name' => $row['subcategoria'],
+                'value' => $row['Existencias'],
+                'name' => $row['Subcategoria'],
             ];
         }
         return $chartData;
