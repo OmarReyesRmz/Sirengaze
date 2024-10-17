@@ -54,10 +54,27 @@ if ($productResult && $productResult->num_rows > 0) {
 
         <div class="detalles">
         <p class="tit"><?php echo strtoupper($product['Nombre']); ?></p>
-        
+        <br>
         <!-- <div class="pd"> -->
+        
+        <?php
+        if($product['Descuento']!=0){
+        ?>
+        <div class="precio-total">
+        <p class="desc"><?php echo $product['Descuento']; ?>%</p>
+        <div class="precio" style="font-size: 30px; font-weight: 100; margin-left:30px;">MXN &nbsp<?php echo $product['Precio']*((100-$product['Descuento'])/100); ?><br>
+
+        </div>
+        </div>
+        <p class="preciodes">Precio original: &nbspMXN <?php echo $product['Precio']; ?> &nbsp</p>
+        <?php
+        }else{
+        ?>
         <p class="precio">MXN &nbsp<?php echo $product['Precio']; ?></p>
-        <p class="desc">- <?php echo $product['Descuento']; ?>%</p>
+        <?php
+        }
+        ?>
+        
         <!-- </div> -->
     
         <br><br>

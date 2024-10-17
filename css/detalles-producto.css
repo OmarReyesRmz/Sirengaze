@@ -29,9 +29,18 @@
     object-fit: cover;
 }
 
-.detalles{
+/* .detalles{
     padding: 130px;
     padding-top: 100px;
+    position: sticky;
+} */
+
+.detalles {
+    padding: 130px;
+    padding-top: 90px;
+    position: sticky;
+    top: 100px;
+    align-self: start;
 }
 
 .tit{
@@ -44,17 +53,32 @@
     justify-content:space-between;
 } */
 
-.precio{
+
+.preciodes{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
-    font-size: 19px;
+    font-size: 17px;
+    color: rgb(139, 139, 139);
+}
+
+
+.precio-total{
+    display: flex;
+    justify-content:start;
+    
+}
+
+
+.precio{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 100;
+    font-size: 30px; 
 }
 
 .desc{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-    color: brown;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
 }
 
 .texto{
