@@ -12,7 +12,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "sirenegaze";
-$tabla = "inventario";
+$tabla = "producto";
 
 
 // Crear conexión
@@ -32,7 +32,7 @@ $var=0;
 $dataQuery = "SELECT * FROM $tabla";
 
 if ($precioMin > 0 || $precioMax < 2000) {
-    $dataQuery .= " WHERE precio-(precio*descuento/100) BETWEEN $var AND $precioMin";
+    $dataQuery .= " WHERE Precio-(Precio*Descuento/100) BETWEEN $var AND $precioMin";
 }
 
 $dataResult = $conn->query($dataQuery);
@@ -44,36 +44,35 @@ if ($dataResult) {
         while ($row = $dataResult->fetch_assoc()) {
             // Mostrar los resultados según tus necesidades
             echo '<div class="contenedor">';
-            echo '<div class="con"><img src="imagenes/' . $row['imagen'] . '" alt=""></div>';
-            echo '<h5 style="font-weight: bold;">ID: ' . $row['Id_producto'] . '</h5>';
-            echo '<h5 style="font-weight: bold;">' . $row['nombre'] . '</h5>';
+            echo '<div class="con"><img src="imagenes/' . $row['Imagen'] . '" alt=""></div>';
+            echo '<h5 style="font-weight: bold;">' . $row['Nombre'] . '</h5>';
 
-            if($row['descuento']!=0){
-                echo '<span style="color:red; text-decoration:line-through;">MXN ' . $row['precio'] . '</span>';
-                echo '<span style="font-weight: bold;">MXN ' . $row['precio']-($row['precio']*$row['descuento']/100) . '</span>';
+            if($row['Descuento']!=0){
+                echo '<span style="color:red; text-decoration:line-through;">MXN ' . $row['Precio'] . '</span>';
+                echo '<span style="font-weight: bold;">MXN ' . $row['Precio']-($row['Precio']*$row['Descuento']/100) . '</span>';
             }else{
-                echo '<span>MXN ' . $row['precio'] . '</span>';
+                echo '<span>MXN ' . $row['Precio'] . '</span>';
             }
 
-            if($row['cantidad']!=0){
-                echo '<span>Cantidad en existencia: ' . $row['cantidad'] . '</span>';
+            if($row['Existencias']!=0){
+                echo '<span>Cantidad en existencia: ' . $row['Existencias'] . '</span>';
             }
             else{
                 echo '<span>Agotado</span>';
             }
 
-            if($row['descuento']!=0){
-                echo '<span>Descuento del: ' . $row['descuento'] . '%</span><br>';
+            if($row['Descuento']!=0){
+                echo '<span>Descuento del: ' . $row['Descuento'] . '%</span><br>';
             }else{
                 echo '<span>Sin descuento</span><br>';
             }
 
             echo '<details>';
             echo '<summary>Descripción</summary>';
-            echo '<p>' . $row['descripcion'] . '</p>';
+            echo '<p>' . $row['Descripcion'] . '</p>';
             echo '</details>';
             if(isset($_SESSION["cuenta"])){ 
-            echo '<button class="buy" onclick="agregarAlCarrito(' . $row['Id_producto'] . ')"><i class="fa-solid fa-plus" style="color: #080808;"></i></button>';
+            echo '<button class="buy" onclick="agregarAlCarrito(' . $row['IdProducto'] . ')"><i class="fa-solid fa-plus" style="color: #080808;"></i></button>';
             }else{
             echo '<button class="buy" onclick="mensaje()"><i class="fa-solid fa-plus" style="color: #080808;"></i></button>';
             }
