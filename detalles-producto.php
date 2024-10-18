@@ -50,19 +50,38 @@ if ($productResult && $productResult->num_rows > 0) {
         </div>
 
         <div class="detalles">
-            <p class="tit"><?php echo strtoupper($product['Nombre']); ?></p>
-            <p class="precio">MXN &nbsp<?php echo $product['Precio']; ?></p>
-            <p class="desc">- <?php echo $product['Descuento']; ?>%</p>
+        <p class="tit"><?php echo strtoupper($product['Nombre']); ?></p>
+        <br>
+        <!-- <div class="pd"> -->
+        
+        <?php
+        if($product['Descuento']!=0){
+        ?>
+        <div class="precio-total">
+        <p class="desc"><?php echo $product['Descuento']; ?>%</p>
+        <div class="precio" style="font-size: 30px; font-weight: 100; margin-left:30px;">MXN &nbsp<?php echo $product['Precio']*((100-$product['Descuento'])/100); ?><br>
 
-            <br><br>
-            <p class="texto">SELECCIONA LA TALLA</p>
-            <p class="texto">Existencias <?php echo $product['Existencias']; ?></p>
-     
-            <p class="texto">Talla seleccionada: <span id="tallaSeleccionada">Ninguna</span></p>
-
-            <div class="tallas">
-                <?php if ($product['XCH'] > 0) { ?>
-                    <button type="button" class="btn-talla" onclick="seleccionarTalla('XCH')">XCH <?php echo $product['XCH']; ?></button>
+        </div>
+        </div>
+        <p class="preciodes">Precio original: &nbspMXN <?php echo $product['Precio']; ?> &nbsp</p>
+        <?php
+        }else{
+        ?>
+        <p class="precio">MXN &nbsp<?php echo $product['Precio']; ?></p>
+        <?php
+        }
+        ?>
+        
+        <!-- </div> -->
+    
+        <br><br>
+        <p class="texto">SELECCIONA LA TALLA</p>
+        <p class="texto">Existencias <?php echo $product['Existencias']; ?></p>
+        <p class="texto">Talla seleccionada: <span id="tallaSeleccionada">Ninguna</span></p>
+            
+        <div class="tallas">
+            <?php if ($product['XCH'] > 0) { ?>
+                <button type="button" class="btn-talla"  onclick="seleccionarTalla('XCH')">XCH <?php echo $product['XCH']; ?></button>
                 <?php } else { ?>
                     <button class="btn-talla x" disabled>XCH <?php echo $product['XCH']; ?></button>
                 <?php } ?>
