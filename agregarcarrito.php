@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Restar las existencias del carrito actual
     $cant = $existencias - (isset($_SESSION['carrito'][$productoId]['cantidad']) ? $_SESSION['carrito'][$productoId]['cantidad'] : 0);
-
+    $ExistenciTalla = $row[$talla] - (isset($_SESSION['carrito'][$productoId]['cantidad']) ? $_SESSION['carrito'][$productoId]['cantidad'] : 0);
     // Validar si el producto es válido y hay suficientes existencias
-    if ($productoId > 0 && $existencias > 0 && $cant > 0) {
+    if ($productoId > 0 && $existencias > 0 && $cant > 0  && $ExistenciTalla > 0) {
         // Lógica para agregar al carrito aquí
         if (!isset($_SESSION['carrito'][$productoId])) {
             $_SESSION['carrito'][$productoId] = [
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo json_encode(['success' => true]);
     } else {
-        echo json_encode(['error' => 'ID de producto no válido o sin existencias']);
+        echo json_encode(['error' => 'ID de producto no válido o alcanzaste el limite de existencias en la talla selecionada']);
     }
 } else {
     echo json_encode(['error' => 'Método de solicitud no válido']);
