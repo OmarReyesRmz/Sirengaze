@@ -40,14 +40,16 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
 
     // Insertar cada producto del carrito en la tabla 'detalles'
     foreach ($carrito as $productoId => $detallesProducto) {
+        $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
         if ($detallesProducto['cantidad'] != 0) {
+
             // Insertar en la tabla 'detalles' la cantidad, IdCompra e IdProducto
             $insertDetalles = "INSERT INTO detalles (Cantidad, IdCompra, IdProducto) 
                             VALUES ({$detallesProducto['cantidad']}, $IdCompra, $productoId)";
             $conn->query($insertDetalles);
 
             // Actualizar las existencias en la tabla de productos
-            $updateQuery = "UPDATE $tabla SET Existencias = Existencias - {$detallesProducto['cantidad']} 
+            $updateQuery = "UPDATE $tabla SET $tallaSeleccionada = $tallaSeleccionada - {$detallesProducto['cantidad']} 
                             WHERE IdProducto = $productoId";
             $conn->query($updateQuery);
         }

@@ -38,12 +38,9 @@ $productResult = $conn->query($productQuery);
 // Verificar si se obtuvo un resultado
 if ($productResult && $productResult->num_rows > 0) {
     $product = $productResult->fetch_assoc();
-    
-    // Mostrar la información del producto
-    ?>
+?>
 
     <div id="contenedor-detalles">
-        
         <div class="imagenes-producto">
             <img src="<?php echo 'imagenes/' . $product['Imagen']; ?>" alt="<?php echo $product['Nombre']; ?>">
             <div class="imagenes-secundarias">
@@ -53,47 +50,51 @@ if ($productResult && $productResult->num_rows > 0) {
         </div>
 
         <div class="detalles">
-        <p class="tit"><?php echo strtoupper($product['Nombre']); ?></p>
-        
-        <!-- <div class="pd"> -->
-        <p class="precio">MXN &nbsp<?php echo $product['Precio']; ?></p>
-        <p class="desc">- <?php echo $product['Descuento']; ?>%</p>
-        <!-- </div> -->
-    
-        <br><br>
-        <p class="texto">SELECCIONA LA TALLA</p>
-            
-        <div class="tallas">
-            <?php if ($product['XCH'] > 0) { ?>
-                <button class="btn-talla" data-talla="XCH">XCH</button>
+            <p class="tit"><?php echo strtoupper($product['Nombre']); ?></p>
+            <p class="precio">MXN &nbsp<?php echo $product['Precio']; ?></p>
+            <p class="desc">- <?php echo $product['Descuento']; ?>%</p>
+
+            <br><br>
+            <p class="texto">SELECCIONA LA TALLA</p>
+            <p class="texto">Existencias <?php echo $product['Existencias']; ?></p>
+     
+            <p class="texto">Talla seleccionada: <span id="tallaSeleccionada">Ninguna</span></p>
+
+            <div class="tallas">
+                <?php if ($product['XCH'] > 0) { ?>
+                    <button type="button" class="btn-talla" onclick="seleccionarTalla('XCH')">XCH <?php echo $product['XCH']; ?></button>
                 <?php } else { ?>
-                <button class="btn-talla x" data-talla="XCH" disabled>XCH</button>
+                    <button class="btn-talla x" disabled>XCH <?php echo $product['XCH']; ?></button>
                 <?php } ?>
-            <?php if ($product['CH'] > 0) { ?>
-                <button class="btn-talla" data-talla="CH">CH</button>
-            <?php } else { ?>
-                <button class="btn-talla x" data-talla="CH" disabled>CH</button>
+
+                <?php if ($product['CH'] > 0) { ?>
+                    <button type="button" class="btn-talla" onclick="seleccionarTalla('CH')">CH <?php echo $product['CH']; ?></button>
+                <?php } else { ?>
+                    <button class="btn-talla x" disabled>CH <?php echo $product['CH']; ?></button>
                 <?php } ?>
+
                 <?php if ($product['M'] > 0) { ?>
-                <button class="btn-talla" data-talla="M">M</button>
-            <?php }else { ?>
-                <button class="btn-talla x" data-talla="M" disabled>M</button>
+                    <button type="button" class="btn-talla" onclick="seleccionarTalla('M')">M <?php echo $product['M']; ?></button>
+                <?php } else { ?>
+                    <button class="btn-talla x" disabled>M <?php echo $product['M']; ?></button>
                 <?php } ?>
-            <?php if ($product['L'] > 0) { ?>
-                <button class="btn-talla" data-talla="L">L</button>
-            <?php }else { ?>
-                <button class="btn-talla x" data-talla="L" disabled>L</button>
+
+                <?php if ($product['L'] > 0) { ?>
+                    <button type="button" class="btn-talla" onclick="seleccionarTalla('L')">L <?php echo $product['L']; ?></button>
+                <?php } else { ?>
+                    <button class="btn-talla x" disabled>L <?php echo $product['L']; ?></button>
                 <?php } ?>
-            <?php if ($product['XL'] > 0) { ?>
-                <button class="btn-talla" data-talla="XL">XL</button>
-            
-            <?php } else{?>
-                <button class="btn-talla x" data-talla="XL" disabled>XL</button>
+
+                <?php if ($product['XL'] > 0) { ?>
+                    <button type="button" class="btn-talla" onclick="seleccionarTalla('XL')">XL <?php echo $product['XL']; ?></button>
+                <?php } else { ?>
+                    <button class="btn-talla x" disabled>XL <?php echo $product['XL']; ?></button>
                 <?php } ?>
-            <?php if ($product['XXL'] > 0) { ?>
-                <button class="btn-talla" data-talla="XXL">XXL</button>
-            <?php }else{ ?>
-                <button class="btn-talla x" data-talla="XXL" disabled>XXL</button>
+
+                <?php if ($product['XXL'] > 0) { ?>
+                    <button type="button" class="btn-talla" onclick="seleccionarTalla('XXL')">XXL <?php echo $product['XXL']; ?></button>
+                <?php } else { ?>
+                    <button class="btn-talla x" disabled>XXL <?php echo $product['XXL']; ?></button>
                 <?php } ?>
             </div>
 
@@ -101,33 +102,29 @@ if ($productResult && $productResult->num_rows > 0) {
 
             <div class="comprar">
                 <!-- Botón para agregar al carrito -->
-                <?php if(isset($_SESSION["cuenta"])){ ?>
+                <?php if (isset($_SESSION["cuenta"])) { ?>
                     <button class="btn-agregar" onclick="agregarAlCarrito(<?php echo $idProducto; ?>)">AGREGAR</button>
-                <?php }else{ ?>
+                <?php } else { ?>
                     <button class="btn-agregar" onclick="mensaje()">A G R E G A R</button>
-                <?php }?>
+                <?php } ?>
             </div>
             
             <br>
             <p class="d-inline-flex gap-1 descripcion texto">
-            <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Descripción
-            </a>
-            <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <i style="margin-left:250px;" class="fa-solid fa-plus" style="color: #000000;"></i>
-            </a>
+                <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Descripción</a>
+                <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <i style="margin-left:250px;" class="fa-solid fa-plus" style="color: #000000;"></i>
+                </a>
             </p>
             <div class="collapse" id="collapseExample">
-            <div class="texto" style="font-size: 15px;">
-                <?php echo $product['Descripcion']; ?>
+                <div class="texto" style="font-size: 15px;">
+                    <?php echo $product['Descripcion']; ?>
+                </div>
             </div>
-            </div>
-        
         </div>
-
     </div>        
-    <?php
 
+<?php
 } else {
     echo "<p>No se encontró el producto.</p>";
 }
@@ -137,7 +134,18 @@ $conn->close();
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+    let tallaSeleccionada = "";
+
+    function seleccionarTalla(talla) {
+        tallaSeleccionada = talla;
+        document.getElementById('tallaSeleccionada').innerText = talla;
+    }
+
     function agregarAlCarrito(productoId) {
+        if (tallaSeleccionada === "") {
+            mensajeTalla();
+            return;
+        }
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "agregarcarrito.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -145,7 +153,14 @@ $conn->close();
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var respuesta = JSON.parse(xhr.responseText);
                 if (respuesta.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Agregado al carrito',
+                        text: 'El producto se a agregado al carrito.',
+                        // confirmButtonText: 'OK'
+                    });
                     window.location.reload();
+
                 } else {
                     Swal.fire({
                         icon: 'info',
@@ -156,7 +171,7 @@ $conn->close();
                 }
             }
         };
-        xhr.send("producto_id=" + productoId);
+        xhr.send("producto_id=" + productoId + "&talla=" + tallaSeleccionada);
     }
 
     function mensaje() {
@@ -171,6 +186,14 @@ $conn->close();
             if (result.isConfirmed) {
                 window.location.href = 'login.php';
             }
+        });
+    }
+
+    function mensajeTalla(){
+        Swal.fire({
+            title: "Aún no seleccionas una talla",
+            text: "Selecciona una talla y vuelve a intentarlo",
+            icon: "error"
         });
     }
 </script>

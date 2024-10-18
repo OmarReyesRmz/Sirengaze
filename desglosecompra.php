@@ -93,7 +93,7 @@
                     <?php 
                     foreach ($carrito as $productoId => $detallesProducto) {
                         echo '<div class="form-group">';
-                        
+                        $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
                         if($detallesProducto['cantidad'] != 0){
                             $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                             $result = $conn->query($query);
@@ -110,7 +110,7 @@
                                 echo '</tr>';
                                 echo '<tr>';
                                 echo '<td>' . $row['Nombre'] . '</td>';
-                                echo '<td> </td>';
+                                echo '<td>'.$tallaSeleccionada.' </td>';
                                 echo '<td> </td>';
                                 echo '</tr>';
                                 echo '<tr>';
@@ -211,6 +211,7 @@
                         </div>
 
                     </form>   
+
                 </div>        
             </div>
         </div>

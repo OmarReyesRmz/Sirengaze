@@ -49,6 +49,7 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                             <th class="px-3 can">Imagen</th>
                             <th class="px-3 can">Producto</th>
                             <th class="px-3 can">Descripcion</th>
+                            <th class="px-3 can">Talla</th>
                             <th class="px-3 can">Precio</th>
                             <th class="px-3 can">Cantidad</th>
                             <th class="px-3 can">Subtotal</th>
@@ -58,6 +59,7 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                         <?php
                     foreach ($carrito as $productoId => $detallesProducto) {
                         if($detallesProducto['cantidad'] != 0){
+                            $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';
                             $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                             $result = $conn->query($query);
                             
@@ -67,6 +69,7 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                                 echo '<td class="align-middle px-4"><img class="img_carrito" src="imagenes/' . $row['Imagen'] . '" alt="imagen no cargada"></td>';
                                 echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
                                 echo '<td class="align-middle px-4">' . $row['Descripcion'] . '</td>';
+                                echo '<td class="align-middle px-4">Talla: ' . $tallaSeleccionada . '</td>';
                                 if($row['Descuento']!=0){
                                     $dcto = ($row['Precio']*$row['Descuento']/100) + $dcto;
                                     $precio_final = ($row['Precio'] - $row['Precio']*$row['Descuento']/100);

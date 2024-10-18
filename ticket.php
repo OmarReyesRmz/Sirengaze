@@ -88,6 +88,7 @@
         <table class="tik">
         <tr>
             <th>Producto</th>
+            <th>Talla</th>
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Subtotal</th>
@@ -95,6 +96,7 @@
         <?php
         foreach ($carrito as $productoId => $detallesProducto) {    
         if($detallesProducto['cantidad'] != 0){
+            $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
             $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
             $result = $conn->query($query);
 
@@ -104,6 +106,7 @@
                 ?>
                 <tr>
                 <td><?php echo $row['Nombre'] ?></td>
+                <td><?php  echo $tallaSeleccionada ?> </td>
                 <td><?php
                 if ($row['Descuento'] != 0) {
                     $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
