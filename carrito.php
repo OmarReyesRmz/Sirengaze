@@ -57,9 +57,9 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                     </thead>
                     <tbody>
                         <?php
-                    foreach ($carrito as $productoId => $detallesProducto) {
-                        if($detallesProducto['cantidad'] != 0){
-                            $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';
+                foreach ($carrito as $productoId => $tallasProducto) {
+                    foreach ($tallasProducto as $talla => $detallesProducto) {
+                        if ($detallesProducto['cantidad'] > 0) {
                             $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                             $result = $conn->query($query);
                             
@@ -69,23 +69,27 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                                 echo '<td class="align-middle px-4"><img class="img_carrito" src="imagenes/' . $row['Imagen'] . '" alt="imagen no cargada"></td>';
                                 echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
                                 echo '<td class="align-middle px-4">' . $row['Descripcion'] . '</td>';
-                                echo '<td class="align-middle px-4">Talla: ' . $tallaSeleccionada . '</td>';
-                                if($row['Descuento']!=0){
-                                    $dcto = ($row['Precio']*$row['Descuento']/100) + $dcto;
-                                    $precio_final = ($row['Precio'] - $row['Precio']*$row['Descuento']/100);
-                                    echo '<td class="align-middle px-4 can" style="color:red";> $' . $precio_final . '</td>';
-                                }else{
+                                echo '<td class="align-middle px-4">Talla: ' . $talla . '</td>';
+                                
+                                if ($row['Descuento'] != 0) {
+                                    $dcto = ($row['Precio'] * $row['Descuento'] / 100);
+                                    $precio_final = $row['Precio'] - $dcto;
+                                    echo '<td class="align-middle px-4 can" style="color:red;">$' . $precio_final . '</td>';
+                                } else {
                                     $precio_final = $row['Precio'];
-                                    echo '<td class="align-middle px-4 can"> $' . $precio_final . '</td>';
+                                    echo '<td class="align-middle px-4 can">$' . $precio_final . '</td>';
                                 }
+                
                                 echo '<td class="align-middle px-4 can">' . $detallesProducto['cantidad'] . '</td>';
-                                echo '<td class="align-middle px-4 can"> $' . $precio_final * $detallesProducto['cantidad'] . '</td>';
-                                echo '<td class="align-middle px-4 can"><button onclick="eliminar(' . $row['IdProducto'] . ')"><i class="fa-regular fa-trash-can" style="color: #000000; font-size:25px;"></i></button></td>';
+                                echo '<td class="align-middle px-4 can">$' . ($precio_final * $detallesProducto['cantidad']) . '</td>';
+                                echo '<td class="align-middle px-4 can"><button onclick="eliminar(' . $row['IdProducto'] . ', \'' . $talla . '\')"><i class="fa-regular fa-trash-can" style="color: #000000; font-size:25px;"></i></button></td>';
                                 echo '</tr>';
+                
+                                $total += $precio_final * $detallesProducto['cantidad'];
                             }
-                            $total = $precio_final* $detallesProducto['cantidad'] + $total;
                         }
                     }
+                }                
                     echo '<tr>';
                         echo '<td colspan="5" style="text-align:center;">T&nbsp O &nbspT&nbsp A&nbsp L</td>';
                         echo '<td class="can">$' . $total .'</td>';
@@ -104,7 +108,7 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
             }
         </script>
         <script>
-            function eliminar(productoId) {
+            function eliminar(productoId,talla) {
                 var xhr = new XMLHttpRequest();
 
                 xhr.open("POST", "eliminarcarrito.php", true);
@@ -127,7 +131,7 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                     }
                 };
 
-                xhr.send("producto_id=" + productoId);
+                xhr.send("producto_id=" + productoId + "&talla=" + talla);
             }
         </script>
         </div>

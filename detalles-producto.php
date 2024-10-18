@@ -75,45 +75,45 @@ if ($productResult && $productResult->num_rows > 0) {
         <!-- </div> -->
     
         <br><br>
-        <p class="texto">SELECCIONA LA TALLA</p>
-        <p class="texto">Existencias <?php echo $product['Existencias']; ?></p>
+        <!-- <p class="texto">SELECCIONA LA TALLA</p> -->
+        <!-- <p class="texto">Existencias <?php echo $product['Existencias']; ?></p> -->
         <p class="texto">Talla seleccionada: <span id="tallaSeleccionada">Ninguna</span></p>
             
         <div class="tallas">
             <?php if ($product['XCH'] > 0) { ?>
-                <button type="button" class="btn-talla"  onclick="seleccionarTalla('XCH')">XCH <?php echo $product['XCH']; ?></button>
+                <button type="button" id="tl1" class="btn-talla"  onclick="seleccionarTalla('XCH',1)">XCH</button>
                 <?php } else { ?>
-                    <button class="btn-talla x" disabled>XCH <?php echo $product['XCH']; ?></button>
+                    <button id="tl1" class="btn-talla x" disabled>XCH</button>
                 <?php } ?>
 
                 <?php if ($product['CH'] > 0) { ?>
-                    <button type="button" class="btn-talla" onclick="seleccionarTalla('CH')">CH <?php echo $product['CH']; ?></button>
+                    <button type="button" id="tl2" class="btn-talla" onclick="seleccionarTalla('CH',2)">CH</button>
                 <?php } else { ?>
-                    <button class="btn-talla x" disabled>CH <?php echo $product['CH']; ?></button>
+                    <button id="tl2" class="btn-talla x" disabled>CH</button>
                 <?php } ?>
 
                 <?php if ($product['M'] > 0) { ?>
-                    <button type="button" class="btn-talla" onclick="seleccionarTalla('M')">M <?php echo $product['M']; ?></button>
+                    <button type="button" id="tl3" class="btn-talla" onclick="seleccionarTalla('M',3)">M</button>
                 <?php } else { ?>
-                    <button class="btn-talla x" disabled>M <?php echo $product['M']; ?></button>
+                    <button id="tl3" class="btn-talla x" disabled>M</button>
                 <?php } ?>
 
                 <?php if ($product['L'] > 0) { ?>
-                    <button type="button" class="btn-talla" onclick="seleccionarTalla('L')">L <?php echo $product['L']; ?></button>
+                    <button type="button" id="tl4" class="btn-talla" onclick="seleccionarTalla('L',4)">L</button>
                 <?php } else { ?>
-                    <button class="btn-talla x" disabled>L <?php echo $product['L']; ?></button>
+                    <button id="tl4" class="btn-talla x" disabled>L</button>
                 <?php } ?>
 
                 <?php if ($product['XL'] > 0) { ?>
-                    <button type="button" class="btn-talla" onclick="seleccionarTalla('XL')">XL <?php echo $product['XL']; ?></button>
+                    <button type="button" id="tl5" class="btn-talla" onclick="seleccionarTalla('XL',5)">XL</button>
                 <?php } else { ?>
-                    <button class="btn-talla x" disabled>XL <?php echo $product['XL']; ?></button>
+                    <button id="tl5" class="btn-talla x" disabled>XL</button>
                 <?php } ?>
 
                 <?php if ($product['XXL'] > 0) { ?>
-                    <button type="button" class="btn-talla" onclick="seleccionarTalla('XXL')">XXL <?php echo $product['XXL']; ?></button>
+                    <button type="button" id="tl6" class="btn-talla" onclick="seleccionarTalla('XXL',6)">XXL</button>
                 <?php } else { ?>
-                    <button class="btn-talla x" disabled>XXL <?php echo $product['XXL']; ?></button>
+                    <button id="tl6" class="btn-talla x" disabled>XXL</button>
                 <?php } ?>
             </div>
 
@@ -154,10 +154,20 @@ $conn->close();
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     let tallaSeleccionada = "";
-
-    function seleccionarTalla(talla) {
+    let dt = 0;
+    function seleccionarTalla(talla, dato) {
         tallaSeleccionada = talla;
+        dt = dato;
+        
+        for (let i = 1; i <= 6; i++) {
+            document.getElementById('tl' + i).style.backgroundColor = '#fff'; 
+        }
+
+        document.getElementById('tl' + dt).style.backgroundColor = 'rgba(72, 122, 80, 0.242)'; 
+        
         document.getElementById('tallaSeleccionada').innerText = talla;
+
+
     }
 
     function agregarAlCarrito(productoId) {
