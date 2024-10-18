@@ -160,6 +160,7 @@ if ($result->num_rows > 0) {
                 <tr>
                     <th class="px-3 can">Imagen</th>
                     <th class="px-3 can">Producto</th>
+                    <th class="px-3 can">Talla</th>
                     <th class="px-3 can">Precio</th>
                     <th class="px-3 can">Cantidad</th>
                     <th class="px-3 can">Subtotal</th>
@@ -167,6 +168,7 @@ if ($result->num_rows > 0) {
             </thead>
             <tbody>';
             foreach ($carrito as $productoId => $detallesProducto) {
+                $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
                 if ($detallesProducto['cantidad'] != 0) {
                     $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
                     $result = $conn->query($query);
@@ -179,6 +181,8 @@ if ($result->num_rows > 0) {
                         $imagenNombre = 'imagen' . $productoId; // Nombre único para cada imagen
                         $mail->AddEmbeddedImage($imagePath, $imagenNombre, $row['Imagen']); 
                         $emailContent .= '<td  class="align-middle px-4 can">' . $row['Nombre'] . '</td>';
+                        $emailContent .= '<td  class="align-middle px-4 can">' . $tallaSeleccionada . '</td>';
+
                         // $emailContent .= '<td  class="align-middle px-4">' . $row['descripcion'] . '</td>';
                         if ($row['Descuento'] != 0) {
                             $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);

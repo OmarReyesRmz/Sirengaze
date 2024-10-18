@@ -30,6 +30,7 @@ $pdf->SetFont('Arial', 'B', 12);
 $pdf->SetFillColor(173, 216, 230);
 $pdf->SetTextColor(0, 0, 128);
 $pdf->Cell(80, 10, "Producto", 1, 0, 'C', true);
+$pdf->Cell(30, 10, "Talla", 1, 0, 'C', true);
 $pdf->Cell(30, 10, "Precio", 1, 0, 'C', true);
 $pdf->Cell(30, 10, "Cantidad", 1, 0, 'C', true);
 $pdf->Cell(30, 10, "Subtotal", 1, 1, 'C', true);
@@ -56,6 +57,8 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
     $carrito = $_SESSION['carrito'];
 
     foreach ($carrito as $productoId => $detallesProducto) {
+        $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
+
         if ($detallesProducto['cantidad'] != 0) {
             $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
             $result = $conn->query($query);
@@ -64,6 +67,8 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
                 $row = $result->fetch_assoc();
 
                 $pdf->Cell(80, 10, $row['Nombre'], 1);
+                $pdf->Cell(30, 10, $tallaSeleccionada, 1);
+
                 if ($row['Descuento'] != 0) {
                     $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
                 } else {
