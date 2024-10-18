@@ -9,7 +9,7 @@
     <style>
         .apartado i {
             font-size: 5rem; /* Ajustar el tamaño de los iconos */
-            margin-bottom: 10%;
+            margin-bottom: 5%;
         }
 
         .apartado:hover {
@@ -33,7 +33,7 @@
 
         #tienda_apartado {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Distribuir apartados automáticamente */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Distribuir apartados automáticamente */
             grid-gap: 40px; 
             margin-bottom: 10%;
         }
@@ -48,6 +48,7 @@
             color: rgb(64, 79, 70);
             font-size: 22px;
             text-align: center; 
+            text-shadow: none;
         }
 
         /* Contenedor ovalado para los botones */
@@ -94,12 +95,11 @@
     <!-- Proveedores Section -->
     <div class="apartado">
         <i class="fa-solid fa-people-group" style="color: rgb(64, 79, 70);"></i>
-        <div class="texto">PROVEEDORES</div>
+        <div class="texto" >PROVEEDORES</div>
         <div class="botones-container">
                 <a href="addprov.php"><i class="fa-solid fa-file-circle-plus"></i></a>
                 <a href="editprov.php"><i class="fa-regular fa-pen-to-square"></i></a>
                 <a href="deleteprov.php"><i class="fa-solid fa-trash-can"></i></a>
-                <a href="deleteprov.php"><i class="fa-solid fa-file-circle-check"></i></a>
         </div>
     </div>
 
@@ -111,7 +111,6 @@
                 <a href="a.php"><i class="fa-solid fa-file-circle-plus"></i></a>
                 <a href="c.php"><i class="fa-regular fa-pen-to-square"></i></a>
                 <a href="b.php"><i class="fa-solid fa-trash-can"></i></a>
-                <a href="deleteprov.php"><i class="fa-solid fa-file-circle-check"></i></a>
         </div>
     </div>
 
@@ -123,7 +122,24 @@
                 <a href="adddesc.php"><i class="fa-solid fa-file-circle-plus"></i></a>
                 <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
                 <a href="deletedesc.php"><i class="fa-solid fa-trash-can"></i></a>
-                <a href="deleteprov.php"><i class="fa-solid fa-file-circle-check"></i></a>
+        </div>
+    </div>
+
+    <div class="apartado">
+        <i class="fa-solid fa-user" style="color: rgb(64, 79, 70);"></i>
+        <div class="texto">CLIENTES</div>
+        <div class="botones-container">
+                <a href="adddesc.php"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="graficas.php"><i class="fa-regular fa-eye"></i></a>
+        </div>
+    </div>
+
+    <div class="apartado">
+        <i class="fa-brands fa-shopify" style="color: rgb(64, 79, 70);"></i>
+        <div class="texto">COMPRAS</div>
+        <div class="botones-container">
+            <a href="graficas.php"><i class="fa-regular fa-eye"></i></a>
         </div>
     </div>
 

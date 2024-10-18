@@ -33,7 +33,7 @@
             padding: 35px;
             font-family: 'Courier New', Courier, monospace;
             border: 1px solid black;
-            max-width: 400px;
+            max-width: 450px;
             text-align: justify;
             font-size:medium;
         }
@@ -90,11 +90,12 @@
             <th>Producto</th>
             <th>Talla</th>
             <th>Precio</th>
-            <th>Cantidad</th>
+            <th>Cant</th>
             <th>Subtotal</th>
         </tr>
         <?php
-        foreach ($carrito as $productoId => $detallesProducto) {    
+        foreach ($carrito as $productoId => $tallasProducto) {
+            foreach ($tallasProducto as $talla => $detallesProducto) {
         if($detallesProducto['cantidad'] != 0){
             $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
             $query = "SELECT * FROM $tabla WHERE IdProducto = $productoId";
@@ -106,7 +107,7 @@
                 ?>
                 <tr>
                 <td><?php echo $row['Nombre'] ?></td>
-                <td><?php  echo $tallaSeleccionada ?> </td>
+                <td><?php  echo $talla ?> </td>
                 <td><?php
                 if ($row['Descuento'] != 0) {
                     $precio_final = ($row['Precio'] - $row['Precio'] * $row['Descuento'] / 100);
@@ -124,7 +125,7 @@
             }
         }
         }
-       
+    }
         ?>
         <td></td>
         <td></td>
@@ -176,8 +177,8 @@
                 <i class="fas fa-file-pdf" ></i> DESCARGAR PDF
             </a>
         </div>
-        <div style="margin-top:50px; margin-left: 80px;">
-            <a href="venta.php"><button type="button" class="btn btn-danger">Confirmar Pago</button></a>
+        <div style="margin-top:50px; margin-left: 100px;">
+            <a href="venta.php"><button type="button" class="btn btn-danger">Volver al inicio</button></a>
         </div>
     </div>
     

@@ -39,20 +39,26 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
     $IdCompra = $conn->insert_id;
 
     // Insertar cada producto del carrito en la tabla 'detalles'
-    foreach ($carrito as $productoId => $detallesProducto) {
-        $tallaSeleccionada = isset($detallesProducto['talla']) ? $detallesProducto['talla'] : '';                    
+    foreach ($carrito as $productoId => $tallasProducto) {
+        foreach ($tallasProducto as $talla => $detallesProducto) {                 
         if ($detallesProducto['cantidad'] != 0) {
 
             // Insertar en la tabla 'detalles' la cantidad, IdCompra e IdProducto
             $insertDetalles = "INSERT INTO detalles (Cantidad, IdCompra, IdProducto) 
                             VALUES ({$detallesProducto['cantidad']}, $IdCompra, $productoId)";
             $conn->query($insertDetalles);
+            
+            $cantidadtalla = "SELECT $talla FROM producto WHERE IdProducto = $productoId";
+            $resultado = $conn->query($cantidadtalla);
+            $fila = $resultado->fetch_assoc();
+            $cantidad_disponible = $fila[$talla];
 
             // Actualizar las existencias en la tabla de productos
-            $updateQuery = "UPDATE $tabla SET $tallaSeleccionada = $tallaSeleccionada - {$detallesProducto['cantidad']} 
+            $updateQuery = "UPDATE $tabla SET $talla = $talla - {$detallesProducto['cantidad']} 
                             WHERE IdProducto = $productoId";
             $conn->query($updateQuery);
         }
+    }
     }
 
     $_SESSION['contador'] = 0;

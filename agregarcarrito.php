@@ -33,15 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar si el producto es válido y hay suficientes existencias
     if ($productoId > 0 && $existencias > 0 && $cant > 0  && $ExistenciTalla > 0) {
         // Lógica para agregar al carrito aquí
-        if (!isset($_SESSION['carrito'][$productoId])) {
-            $_SESSION['carrito'][$productoId] = [
-                'cantidad' => 0,
-                'talla' => $talla  // Guardar la talla seleccionada en la sesión
+
+        
+        if (!isset($_SESSION['carrito'][$productoId][$talla])) {
+            $_SESSION['carrito'][$productoId][$talla] = $talla;
+            $_SESSION['carrito'][$productoId][$talla] = [
+                'cantidad' => 0
             ];
         }
         
         // Incrementar la cantidad del producto en el carrito
-        $_SESSION['carrito'][$productoId]['cantidad'] += 1;
+        $_SESSION['carrito'][$productoId][$talla]['cantidad'] += 1;
 
         // Incrementar el contador total de productos
         $_SESSION["contador"] = isset($_SESSION["contador"]) ? $_SESSION["contador"] + 1 : 1;
