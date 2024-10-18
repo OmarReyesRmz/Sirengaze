@@ -176,9 +176,12 @@ $conn->close();
                         icon: 'success',
                         title: 'Agregado al carrito',
                         text: 'El producto se a agregado al carrito.',
-                        // confirmButtonText: 'OK'
+                        confirmButtonText: 'OK'
+                    }).then(function () {
+                        window.location.reload();
                     });
-                    window.location.reload();
+
+                  
 
                 } else {
                     Swal.fire({
