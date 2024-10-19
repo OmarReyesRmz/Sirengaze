@@ -147,7 +147,7 @@
         <i class="fa-brands fa-shopify" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">COMPRAS</div>
         <div class="botones-container">
-            <a href="graficas.php"><i class="fa-regular fa-eye"></i></a>
+            <a href="showcompras.php"><i class="fa-regular fa-eye"></i></a>
         </div>
     </div>
 

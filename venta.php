@@ -42,10 +42,10 @@ if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
     foreach ($carrito as $productoId => $tallasProducto) {
         foreach ($tallasProducto as $talla => $detallesProducto) {                 
         if ($detallesProducto['cantidad'] != 0) {
-
+            echo $talla;
             // Insertar en la tabla 'detalles' la cantidad, IdCompra e IdProducto
-            $insertDetalles = "INSERT INTO detalles (Cantidad, IdCompra, IdProducto) 
-                            VALUES ({$detallesProducto['cantidad']}, $IdCompra, $productoId)";
+            $insertDetalles = "INSERT INTO detalles (Cantidad, IdCompra, IdProducto, Talla) 
+                            VALUES ({$detallesProducto['cantidad']}, $IdCompra, $productoId,'$talla')";
             $conn->query($insertDetalles);
             
             $cantidadtalla = "SELECT $talla FROM producto WHERE IdProducto = $productoId";
