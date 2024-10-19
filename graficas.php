@@ -91,11 +91,12 @@
     </style>
 </head>
 <body>
+    
     <div class="charts-container">
         <div id="chartWoman" class="chart"></div>
         <div id="chartMen" class="chart"></div>
     </div>
-
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             createChart('chartWoman', 'Categoría Woman', <?php echo json_encode($dataWoman); ?>);

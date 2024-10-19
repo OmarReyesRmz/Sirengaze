@@ -41,7 +41,7 @@ session_start();
 		</section>
             <hr>
             <i class="fa-solid fa-cart-shopping" style="font-size: 100px"></i>
-            <h1 class="titulo">C a r r i t o &nbsp&nbsp  d e  &nbsp&nbspc o m p r a s</h1>
+            <h1 class="titulo">T i c k e t &nbsp&nbsp  d e  &nbsp&nbspc o m p r a s</h1>
             <hr>
             <div class="table-responsive">
 

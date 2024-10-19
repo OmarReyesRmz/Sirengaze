@@ -139,7 +139,7 @@
         <i class="fa-solid fa-address-card" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">MEMBRESIAS</div>
         <div class="botones-container">
-                <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="showmem.php"><i class="fa-regular fa-pen-to-square"></i></a>
         </div>
     </div>
 
