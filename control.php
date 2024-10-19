@@ -33,7 +33,7 @@
 
         #tienda_apartado {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Distribuir apartados automáticamente */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Distribuir apartados automáticamente */
             grid-gap: 40px; 
             margin-bottom: 10%;
         }
@@ -132,6 +132,14 @@
                 <a href="adddesc.php"><i class="fa-solid fa-file-circle-plus"></i></a>
                 <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
                 <a href="graficas.php"><i class="fa-regular fa-eye"></i></a>
+        </div>
+    </div>
+
+    <div class="apartado">
+        <i class="fa-solid fa-address-card" style="color: rgb(64, 79, 70);"></i>
+        <div class="texto">MEMBRESIAS</div>
+        <div class="botones-container">
+                <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
         </div>
     </div>
 
