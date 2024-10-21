@@ -47,7 +47,7 @@ session_start();
             $resultadoMayoristas = $conn->query($mayoristas);
         ?>
 
-        <div class="table-responsive card card-body">
+        <div class="table-responsive">
             <table class="table table-borderless table-hover prod">
                 <thead>
                     <tr>
@@ -94,15 +94,17 @@ session_start();
             </table>
         </div>
 
-
+                    
         <p class="d-inline-flex gap-1">
+        <br><hr>
         <h1 class="titulo" data-bs-toggle="collapse" href="#tablaMayoristas" role="button" aria-expanded="false" aria-controls="tablaMayoristas">
             M A Y O R I S T A S
         </h1>
+        <hr>
         </p>
 
         <div class="collapse" id="tablaMayoristas">
-        <div class="card card-body">
+        <div class="">
             <div class="table-responsive">
                 <table class="table table-borderless table-hover prod">
                     <thead>
