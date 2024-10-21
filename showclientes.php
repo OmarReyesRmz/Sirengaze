@@ -37,14 +37,17 @@ session_start();
         <br>
         <h1 class="titulo">C L I E N T E S</h1>
         <hr>
+
         <?php 
-            $clientes = "SELECT cliente.*, IF(membresia.NoMembresia IS NOT NULL, 1, 0) AS Membresia
-                        FROM cliente
-                        LEFT JOIN membresia ON cliente.IdCliente = membresia.IdCliente";
+
+            $clientes = "SELECT cliente.*, IF(membresia.NoMembresia IS NOT NULL, 1, 0) AS Membresia FROM cliente LEFT JOIN membresia ON cliente.IdCliente = membresia.IdCliente";
             $resultadoClientes = $conn->query($clientes);
+
+            $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente";
+            $resultadoMayoristas = $conn->query($mayoristas);
         ?>
 
-        <div class="table-responsive">
+        <div class="table-responsive card card-body">
             <table class="table table-borderless table-hover prod">
                 <thead>
                     <tr>
@@ -90,6 +93,48 @@ session_start();
                 </tbody>
             </table>
         </div>
+
+
+        <p class="d-inline-flex gap-1">
+        <h1 class="titulo" data-bs-toggle="collapse" href="#tablaMayoristas" role="button" aria-expanded="false" aria-controls="tablaMayoristas">
+            M A Y O R I S T A S
+        </h1>
+        </p>
+
+        <div class="collapse" id="tablaMayoristas">
+        <div class="card card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless table-hover prod">
+                    <thead>
+                        <tr>
+                            <th class="px-3 can">ID FISCAL</th>
+                            <th class="px-3 can">ID CLIENTE</th>
+                            <th class="px-3 can">NOMBRE CLIENTE</th>
+                            <th class="px-3 can">NOMBRE EMPRESA</th>
+                            <th class="px-3 can">VOLUMEN DE COMPRAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($resultadoMayoristas->num_rows > 0) {
+                            while ($row = $resultadoMayoristas->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td class="align-middle px-4">' . $row['IdFiscal'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['IdCliente'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['NombreEmpresa'] . '</td>';
+                                echo '<td class="align-middle px-4">' . number_format($row['VolumenCompras'], 0) . '</td>';
+                                echo '</tr>';
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+
+
     </div>
     <?php include 'footer.php'; ?>
 </body>
