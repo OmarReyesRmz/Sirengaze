@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Tourney';
+    src: url('../fonts/Tourney/static/Tourney_Condensed-Thin.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Lexend_Tera';
+    src: url('../fonts/Lexend_Tera/static/LexendTera-Bold.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+
+h1{
+    text-align: center;
+    font-family: 'Cormorant_Infant';
+}
+
+form{
+    font-family: 'Cormorant_Infant';
+    font-size: 20px;
+}
