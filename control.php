@@ -129,7 +129,7 @@
         <i class="fa-solid fa-user" style="color: rgb(64, 79, 70);"></i>
         <div class="texto">CLIENTES</div>
         <div class="botones-container">
-                <a href="adddesc.php"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a href="addclientes.php"><i class="fa-solid fa-file-circle-plus"></i></a>
                 <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
                 <a href="showclientes.php"><i class="fa-regular fa-eye"></i></a>
         </div>
