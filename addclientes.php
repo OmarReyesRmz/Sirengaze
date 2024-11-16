@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include 'header.php'; ?>
     
-<div class="container" style="margin-top:100px;">
+<div class="container" style="margin-top:80px;">
     
     <p class="d-inline-flex gap-1">
         <br><hr>
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </h1>
         <hr>
     </p>
-    
+
     <div class="collapse" id="cli">
         <form method="POST" action="" class="formulario" style="display:flex; flex-direction: column; align-items: center;">
         <!-- Para poner en la misma fila agregar: d-flex al div en class -->
@@ -211,8 +211,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
     </div>
-
 </div>
+
 
     <?php include 'footer.php'; ?>
 </body>
