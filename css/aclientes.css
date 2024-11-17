@@ -21,3 +21,11 @@ form{
     font-family: 'Cormorant_Infant';
     font-size: 20px;
 }
+
+body{
+    padding-top: 80px;
+}
+
+.container{
+    font-family: 'Cormorant_Infant';
+}

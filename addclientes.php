@@ -24,12 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $numero = $_POST['Numero'];
         $colonia = $_POST['Colonia'];
         $correo = $_POST['Correo'];
-        $password = $_POST['Password'];
+        $password = $_POST['Password']; 
         $cuenta = $_POST['Cuenta'];
-
+    
+        $claveSecreta = "tu_clave_secreta";
+        $encryptedPassword = openssl_encrypt($password, 'aes-256-cbc', $claveSecreta, 0, $claveSecreta);
+    
         try {
             $sql = "INSERT INTO cliente (IdCliente, Edad, Telefono, Nombre, Calle, CP, Numero, Colonia, Correo, password, Cuenta)
-                    VALUES ('$idCliente', '$edad', '$telefono', '$nombre', '$calle', '$cp', '$numero', '$colonia', '$correo', '$password', '$cuenta')";
+                    VALUES ('$idCliente', '$edad', '$telefono', '$nombre', '$calle', '$cp', '$numero', '$colonia', '$correo', '$encryptedPassword', '$cuenta')";
+            
             $conn->query($sql);
             $_SESSION['mensaje'] = 'Cliente agregado con éxito';
             $_SESSION['tipo_mensaje'] = 'success';
@@ -42,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['tipo_mensaje'] = 'error';
             }
         }
-    } else if (isset($_POST['mayorista'])) {
+    }else if (isset($_POST['mayorista'])) {
         $idFiscal = $_POST['IdFiscal'];
         $idCliente = $_POST['IdCliente'];
         $volumenCompras = $_POST['VolumenCompras'];
@@ -83,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include 'header.php'; ?>
     
-<div class="container" style="margin-top:80px;">
+<div class="container">
     
     <p class="d-inline-flex gap-1">
         <br><hr>

@@ -14,7 +14,8 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Clientes</title>
+    <title>Editar Clientes</title>
+    <link rel="stylesheet" href="css/aclientes.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -23,8 +24,8 @@ $result = $conn->query($sql);
     <?php include 'header.php'; ?>
 
     <div class="container mt-5">
-        <h2>Lista de Clientes</h2>
-        <table class="table table-bordered">
+        <h1>Lista de Clientes</h1><br>
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>ID Cliente</th>
@@ -38,6 +39,7 @@ $result = $conn->query($sql);
                     <th>Colonia</th>
                     <th>Cuenta</th>
                     <th>Password</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +58,7 @@ $result = $conn->query($sql);
                             <td><?php echo $row['Cuenta']; ?></td>
                             <td><?php echo $row['password']; ?></td>
                             <td>
-                                <a href="editprov2.php?id=<?php echo $row['IdCliente']; ?>" class="btn btn-black">Editar</a>
+                                <a href="editcliente.php?id=<?php echo $row['IdCliente']; ?>" class="btn btn-dark">Editar</b>
                             </td>
                         </tr>
                     <?php endwhile; ?>

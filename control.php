@@ -130,7 +130,7 @@
         <div class="texto">CLIENTES</div>
         <div class="botones-container">
                 <a href="addclientes.php"><i class="fa-solid fa-file-circle-plus"></i></a>
-                <a href="editdesc.php"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a href="editclientes.php"><i class="fa-regular fa-pen-to-square"></i></a>
                 <a href="showclientes.php"><i class="fa-regular fa-eye"></i></a>
         </div>
     </div>
