@@ -7,6 +7,10 @@ if ($conn->connect_error) {
 
 $sql = "SELECT * FROM cliente";
 $result = $conn->query($sql);
+
+$sqlMayoristas = "SELECT * FROM mayorista";
+$resultMayoristas = $conn->query($sqlMayoristas);
+
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +27,18 @@ $result = $conn->query($sql);
 
     <?php include 'header.php'; ?>
 
-    <div class="container mt-5">
-        <h1>Lista de Clientes</h1><br>
-        <table class="table table-bordered table-hover">
+<div class="container mt-5">
+
+    <p class="d-inline-flex gap-1">
+        <hr>
+        <h1 class="titulo" data-bs-toggle="collapse" href="#cli" role="button" aria-expanded="false" aria-controls="tablaMayoristas">   
+            Lista de Clientes
+        </h1>
+        <hr>
+    </p>
+
+    <div class="collapse" id="cli">
+        <table class="table  table-hover">
             <thead>
                 <tr>
                     <th>ID Cliente</th>
@@ -70,6 +83,54 @@ $result = $conn->query($sql);
             </tbody>
         </table>
     </div>
+
+
+    <p class="d-inline-flex gap-1">
+        <hr>
+        <h1 class="titulo" data-bs-toggle="collapse" href="#mayor" role="button" aria-expanded="false" aria-controls="tablaMayoristas">   
+            Lista de Mayoristas
+        </h1>
+        <hr>
+    </p>
+
+    <div class="collapse" id="mayor">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID_Fiscal</th>
+                    <th>ID_Cliente</th>
+                    <th>Volumen de compra</th>
+                    <th>Nombre de la empresa</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($resultMayoristas->num_rows > 0): ?>
+                    <?php while($row = $resultMayoristas->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $row['IdFiscal']; ?></td>
+                            <td><?php echo $row['IdCliente']; ?></td>
+                            <td><?php echo $row['VolumenCompras']; ?></td>
+                            <td><?php echo $row['NombreEmpresa']; ?></td>
+                            <td>
+                                <a href="editmayorista.php?id=<?php echo $row['IdFiscal']; ?>" class="btn btn-dark">Editar</b>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center">No hay proveedores</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    
+
+
+
+</div>
 
     <?php include 'footer.php'; ?>
     
