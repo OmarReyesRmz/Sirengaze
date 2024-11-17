@@ -92,7 +92,7 @@ $resultMayoristas = $conn->query($sqlMayoristas);
         </h1>
         <hr>
     </p>
-
+    
     <div class="collapse" id="mayor">
         <table class="table table-hover">
             <thead>
@@ -153,6 +153,5 @@ $resultMayoristas = $conn->query($sqlMayoristas);
 </html>
 
 <?php
-// Cerrar la conexión a la base de datos
 $conn->close();
 ?>
