@@ -11,6 +11,31 @@ session_start();
     if ($conn->connect_error) {
         die("Error de conexión: " . $conn->connect_error);
     }
+
+    $clientes = "SELECT cliente.*, 
+                IF(membresia.NoMembresia IS NOT NULL, 1, 0) AS Membresia, 
+                tipomembresia.Tipo AS Tipo 
+                FROM cliente 
+                LEFT JOIN membresia ON cliente.IdCliente = membresia.IdCliente 
+                LEFT JOIN tipomembresia ON tipomembresia.IdTipo = membresia.IdTipo ORDER BY 
+                cliente.IdCliente;";
+
+            $resultadoClientes = $conn->query($clientes);
+
+            $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente;";
+            $resultadoMayoristas = $conn->query($mayoristas);
+
+            $prod = "SELECT IdProducto, Nombre FROM producto WHERE Exclusivo = 'T'
+            UNION SELECT IdProducto, Nombre FROM producto WHERE Descuento != 0;";
+
+            $resultadoprod = $conn->query($prod);
+
+            $compras = "SELECT c.IdCliente, c.Nombre, COUNT(co.IdCompra) AS NumeroDeCompras FROM cliente c
+            JOIN compra co ON c.IdCliente = co.IdCliente WHERE c.IdCliente IN (
+            SELECT IdCliente FROM membresia INTERSECT SELECT IdCliente FROM compra) 
+            GROUP BY c.IdCliente HAVING NumeroDeCompras>2;"; 
+
+            $resultadoc = $conn->query($compras);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -26,37 +51,22 @@ session_start();
     <body>
         <?php include 'header.php'; ?>
         
-        <div class="carrito" style="text-align: center">
-        <section class="regresar" style="position:absolute;">
-			<a href="./control.php">
-				<i class=" fa-solid fa-arrow-left " style="font-size: 40px"></i>
-			</a>
-		</section>
-        <hr>
-        <i class="fa-solid fa-users" style="color: black; font-size: 100px;"></i><br>
-        <br>
-        <h1 class="titulo">C L I E N T E S</h1>
-        <hr>
+    <div class="carrito" style="text-align: center">
 
-        <?php 
+        <p class="d-inline-flex gap-1">
+            <section class="regresar" style="position:absolute;">
+                <br>
+                <a href="./control.php">
+                    <i class=" fa-solid fa-arrow-left " style="font-size: 40px"></i>
+                </a>
+            </section>
+            <hr>
+            <i class="fa-solid fa-users" style="color: black; font-size: 100px;"></i><br>
+            <br>
+            <h1 class="titulo">C L I E N T E S</h1>
+            <hr>
+        </p>
 
-            $clientes = "SELECT cliente.*, 
-                IF(membresia.NoMembresia IS NOT NULL, 1, 0) AS Membresia, 
-                tipomembresia.Tipo AS Tipo 
-                FROM cliente 
-                LEFT JOIN membresia ON cliente.IdCliente = membresia.IdCliente 
-                LEFT JOIN tipomembresia ON tipomembresia.IdTipo = membresia.IdTipo;";
-
-            $resultadoClientes = $conn->query($clientes);
-
-            $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente;";
-            $resultadoMayoristas = $conn->query($mayoristas);
-
-            $prod = "SELECT IdProducto, Nombre FROM producto WHERE Exclusivo = 'T'
-            UNION SELECT IdProducto, Nombre FROM producto WHERE Descuento != 0;";
-
-            $resultadoprod = $conn->query($prod);
-        ?>
 
         <div class="table-responsive">
             <table class="table table-borderless table-hover prod">
@@ -156,33 +166,33 @@ session_start();
         </div>
 
 
-
-        <!-- ESTO OBVIO NO VA EN SHOWCLIENTES -->
         <p class="d-inline-flex gap-1">
         <br><hr>
-        <h2 class="titulo2" data-bs-toggle="collapse" href="#tablaCliM" role="button" aria-expanded="false" aria-controls="tablaMayoristas">
-            Productos Exclusivos y Productos con Descuento
+        <h2 class="titulo2" data-bs-toggle="collapse" href="#tablaCC" role="button" aria-expanded="false" aria-controls="tablaMayoristas">
+            Clientes con Membresia que han realizado más de 2 Compras
         </h2>
         <hr>
         </p>
 
-        <div class="collapse" id="tablaCliM">
+        <div class="collapse" id="tablaCC">
         <div class="">
             <div class="table-responsive">
                 <table class="table table-borderless table-hover prod">
                     <thead>
                         <tr>
-                            <th class="px-3 can">ID PRODUCTO</th>
+                            <th class="px-3 can">ID CLIENTE</th>
                             <th class="px-3 can">NOMBRE</th>
+                            <th class="px-3 can">NO DE COMPRAS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        if ($resultadoprod->num_rows > 0) {
-                            while ($row = $resultadoprod->fetch_assoc()) {
+                        if ($resultadoc->num_rows > 0) {
+                            while ($row = $resultadoc->fetch_assoc()) {
                                 echo '<tr>';
-                                echo '<td class="align-middle px-4">' . $row['IdProducto'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['IdCliente'] . '</td>';
                                 echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['NumeroDeCompras'] . '</td>';
                                 echo '</tr>';
                             }
                         }
