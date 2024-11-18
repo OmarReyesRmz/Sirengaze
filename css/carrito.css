@@ -8,6 +8,11 @@
     src: url('../fonts/Lexend_Tera/static/LexendTera-Bold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Cormorant_Infant';
+    src: url('../fonts/Cormorant_Infant/CormorantInfant-Light.ttf') format('truetype');
+}
+
 .carrito{
     margin: 150px;
 }
@@ -26,6 +31,11 @@
 
 .titulo{
     font-family: 'Big_Sholuders_Inline_Text', sans-serif;
+    text-align: center;
+}
+
+.titulo2{
+    font-family: 'Cormorant_Infant';
     text-align: center;
 }
 

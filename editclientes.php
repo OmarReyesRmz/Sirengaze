@@ -94,7 +94,7 @@ $resultMayoristas = $conn->query($sqlMayoristas);
     </p>
     
     <div class="collapse" id="mayor">
-        <table class="table table-hover">
+        <table class="table table-hover" style="text-align:center;">
             <thead>
                 <tr>
                     <th>ID_Fiscal</th>

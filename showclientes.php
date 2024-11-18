@@ -40,11 +40,22 @@ session_start();
 
         <?php 
 
-            $clientes = "SELECT cliente.*, IF(membresia.NoMembresia IS NOT NULL, 1, 0) AS Membresia FROM cliente LEFT JOIN membresia ON cliente.IdCliente = membresia.IdCliente";
+            $clientes = "SELECT cliente.*, 
+                IF(membresia.NoMembresia IS NOT NULL, 1, 0) AS Membresia, 
+                tipomembresia.Tipo AS Tipo 
+                FROM cliente 
+                LEFT JOIN membresia ON cliente.IdCliente = membresia.IdCliente 
+                LEFT JOIN tipomembresia ON tipomembresia.IdTipo = membresia.IdTipo;";
+
             $resultadoClientes = $conn->query($clientes);
 
-            $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente";
+            $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente;";
             $resultadoMayoristas = $conn->query($mayoristas);
+
+            $prod = "SELECT IdProducto, Nombre FROM producto WHERE Exclusivo = 'T'
+            UNION SELECT IdProducto, Nombre FROM producto WHERE Descuento != 0;";
+
+            $resultadoprod = $conn->query($prod);
         ?>
 
         <div class="table-responsive">
@@ -53,6 +64,8 @@ session_start();
                     <tr>
                         <th class="px-3 can">ID CLIENTE</th>
                         <th class="px-3 can">NOMBRE</th>
+                        <th class="px-3 can">MEMBRESIA</th>
+                        <th class="px-3 can">TIPO</th>
                         <th class="px-3 can">EDAD</th>
                         <th class="px-3 can">TELÉFONO</th>
                         <th class="px-3 can">CALLE</th>
@@ -61,7 +74,6 @@ session_start();
                         <th class="px-3 can">COLONIA</th>
                         <th class="px-3 can">CORREO</th>
                         <th class="px-3 can">CUENTA</th>
-                        <th class="px-3 can">MEMBRESIA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +83,19 @@ session_start();
                             echo '<tr>';
                             echo '<td class="align-middle px-4">' . $row['IdCliente'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
+                            echo '<td class="align-middle px-4">';
+                            if ($row['Membresia'] == 1) {
+                                echo '<i class="fa-solid fa-check" style="color: #338212;"></i>'; 
+                            } else {
+                                echo '<i class="fa-solid fa-xmark" style="color: #b42727;"></i>'; 
+                            }
+                            echo '</td>';
+                            
+                            if ($row['Tipo'] != "") {
+                                echo '<td class="align-middle px-4">' . $row['Tipo'] . '</td>';
+                            } else {
+                                echo '<td class="align-middle px-4"><i class="fa-regular fa-window-minimize" style="color: #000000;"></i></td>';
+                            }
                             echo '<td class="align-middle px-4">' . $row['Edad'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Telefono'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Calle'] . '</td>';
@@ -79,13 +104,7 @@ session_start();
                             echo '<td class="align-middle px-4">' . $row['Colonia'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Correo'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Cuenta'] . '</td>';
-                            echo '<td class="align-middle px-4">';
-                            if ($row['Membresia'] == 1) {
-                                echo '<i class="fa-solid fa-check" style="color: #338212;"></i>'; 
-                            } else {
-                                echo '<i class="fa-solid fa-xmark" style="color: #b42727;"></i>'; 
-                            }
-                            echo '</td>';
+                            
                             echo '</tr>';
                         }
                     }
@@ -126,6 +145,44 @@ session_start();
                                 echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
                                 echo '<td class="align-middle px-4">' . $row['NombreEmpresa'] . '</td>';
                                 echo '<td class="align-middle px-4">' . number_format($row['VolumenCompras'], 0) . '</td>';
+                                echo '</tr>';
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+
+
+
+        <!-- ESTO OBVIO NO VA EN SHOWCLIENTES -->
+        <p class="d-inline-flex gap-1">
+        <br><hr>
+        <h2 class="titulo2" data-bs-toggle="collapse" href="#tablaCliM" role="button" aria-expanded="false" aria-controls="tablaMayoristas">
+            Productos Exclusivos y Productos con Descuento
+        </h2>
+        <hr>
+        </p>
+
+        <div class="collapse" id="tablaCliM">
+        <div class="">
+            <div class="table-responsive">
+                <table class="table table-borderless table-hover prod">
+                    <thead>
+                        <tr>
+                            <th class="px-3 can">ID PRODUCTO</th>
+                            <th class="px-3 can">NOMBRE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($resultadoprod->num_rows > 0) {
+                            while ($row = $resultadoprod->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td class="align-middle px-4">' . $row['IdProducto'] . '</td>';
+                                echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
                                 echo '</tr>';
                             }
                         }
