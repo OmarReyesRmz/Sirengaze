@@ -2,7 +2,6 @@
 session_start(); 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
-    $idProveedor = $_POST['idProveedor'];
     $nombre = $_POST['nombre'];
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
@@ -13,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Error en la conexión: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO proveedor (IdProveedor, Nombre, Direccion, Telefono) 
-            VALUES ('$idProveedor', '$nombre', '$direccion', '$telefono')";
+    $sql = "INSERT INTO proveedor (Nombre, Direccion, Telefono) 
+            VALUES ('$nombre', '$direccion', '$telefono')";
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION['mensaje'] = 'Proveedor agregado con éxito';
@@ -47,10 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container mt-5">
         <h2>Agregar Proveedor</h2>
         <form action="addprov.php" method="POST">
-            <div class="mb-3">
-                <label for="idProveedor" class="form-label">ID Proveedor</label>
-                <input type="text" class="form-control" id="idProveedor" name="idProveedor" required>
-            </div>
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
