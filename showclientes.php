@@ -69,6 +69,7 @@ session_start();
 
 
         <div class="table-responsive">
+
             <table class="table table-borderless table-hover prod">
                 <thead>
                     <tr>
@@ -92,15 +93,19 @@ session_start();
                         while ($row = $resultadoClientes->fetch_assoc()) {
                             echo '<tr>';
                             echo '<td class="align-middle px-4">' . $row['IdCliente'] . '</td>';
-                            echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
+                            echo '<td class="align-middle px-4">
+                                    <button class="btn btn-success" onclick="mostrarGastoPromedio(' . $row['IdCliente'] . ', \'' . $row['Nombre'] . '\')">
+                                        ' . $row['Nombre'] . '
+                                    </button>
+                                  </td>';
                             echo '<td class="align-middle px-4">';
                             if ($row['Membresia'] == 1) {
-                                echo '<i class="fa-solid fa-check" style="color: #338212;"></i>'; 
+                                echo '<i class="fa-solid fa-check" style="color: #338212;"></i>';
                             } else {
-                                echo '<i class="fa-solid fa-xmark" style="color: #b42727;"></i>'; 
+                                echo '<i class="fa-solid fa-xmark" style="color: #b42727;"></i>';
                             }
                             echo '</td>';
-                            
+                        
                             if ($row['Tipo'] != "") {
                                 echo '<td class="align-middle px-4">' . $row['Tipo'] . '</td>';
                             } else {
@@ -114,7 +119,6 @@ session_start();
                             echo '<td class="align-middle px-4">' . $row['Colonia'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Correo'] . '</td>';
                             echo '<td class="align-middle px-4">' . $row['Cuenta'] . '</td>';
-                            
                             echo '</tr>';
                         }
                     }
@@ -205,6 +209,47 @@ session_start();
 
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+    <script>
+        function mostrarGastoPromedio(idCliente, nombreCliente) {
+            fetch('gasto_promedio.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'idCliente=' + idCliente
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.gastoPromedio) {
+                    Swal.fire({
+                        title: `Gasto Promedio`,
+                        html: `<b>${nombreCliente}</b> tiene un gasto promedio de: <br><h2>$${parseFloat(data.gastoPromedio).toFixed(2)}</h2>`,
+                        icon: 'info',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.error || 'No se pudo obtener el promedio de gasto.',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al realizar la solicitud.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+        }
+    </script>
+
     <?php include 'footer.php'; ?>
 </body>
 </html>
