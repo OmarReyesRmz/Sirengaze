@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $encryptedPassword = openssl_encrypt($password, 'aes-256-cbc', $claveSecreta, 0, $claveSecreta);
     
         try {
-            $sql = "INSERT INTO cliente (IdCliente, Edad, Telefono, Nombre, Calle, CP, Numero, Colonia, Correo, password, Cuenta)
-                    VALUES ('$idCliente', '$edad', '$telefono', '$nombre', '$calle', '$cp', '$numero', '$colonia', '$correo', '$encryptedPassword', '$cuenta')";
+            $sql = "INSERT INTO cliente (Edad, Telefono, Nombre, Calle, CP, Numero, Colonia, Correo, password, Cuenta)
+                    VALUES ('$edad', '$telefono', '$nombre', '$calle', '$cp', '$numero', '$colonia', '$correo', '$encryptedPassword', '$cuenta')";
             
             $conn->query($sql);
             $_SESSION['mensaje'] = 'Cliente agregado con éxito';
@@ -53,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombreEmpresa = $_POST['NombreEmpresa'];
 
         try {
-            $sql = "INSERT INTO mayorista (IdFiscal, VolumenCompras, NombreEmpresa, IdCliente)
-                    VALUES ('$idFiscal', '$volumenCompras', '$nombreEmpresa', '$idCliente')";
+            $sql = "INSERT INTO mayorista (VolumenCompras, NombreEmpresa, IdCliente)
+                    VALUES ('$volumenCompras', '$nombreEmpresa', '$idCliente')";
             $conn->query($sql);
             $_SESSION['mensaje'] = 'Mayorista agregado con éxito';
             $_SESSION['tipo_mensaje'] = 'success';
@@ -101,10 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="collapse" id="cli">
         <form method="POST" action="" class="formulario" style="display:flex; flex-direction: column; align-items: center;">
         <!-- Para poner en la misma fila agregar: d-flex al div en class -->
-            <div class="mb-2 align-items-center col-8">
-                <label for="IDCliente" class="form-label me-2">ID</label>
-                <input type="number" name="IdCliente" class="form-control" id="IDCliente" required>
-            </div>
             
             <div class="mb-2 align-items-center col-8">
                 <label for="name" class="form-label me-2">Nombre</label>
@@ -173,10 +169,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="collapse" id="may">
     <form method="POST" action="" class="formulario" style="display:flex; flex-direction: column; align-items: center;">
         <!-- Para poner en la misma fila agregar: d-flex al div en class -->
-            <div class="mb-2 align-items-center col-8">
-                <label for="IDFiscal" class="form-label me-2">ID</label>
-                <input type="number" name="IdFiscal" class="form-control" id="IDFiscal" required>
-            </div>
 
             <div class="mb-2 align-items-center col-8">
                 <label for="IdClientes" class="form-label me-2">ID Cliente</label>
