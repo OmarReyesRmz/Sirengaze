@@ -96,9 +96,9 @@ session_start();
                 <table class="table table-borderless table-hover prod">
                     <thead>
                         <tr>
-                            <th class="px-3 can">ID_Cliente</th>
-                            <th class="px-3 can">Nombre</th>
-                            <th class="px-3 can">Total</th>
+                            <th class="px-3 can">ID CLIENTE</th>
+                            <th class="px-3 can">NOMBRE</th>
+                            <th class="px-3 can">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,7 +108,7 @@ session_start();
                                 echo '<tr>';
                                 echo '<td class="align-middle px-4">' . $row['IdCliente'] . '</td>';
                                 echo '<td class="align-middle px-4">' . $row['Nombre'] . '</td>';
-                                echo '<td class="align-middle px-4">' . $row['Total_Compras'] . '</td>';
+                                echo '<td class="align-middle px-4">' . number_format($row['Total_Compras'], 2) . '</td>';
                                 echo '</tr>';
                             }
                         }
@@ -146,7 +146,7 @@ session_start();
                                 echo '<tr>';
                                 echo '<td class="align-middle px-4">' . $row['Year'] . '</td>';
                                 echo '<td class="align-middle px-4">' . $row['Month'] . '</td>';
-                                echo '<td class="align-middle px-4">' . $row['Total_Compras'] . '</td>';
+                                echo '<td class="align-middle px-4">' . number_format($row['Total_Compras'], 2) . '</td>';
                                 echo '</tr>';
                             }
                         }
