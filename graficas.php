@@ -18,6 +18,45 @@
     $queryWoman = "SELECT Subcategoria, COUNT(*) as Existencias FROM producto WHERE Categoria = 'woman' GROUP BY Subcategoria";
     $queryMen = "SELECT Subcategoria, COUNT(*) as Existencias FROM producto WHERE Categoria = 'men' GROUP BY Subcategoria";
 
+    // Llamar al procedimiento almacenado para calcular el total de compras
+    $queryCompras = "CALL CalcularTotalCompras()";
+    $resultCompras = $conn->query($queryCompras);
+
+    $clientesCompras = [];
+    while ($row = $resultCompras->fetch_assoc()) {
+        $clientesCompras[] = [
+            'nombre' => $row['NombreCliente'], // Nombre del cliente
+            'total' => $row['TotalCompras']    // Total gastado
+        ];
+    }
+    $resultCompras->close();
+    $conn->next_result();  
+
+    // Consulta SQL para obtener el resultado de la función
+    $queryPromedioTotal = "SELECT `GastoPromedioTodosClientes`() AS `GastoPromedioTodosClientes`";
+
+    // Ejecutar la consulta
+    $resultPromedioTotal = $conn->query($queryPromedioTotal);
+
+    $rowPromedio = $resultPromedioTotal->fetch_assoc();
+    $promedioTotal = $rowPromedio['GastoPromedioTodosClientes'];
+    $resultPromedioTotal->close();
+    $conn->next_result();
+
+    // Parámetro para el procedimiento almacenado
+    $parametroBajoInventario = 15;
+
+    // Llamar al procedimiento almacenado
+    $queryBajoInventario = "CALL ReporteBajoInventario(?)";
+    $stmt = $conn->prepare($queryBajoInventario);
+    $stmt->bind_param("i", $parametroBajoInventario);
+    $stmt->execute();
+
+    $resultadoBajoInventario = $stmt->get_result();
+ 
+    $stmt->close();
+    $conn->next_result();
+
     $resultWoman = $conn->query($queryWoman);
     $resultMen = $conn->query($queryMen);
 
@@ -80,6 +119,81 @@
             padding: 10px;
             text-align: center;
         }
+
+        /* Contenedor centrado para la tabla */
+        .tabla-contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        /* Estilos de la tabla */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .promedio-contenedor {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .promedio-contenedor h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .promedio-valor {
+            font-size: 28px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
 
        
 
@@ -154,6 +268,63 @@
             chart.setOption(option);
         }
     </script>
+
+<div class="tabla-contenedor">
+    <h3>Gastos de los Clientes</h3>
+    <table>
+       
+        <thead>
+            <tr>
+                <th>Nombre del Cliente</th>
+                <th>Total Gastado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($clientesCompras as $cliente): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
+                    <td>$<?php echo number_format($cliente['total'], 2); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="promedio-contenedor">
+    <h2>Gasto Promedio de Todos los Clientes</h2>
+    <p class="promedio-valor">$<?php echo number_format($promedioTotal, 2); ?></p>
+</div>
+
+<div class="tabla-contenedor">
+    <h2>Inventario Bajo</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead style="background-color: red;">
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Nombre Producto</th>
+                    <th>Total Existencias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($resultadoBajoInventario->num_rows > 0) {
+                    while ($row = $resultadoBajoInventario->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row['ID_Producto'] . '</td>';
+                        echo '<td>' . $row['Nombre_Producto'] . '</td>';
+                        echo '<td>' . $row['Total_Existencias'] . '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="3">No hay productos con inventario bajo.</td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
     <?php include 'footer.php'; ?>
 </body>
