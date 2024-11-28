@@ -20,22 +20,22 @@ session_start();
                 LEFT JOIN tipomembresia ON tipomembresia.IdTipo = membresia.IdTipo ORDER BY 
                 cliente.IdCliente;";
 
-            $resultadoClientes = $conn->query($clientes);
+    $resultadoClientes = $conn->query($clientes);
 
-            $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente;";
-            $resultadoMayoristas = $conn->query($mayoristas);
+    $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente;";
+    $resultadoMayoristas = $conn->query($mayoristas);
 
-            $prod = "SELECT IdProducto, Nombre FROM producto WHERE Exclusivo = 'T'
-            UNION SELECT IdProducto, Nombre FROM producto WHERE Descuento != 0;";
+    $prod = "SELECT IdProducto, Nombre FROM producto WHERE Exclusivo = 'T'
+    UNION SELECT IdProducto, Nombre FROM producto WHERE Descuento != 0;";
 
-            $resultadoprod = $conn->query($prod);
+    $resultadoprod = $conn->query($prod);
 
-            $compras = "SELECT c.IdCliente, c.Nombre, COUNT(co.IdCompra) AS NumeroDeCompras FROM cliente c
-            JOIN compra co ON c.IdCliente = co.IdCliente WHERE c.IdCliente IN (
-            SELECT IdCliente FROM membresia INTERSECT SELECT IdCliente FROM compra) 
-            GROUP BY c.IdCliente HAVING NumeroDeCompras>2;"; 
+    $compras = "SELECT c.IdCliente, c.Nombre, COUNT(co.IdCompra) AS NumeroDeCompras FROM cliente c
+    JOIN compra co ON c.IdCliente = co.IdCliente WHERE c.IdCliente IN (
+    SELECT IdCliente FROM membresia INTERSECT SELECT IdCliente FROM compra) 
+    GROUP BY c.IdCliente HAVING NumeroDeCompras>2;"; 
 
-            $resultadoc = $conn->query($compras);
+    $resultadoc = $conn->query($compras);
 ?>
     <!DOCTYPE html>
     <html lang="en">
