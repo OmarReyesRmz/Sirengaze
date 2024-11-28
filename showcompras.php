@@ -85,7 +85,7 @@ session_start();
             <p class="d-inline-flex gap-1">
         <br><hr>
         <h2 class="titulo2" data-bs-toggle="collapse" href="#tablaE" role="button" aria-expanded="false" aria-controls="tablaMayoristas">
-            Total de Compras por Cliente (Con Total General)
+            Compras por Cliente (Con Total General)
         </h2>
         <hr>
         </p>
