@@ -25,10 +25,6 @@ session_start();
     $mayoristas = "SELECT mayorista.*, cliente.Nombre FROM mayorista JOIN cliente ON mayorista.IdCliente = cliente.IdCliente;";
     $resultadoMayoristas = $conn->query($mayoristas);
 
-    $prod = "SELECT IdProducto, Nombre FROM producto WHERE Exclusivo = 'T'
-    UNION SELECT IdProducto, Nombre FROM producto WHERE Descuento != 0;";
-
-    $resultadoprod = $conn->query($prod);
 
     $compras = "SELECT c.IdCliente, c.Nombre, COUNT(co.IdCompra) AS NumeroDeCompras FROM cliente c
     JOIN compra co ON c.IdCliente = co.IdCliente WHERE c.IdCliente IN (
