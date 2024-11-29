@@ -57,6 +57,46 @@
     $stmt->close();
     $conn->next_result();
 
+    // Consulta para obtener los datos de la vista
+    $queryVentasPorSubcategoria = "SELECT * FROM ventasporsubcategoria";
+    $resultVentas = $conn->query($queryVentasPorSubcategoria);
+
+    if (!$resultVentas) {
+        die("Error al ejecutar la consulta: " . $conn->error);
+    }
+
+    $conn->next_result();
+
+     // Consulta para obtener los datos de la vista `clientesultimos30dias`
+     $queryClientes30Dias = "SELECT * FROM clientesultimos30dias";
+     $resultClientes30Dias = $conn->query($queryClientes30Dias);
+ 
+     if (!$resultClientes30Dias) {
+         die("Error al ejecutar la consulta: " . $conn->error);
+     }
+
+    $conn->next_result();
+
+   // Consulta para obtener los datos de la vista `ventasporcategoria`
+   $queryVentasPorCategoria = "SELECT * FROM ventasporcategoria";
+   $resultVentasCategoria = $conn->query($queryVentasPorCategoria);
+
+   if (!$resultVentasCategoria) {
+       die("Error al ejecutar la consulta: " . $conn->error);
+   }
+
+    $conn->next_result();
+
+     // Consulta a la vista `resumencomprasporproducto`
+     $queryResumenCompras = "SELECT * FROM resumencomprasporproducto";
+     $resultResumenCompras = $conn->query($queryResumenCompras);
+ 
+     if (!$resultResumenCompras) {
+         die("Error al ejecutar la consulta: " . $conn->error);
+     }
+
+    $conn->next_result();
+
     $resultWoman = $conn->query($queryWoman);
     $resultMen = $conn->query($queryMen);
 
@@ -194,6 +234,13 @@
             font-weight: bold;
         }
 
+        .contenedor{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+
+        }
 
        
 
@@ -205,10 +252,16 @@
     </style>
 </head>
 <body>
+
     
     <div class="charts-container">
-        <div id="chartWoman" class="chart"></div>
-        <div id="chartMen" class="chart"></div>
+        <div id="chartWoman" class="chart"> </div>
+        <div id="chartMen" class="chart"> </div>
+    </div>
+
+    <div class="promedio-contenedor">
+        <h2>Gasto Promedio de Todos los Clientes</h2>
+        <p class="promedio-valor">$<?php echo number_format($promedioTotal, 2); ?></p>
     </div>
     
     <script>
@@ -269,60 +322,183 @@
         }
     </script>
 
-<div class="tabla-contenedor">
-    <h3>Gastos de los Clientes</h3>
-    <table>
-       
-        <thead>
-            <tr>
-                <th>Nombre del Cliente</th>
-                <th>Total Gastado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($clientesCompras as $cliente): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
-                    <td>$<?php echo number_format($cliente['total'], 2); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+    <div class="contenedor">
 
-<div class="promedio-contenedor">
-    <h2>Gasto Promedio de Todos los Clientes</h2>
-    <p class="promedio-valor">$<?php echo number_format($promedioTotal, 2); ?></p>
-</div>
+    
+        <!-- Tabla para Ventas por Categoría -->
+        <div class="tabla-contenedor">
+            <h2 class="mb-3">Ventas por Categoría</h2>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Total Vendidos</th>
+                        <th>Total Ventas ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($resultVentasCategoria->num_rows > 0): ?>
+                        <?php while ($row = $resultVentasCategoria->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['Categoria']); ?></td>
+                                <td><?php echo number_format($row['TotalVendidos'], 0); ?></td>
+                                <td>$<?php echo number_format($row['TotalVentas'], 2); ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3">No se encontraron datos.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
-<div class="tabla-contenedor">
-    <h2>Inventario Bajo</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead style="background-color: red;">
+        <div class="tabla-contenedor">
+            <h1 class="text-center my-4">Ventas por Subcategoría</h1>
+
+
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Subcategoría</th>
+                            <th>Total Vendidos</th>
+                            <th>Total Ventas ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($resultVentas->num_rows > 0): ?>
+                            <?php while ($row = $resultVentas->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($row['Subcategoria']); ?></td>
+                                    <td><?php echo number_format($row['TotalVendidos'], 0); ?></td>
+                                    <td>$<?php echo number_format($row['TotalVentas'], 2); ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3">No se encontraron datos.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            
+        </div>
+    </div>    
+
+
+    <div class="contenedor">                     
+        <div class="tabla-contenedor">
+            <h3>Gastos de los Clientes</h3>
+            <table>
+            
+                <thead>
+                    <tr>
+                        <th>Nombre del Cliente</th>
+                        <th>Total Gastado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($clientesCompras as $cliente): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
+                            <td>$<?php echo number_format($cliente['total'], 2); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="tabla-contenedor">
+            <h2>Inventario Bajo</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead style="background-color: red;">
+                        <tr>
+                            <th>ID Producto</th>
+                            <th>Nombre Producto</th>
+                            <th>Total Existencias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($resultadoBajoInventario->num_rows > 0) {
+                            while ($row = $resultadoBajoInventario->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $row['ID_Producto'] . '</td>';
+                                echo '<td>' . $row['Nombre_Producto'] . '</td>';
+                                echo '<td>' . $row['Total_Existencias'] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="3">No hay productos con inventario bajo.</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+     <!-- Tabla para Clientes en los Últimos 30 Días -->
+     <div class="tabla-contenedor mt-5">
+        <h2 class="mb-3">Clientes en los Últimos 30 Días</h2>
+        <table class="table table-striped table-bordered">
+            <thead >
                 <tr>
-                    <th>ID Producto</th>
-                    <th>Nombre Producto</th>
-                    <th>Total Existencias</th>
+                    <th>ID Cliente</th>
+                    <th>Nombre del Cliente</th>
+                    <th>Total Gastado ($)</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                if ($resultadoBajoInventario->num_rows > 0) {
-                    while ($row = $resultadoBajoInventario->fetch_assoc()) {
-                        echo '<tr>';
-                        echo '<td>' . $row['ID_Producto'] . '</td>';
-                        echo '<td>' . $row['Nombre_Producto'] . '</td>';
-                        echo '<td>' . $row['Total_Existencias'] . '</td>';
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr><td colspan="3">No hay productos con inventario bajo.</td></tr>';
-                }
-                ?>
+                <?php if ($resultClientes30Dias->num_rows > 0): ?>
+                    <?php while ($row = $resultClientes30Dias->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['IdCliente']); ?></td>
+                            <td><?php echo htmlspecialchars($row['NombreCliente']); ?></td>
+                            <td>$<?php echo number_format($row['TotalGastado'], 2); ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3">No se encontraron datos.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
+
+    <div class="tabla-contenedor mt-5">
+    <h2 class="mb-3">Resumen de Compras por Producto</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-info">
+            <tr>
+                <th>ID Producto</th>
+                <th>Nombre del Producto</th>
+                <th>Total Vendidos</th>
+                <th>Total Gastado ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if ($resultResumenCompras->num_rows > 0): ?>
+                <?php while ($row = $resultResumenCompras->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['IdProducto']); ?></td>
+                        <td><?php echo htmlspecialchars($row['NombreProducto']); ?></td>
+                        <td><?php echo number_format($row['TotalVendidos'], 0); ?></td>
+                        <td>$<?php echo number_format($row['TotalGastado'], 2); ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4">No se encontraron datos.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 
 
