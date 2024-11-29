@@ -28,13 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo = $_POST['tipo'];
     $descuento = $_POST['descuento'];
     $fechaExpiracion = $_POST['fechaExpiracion'];
+    $cantidad = $_POST['cantidad'];
 
     $sql = "UPDATE $tabla SET 
                 Nombre = '$nombre', 
                 Categoria = '$categoria', 
                 Tipo = '$tipo', 
                 Descuento = '$descuento', 
-                FechaExpiracion = '$fechaExpiracion' 
+                FechaExpiracion = '$fechaExpiracion' ,
+                Cantidad = '$cantidad'
             WHERE IdDescuentos = '$idDescuento'";
 
     if ($conn->query($sql) === TRUE) {

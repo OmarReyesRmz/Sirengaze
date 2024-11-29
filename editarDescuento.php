@@ -63,20 +63,104 @@ if (isset($_GET['id'])) {
                 <h5 style="font-weight: bold;">Nombre del Descuento</h5>
                 <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $descuentoEditar['Nombre']; ?>" required><br>
                 
-                <label for="categoria">Categoría:</label>
-                <select name="categoria" id="categoria" required>
-                    <option value="men" <?php echo ($descuentoEditar['Categoria'] == 'men') ? 'selected' : ''; ?>>Men</option>
-                    <option value="woman" <?php echo ($descuentoEditar['Categoria'] == 'woman') ? 'selected' : ''; ?>>Woman</option>
+                <label for="tipo">Tipo Descuento:</label>
+                <select name="tipo" id="tipo" required>
+                    <option value="women" <?php echo ($descuentoEditar['Tipo'] == 'women') ? 'selected' : ''; ?>>Women</option>
+                    <option value="men" <?php echo ($descuentoEditar['Tipo'] == 'men') ? 'selected' : ''; ?>>Men</option>
+                    <option value="all" <?php echo ($descuentoEditar['Tipo'] == 'all') ? 'selected' : ''; ?>>All</option>
+                    <option value="diamante" <?php echo ($descuentoEditar['Tipo'] == 'diamante') ? 'selected' : ''; ?>>Diamante</option>
+                    <option value="dorada" <?php echo ($descuentoEditar['Tipo'] == 'dorada') ? 'selected' : ''; ?>>Dorada</option>
+                    <option value="plata" <?php echo ($descuentoEditar['Tipo'] == 'plata') ? 'selected' : ''; ?>>Plata</option>
+                    <option value="bronce" <?php echo ($descuentoEditar['Tipo'] == 'bronce') ? 'selected' : ''; ?>>Bronce</option>
                 </select><br>
 
-                <label for="tipo">Tipo:</label>
-                <input type="text" name="tipo" placeholder="Tipo de descuento" value="<?php echo $descuentoEditar['Tipo']; ?>" required><br>
+                <label for="categoria">Categoría:</label>
+                <select name="categoria" id="categoria" required>
+                    <option value="pantalones" <?php echo ($descuentoEditar['Categoria'] == 'pantalones') ? 'selected' : ''; ?>>Pantalones</option>
+                    <option value="blusas" <?php echo ($descuentoEditar['Categoria'] == 'blusas') ? 'selected' : ''; ?>>Blusas</option>
+                    <option value="sueteres" <?php echo ($descuentoEditar['Categoria'] == 'sueteres') ? 'selected' : ''; ?>>Sueteres</option>
+                    <option value="chamarras" <?php echo ($descuentoEditar['Categoria'] == 'chamarras') ? 'selected' : ''; ?>>Chamarras</option>
+                    <option value="vestidos" <?php echo ($descuentoEditar['Categoria'] == 'vestidos') ? 'selected' : ''; ?>>Vestidos</option>
+                    <option value="camisetas" <?php echo ($descuentoEditar['Categoria'] == 'camisetas') ? 'selected' : ''; ?>>Camisetas</option>
+                    <option value="playeras" <?php echo ($descuentoEditar['Categoria'] == 'playeras') ? 'selected' : ''; ?>>Playeras</option>
+                    <option value="shorts" <?php echo ($descuentoEditar['Categoria'] == 'shorts') ? 'selected' : ''; ?>>Shorts</option>
+                    <option value="pantalones_2" <?php echo ($descuentoEditar['Categoria'] == 'pantalones_2') ? 'selected' : ''; ?>>Pantalones</option>
+                    <option value="sudaderas" <?php echo ($descuentoEditar['Categoria'] == 'sudaderas') ? 'selected' : ''; ?>>Sudaderas</option> 
+                </select><br>
+
+
+                <script>
+                    // Listas de categorías según el tipo de descuento
+                    const categoriasMujer = [
+                        { value: 'pantalones', text: 'Pantalones' },
+                        { value: 'blusas', text: 'Blusas' },
+                        { value: 'sueteres', text: 'Sueteres' },
+                        { value: 'chamarras', text: 'Chamarras' },
+                        { value: 'vestidos', text: 'Vestidos' }
+                    ];
+
+                    const categoriasHombre = [
+                        { value: 'camisetas', text: 'Camisetas' },
+                        { value: 'playeras', text: 'Playeras' },
+                        { value: 'chamarras_2', text: 'Chamarras' },
+                        { value: 'pantalones_2', text: 'Pantalones' },
+                        { value: 'sudaderas', text: 'Sudaderas' }
+                    ];
+
+                    const categoriasTodos = [
+                        ...categoriasMujer,
+                        ...categoriasHombre
+                    ];
+
+                    // Función para actualizar las opciones de categoría
+                    function actualizarCategorias() {
+                        const tipo = document.getElementById('tipo').value;
+                        const categoriaSelect = document.getElementById('categoria');
+
+                        // Limpia las opciones actuales
+                        categoriaSelect.innerHTML = '';
+
+                        // Selecciona las categorías correctas
+                        let opciones = [];
+                        if (tipo === 'women') {
+                            opciones = categoriasMujer;
+                        } else if (tipo === 'men') {
+                            opciones = categoriasHombre;
+                        } else if (tipo === 'all') {
+                            opciones = categoriasTodos;
+                        }
+
+                        // Agrega las opciones seleccionadas al select de categorías
+                        opciones.forEach(opcion => {
+                            const optionElement = document.createElement('option');
+                            optionElement.value = opcion.value;
+                            optionElement.textContent = opcion.text;
+                            // Selecciona la opción si coincide con la categoría actual
+                            if (opcion.value === '<?php echo $descuentoEditar['Categoria']; ?>') {
+                                optionElement.selected = true;
+                            }
+                            categoriaSelect.appendChild(optionElement);
+                        });
+                    }
+
+                    // Llama a la función una vez para establecer las categorías al cargar
+                    actualizarCategorias();
+
+                    // Agrega un listener para actualizar categorías cuando cambie el tipo
+                    document.getElementById('tipo').addEventListener('change', actualizarCategorias);
+                </script>
+
+
+                
 
                 <label for="descuento">Descuento (%):</label>
                 <input type="number" name="descuento" placeholder="Descuento" value="<?php echo $descuentoEditar['Descuento']; ?>" required><br>
 
                 <label for="fechaExpiracion">Fecha de Expiración:</label>
                 <input type="date" name="fechaExpiracion" value="<?php echo $descuentoEditar['FechaExpiracion']; ?>" required><br>
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" placeholder="Cantidad" value="<?php echo $descuentoEditar['Cantidad']; ?>" required><br>
 
                 <button type="submit">Guardar Cambios</button><br>
                 

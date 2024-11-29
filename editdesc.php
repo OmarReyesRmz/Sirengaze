@@ -46,6 +46,7 @@ if ($dataResult) {
         $fechaExpiracion = $row['FechaExpiracion'];
         $tipo = $row['Tipo'];
         $descuento = $row['Descuento'];
+        $cantidad = $row['Cantidad'];
 
         ?>
         
@@ -58,6 +59,7 @@ if ($dataResult) {
             echo 'Tipo: ' . $tipo . '<br>';
             echo 'Fecha de Expiración: ' . $fechaExpiracion . '<br>';
             echo 'Descuento: ' . $descuento . '%<br>';
+            echo 'Cantidad: ' . $cantidad . '<br>';
             ?>
             </p>
             <button class="editar-button" onclick="editarDescuento(<?php echo $id; ?>)">Editar Descuento <?php echo $id ?></button>

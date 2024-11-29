@@ -21,10 +21,11 @@ $categoria = $_POST['categoria'];
 $tipo_descuento = $_POST['tipo_descuento'];
 $valor_descuento = $_POST['valor_descuento'];
 $fecha_expiracion = $_POST['fecha_expiracion'];
+$Cantidad = $_POST['Cantidad'];
 
 // Insertar el descuento en la base de datos
-$sql = "INSERT INTO descuentos (Nombre, Categoria, Tipo, Descuento, FechaExpiracion) 
-        VALUES ('$nombre_descuento', '$categoria', '$tipo_descuento', '$valor_descuento', '$fecha_expiracion')";
+$sql = "INSERT INTO descuentos (Nombre, Categoria, Tipo, Descuento, FechaExpiracion, Cantidad) 
+        VALUES ('$nombre_descuento', '$categoria', '$tipo_descuento', '$valor_descuento', '$fecha_expiracion', '$Cantidad')";
 
 if ($conn->query($sql) === TRUE) {
     echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
