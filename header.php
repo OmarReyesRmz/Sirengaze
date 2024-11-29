@@ -46,6 +46,7 @@
                         <button class="dropbtn icono" style=""><i class="fa-solid fa-user" style="color: #000000; font-size:23px;"></i><?php echo '&nbsp' . $cuenta?></button>
                         <div class="dropdown-content">
                             <a id="menu1" href="addmembresia.php">Ser Miembro</a>
+                            <a id="menu1" href="descuentosusuario.php">Mis Descuentos</a>
                             <a id="menu1" href="cerrar_sesion.php">Cerrar Sesión</a>
                         </div>
                 </div>

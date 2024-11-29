@@ -20,9 +20,75 @@
         $temp2 = 0;
 
         $conn = new mysqli($servername, $username, $password, $database);
-
+        
         if ($conn->connect_error) {
             die("Error de conexión: " . $conn->connect_error);
+        }
+
+
+        if (isset($_SESSION['cuenta'])) {
+            $cuenta = $_SESSION['cuenta'];
+            
+            // Consulta para obtener el IdCliente usando la cuenta
+            $sql = "SELECT IdCliente FROM cliente WHERE Cuenta = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $cuenta);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $user_id = $row['IdCliente'];
+                
+                // Verificar si el usuario tiene membresía
+                $sql_membresia = "SELECT * FROM membresia WHERE IdCliente = ?";
+                $stmt_membresia = $conn->prepare($sql_membresia);
+                $stmt_membresia->bind_param("i", $user_id);
+                $stmt_membresia->execute();
+                $result_membresia = $stmt_membresia->get_result();
+                $is_member = $result_membresia->num_rows > 0;
+        
+                // Obtener descuentos aplicables al usuario
+                // Inicializar el array de cupones válidos con los descuentos generales
+                $cuponesValidos = [];
+
+                // Descuentos generales para 'all', 'men' y 'women'
+                $sql_descuentos_generales = "SELECT Nombre, Descuento FROM descuentos WHERE Tipo = 'all';";
+                $result_descuentos_generales = $conn->query($sql_descuentos_generales);
+
+                // Guardar los descuentos generales
+                while ($row_descuento = $result_descuentos_generales->fetch_assoc()) {
+                    $cuponesValidos[$row_descuento['Nombre']] = $row_descuento['Descuento'];
+                }
+
+                // Si el usuario es miembro, obtener los descuentos específicos para miembros
+                if ($is_member) {
+                    // Descuentos específicos para miembros
+                    $sql_descuentos_membresia = "SELECT d.Nombre, d.Descuento, d.Tipo FROM descuentos d 
+                                                INNER JOIN tipomembresia_descuento tm ON d.IdDescuentos = tm.IdDescuento 
+                                                INNER JOIN tipomembresia m ON tm.IdTipo = m.IdTipo 
+                                                INNER JOIN membresia mem ON mem.IdTipo = m.IdTipo 
+                                                WHERE mem.IdCliente = ?;";
+                    $stmt_descuentos = $conn->prepare($sql_descuentos_membresia);
+                    $stmt_descuentos->bind_param("i", $user_id);
+                    $stmt_descuentos->execute();
+                    $result_descuentos = $stmt_descuentos->get_result();
+
+                    // Agregar los descuentos específicos del miembro al array de cupones válidos
+                    while ($row_descuento = $result_descuentos->fetch_assoc()) {
+                        // Solo agregar si no existe ya el descuento (en caso de que sea el mismo código)
+                        $cuponesValidos[$row_descuento['Nombre']] = $row_descuento['Descuento'];
+                    }
+                }
+
+                // Convertir cupones válidos a formato JSON para usar en JavaScript
+                $cuponesValidosJson = json_encode($cuponesValidos);
+
+            } else {
+                echo "No se encontró un usuario con esa cuenta.";
+            }
+        } else {
+            echo "No hay cuenta en sesión.";
         }
 
         if ($_SESSION['subtotal'] < 1500) {
@@ -271,11 +337,7 @@
             actualizarTotal();
         }
 
-        var cuponesValidos = {
-            'SGFS23': 10,
-            'FASHION30': 20,
-            'SGFS10': 15
-        };
+        var cuponesValidos = <?php echo $cuponesValidosJson; ?>;
 
         btnAplicarDescuento.addEventListener('click', function () {
             var codigo = inputCodigo.value;

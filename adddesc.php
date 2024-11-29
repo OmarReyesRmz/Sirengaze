@@ -86,10 +86,10 @@
                 <tr>
                     <td><strong>Tipo de Descuento</strong></td>
                     <td>
-                        <select name="tipo_descuento" id="tipo_descuento" required onchange="filtrarCategorias()">
-                            <option value="men">Men</option>
-                            <option value="women">Women</option>
+                        <select name="tipo_descuento" id="tipo_descuento" required>
                             <option value="all">All</option>
+                            <!-- <option value="women">Women</option>
+                            <option value="men">Men</option> -->
                             <option value="diamante">Diamante</option>
                             <option value="dorada">Dorada</option>
                             <option value="plata">Plata</option>
@@ -97,7 +97,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td><strong>Categoría</strong></td>
                     <td>
                         <select name="categoria" id="categoria" required>
@@ -113,36 +113,36 @@
                             <option value="sudaderas">Sudaderas</option>
                         </select>
                     </td>
-                </tr>
+                </tr> -->
 
-                <script>
+                <!-- <script>
                     function filtrarCategorias() {
                         const tipoDescuento = document.getElementById("tipo_descuento").value;
-                        const categoria = document.getElementById("categoria");
+                        //const categoria = document.getElementById("categoria");
 
-                        categoria.innerHTML = "";
+                        // categoria.innerHTML = "";
 
-                        const categoriasMen = ["Chamarras", "Pantalones", "Sudaderas", "Camisetas", "Playeras"];
-                        const categoriasWomen = ["Pantalones", "Blusas", "Sueteres", "Chamarras", "Vestidos"];
-                        const todasCategorias = ["Pantalones", "Blusas", "Sueteres", "Chamarras", "Vestidos", "Camisetas", "Playeras", "Shorts", "Pantalones", "Sudaderas"];
+                        // const categoriasMen = ["Chamarras", "Pantalones", "Sudaderas", "Camisetas", "Playeras"];
+                        // const categoriasWomen = ["Pantalones", "Blusas", "Sueteres", "Chamarras", "Vestidos"];
+                        // const todasCategorias = ["Pantalones", "Blusas", "Sueteres", "Chamarras", "Vestidos", "Camisetas", "Playeras", "Shorts", "Pantalones", "Sudaderas"];
 
-                        let opciones = [];
-                        if (tipoDescuento === "men") {
-                            opciones = categoriasMen;
-                        } else if (tipoDescuento === "women") {
-                            opciones = categoriasWomen;
-                        } else {
-                            opciones = todasCategorias;
-                        }
+                        // let opciones = [];
+                        // if (tipoDescuento === "men") {
+                        //     opciones = categoriasMen;
+                        // } else if (tipoDescuento === "women") {
+                        //     opciones = categoriasWomen;
+                        // } else {
+                        //     opciones = todasCategorias;
+                        // }
 
-                        opciones.forEach(categoriaNombre => {
-                            const option = document.createElement("option");
-                            option.value = categoriaNombre.toLowerCase();
-                            option.textContent = categoriaNombre;
-                            categoria.appendChild(option);
-                        });
+                        // opciones.forEach(categoriaNombre => {
+                        //     const option = document.createElement("option");
+                        //     option.value = categoriaNombre.toLowerCase();
+                        //     option.textContent = categoriaNombre;
+                        //     categoria.appendChild(option);
+                        // });
                     }
-                </script>
+                </script> -->
 
                 <tr>
                     <td><strong>Valor del Descuento</strong></td>
