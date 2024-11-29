@@ -126,27 +126,7 @@
 
                         
                     </div>
-
-                    
-
-                    <!-- <div class="registrosl">
-                        <label for="preguntaSeleccionada">Pregunta de Seguridad:</label>
-                        <select class="form-control" id="preguntaSeleccionada" name="preguntaSeleccionada" required>
-                            <option value="1">Cual es el nombre de tu mejor amigo?</option>
-                            <option value="2">Cual es en nombre de tu mascota?</option>
-                            <option value="3">Cual es el nombre de tu cantante favorito?</option>
-                            <option value="4">Cual es tu personaje de ficción favorito?</option>
-                        </select>
-                    </div>
-
-                    <div class="registrosl">
-                        <label for="respuestaPregunta">Respuesta de Seguridad:</label>
-                        <input type="text" class="form-control" id="respuestaPregunta" name="respuestaPregunta" required>
-                    </div> -->
-
                 
-                    
-
                     <div class="registrosl">
                         <label for="password">Contraseña:</label>
                         <input type="password" class="form-control" id="password" name="password" required>
@@ -231,8 +211,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </script>';
     } else {
         // El usuario no existe, realizar el registro
-        $stmt_insertar = $conn->prepare("INSERT INTO cliente (Nombre,Edad, Cuenta, Telefono, Correo, Calle, Colonia, CP,Numero, password) VALUES (?, ?, ?, ?, ?,?,?, ?, ?)");
-        $stmt_insertar->bind_param("sssssssss", $nombre, $edad,$cuenta, $telefono,$email, $calle, $colonia, $cp, $numero_int , $encryptedPassword);
+        $stmt_insertar = $conn->prepare("INSERT INTO cliente (Nombre,Edad, Cuenta, Telefono, Correo, Calle, Colonia, CP,Numero, password) VALUES (?, ?, ?, ?, ?,?,?, ?, ?,?)");
+        $stmt_insertar->bind_param("ssssssssss", $nombre, $edad,$cuenta, $telefono,$email, $calle, $colonia, $cp, $numero_int , $encryptedPassword);
 
         if ($stmt_insertar->execute()) {
             // Registro exitoso

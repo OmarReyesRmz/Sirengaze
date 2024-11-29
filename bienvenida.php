@@ -19,6 +19,7 @@
     if (!$email) {
         // Dirección de correo electrónico no válida
         echo "Dirección de correo electrónico no válida.";
+        header('Location: index.php');
         exit;  // O maneja el error de alguna manera apropiada para tu aplicación
     }
         
